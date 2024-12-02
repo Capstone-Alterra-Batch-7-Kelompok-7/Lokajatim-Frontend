@@ -2,8 +2,8 @@ import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom"
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import ForgotPass from "./pages/Auth/forgotPass";
-import VerifyCode from "../../pages/Auth/verifyCode";
-import ResetPassword from "../../pages/Auth/resetPassword";
+import VerifyCode from "./pages/Auth/verifyCode";
+import ResetPassword from "./pages/Auth/resetPassword";
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
   { path: "/register", element: <Register /> }, 

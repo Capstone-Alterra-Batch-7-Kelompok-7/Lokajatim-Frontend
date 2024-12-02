@@ -1,6 +1,5 @@
 import { BrowserRouter } from "react-router-dom"
-feat/forgotpass
-import PublicRoutes from "./public/PublicRoutes"
+import PublicRoutes from "./public/publicRoutes"
 
 const AppRouter = () => {
   return(
