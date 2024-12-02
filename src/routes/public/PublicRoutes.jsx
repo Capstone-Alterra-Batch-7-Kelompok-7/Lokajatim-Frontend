@@ -4,7 +4,7 @@ import Register from "../../pages/Auth/Register";
 const PublicRoutes = () => {
   return (
     <Routes>
-      <Route path="/register" element={<Register />} />
+      <Route path="/" element={<Register />} />
     </Routes>
   );
 }
