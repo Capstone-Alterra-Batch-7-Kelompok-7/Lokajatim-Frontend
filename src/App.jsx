@@ -1,14 +1,17 @@
-
-import AppRouter from "./routes/AppRoutes"
 import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
-
+import ForgotPass from "./pages/Auth/forgotPass";
+import VerifyCode from "../../pages/Auth/verifyCode";
+import ResetPassword from "../../pages/Auth/resetPassword";
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
-  { path: "/register", element: <Register /> },
-  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> }, 
+  { path: "/aturulang", element: <ForgotPass /> },
   { path: "*", element: <div>404 - Page Not Found</div> },
+  { path: "/login", element: <Login /> },
+  { path: "/reset", element: <ResetPassword/> },
+  { path: "/verify", element: <VerifyCode /> },
 ];
 
 const router = createBrowserRouter(routes, {
@@ -23,9 +26,7 @@ const router = createBrowserRouter(routes, {
 });
 
 function App() {
-  return (
-    <AppRouter />
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
