@@ -10,32 +10,24 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-const CardArticle = ({id}) => {
+const CardArticle = ({ id, img, title, update }) => {
   return (
     <>
       <div className={`card card-compact bg-base-100 md:w-64 w-full shadow-md`}>
         <figure className="relative">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes"
-            className={`h-48 w-full object-cover md:object-fill`}
+            src={img}
+            alt="Image"
+            className={`h-48 max-h-48 w-full object-cover md:object-fill`}
           />
-          <div className="flex items-center gap-1 absolute top-2 right-2 text-xs bg-[#49454F] rounded-lg text-white p-1">
-            <FontAwesomeIcon icon={faLocationDot} className="" />
-            <p>Jakarta</p>
-          </div>
         </figure>
-        <div className="card-body h-[30%]">
-          <div className="flex justify-between items-center gap-2">
-            <h2 className="text-sm card-title text-primary">Seni Pertujukan</h2>
-            <FontAwesomeIcon icon={bookmarkRegular} />
-          </div>
+        <div className="card-body min-h-32 max-h-32">
           <Link to={`/article/${id}`} className="text-xl">
-            Eksplorasi Tari Reog Ponorogo: Dari Tradisi hingga Modernisasi
+            {title}
           </Link>
           <div className="border-t pt-1 border-gray-400">
             <div className="flex justify-between gap-2 items-center text-xs">
-              <p>15 November 2024</p>
+              <p>{update}</p>
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
                   <FontAwesomeIcon icon={faThumbsUp} />

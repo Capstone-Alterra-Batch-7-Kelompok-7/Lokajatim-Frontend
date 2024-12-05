@@ -1,5 +1,6 @@
 import BreadCrumbs from "../../components/BreadCrumbs";
 import CardArticle from "../../components/CardArticle";
+import { useFetch } from "../../hooks/useFetch";
 import NavbarSearchBlack from "../../components/NavbarSearchBlack";
 
 const ArticleList = () => {
@@ -15,6 +16,8 @@ const ArticleList = () => {
       href: "/article/list",
     },
   ];
+
+  const { data } = useFetch("/articles");
   return (
     <>
       <NavbarSearchBlack>
@@ -50,15 +53,32 @@ const ArticleList = () => {
             <div className="md:w-[70%] w-full">
               <h2 className="text-3xl font-medium ">Trending Artikel</h2>
               <div className="flex justify-between gap-2 flex-wrap my-4">
-                <CardArticle id={1} />
-                <CardArticle id={2} />
-                <CardArticle id={2} />
+                {data &&
+                  data
+                    .slice(0, 3)
+                    .map((item) => (
+                      <CardArticle
+                        id={item.id}
+                        key={item.id}
+                        img={item.photo}
+                        title={item.title}
+                        update={item.updated_at}
+                      />
+                    ))}
               </div>
               <h2 className="text-3xl font-medium mb-2">Semua Artikel</h2>
               <div className="flex justify-between gap-2 flex-wrap my-4">
-                <CardArticle id={2} />
-                <CardArticle id={2} />
-                <CardArticle id={2} />
+                {data &&
+                  data
+                    .map((item) => (
+                      <CardArticle
+                        id={item.id}
+                        key={item.id}
+                        img={item.photo}
+                        title={item.title}
+                        update={item.updated_at}
+                      />
+                    ))}
               </div>
             </div>
           </div>

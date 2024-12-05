@@ -4,8 +4,11 @@ import NavbarBlack from "../../components/NavbarBlack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import FooterArticle from "../../components/FooterArticle";
+import { useFetch } from "../../hooks/useFetch";
 
 const ArticleHome = () => {
+  const { data } = useFetch("/articles");
+
   return (
     <>
       <NavbarBlack>
@@ -17,9 +20,16 @@ const ArticleHome = () => {
             Yuk Lihat Berbagai Artikel Menarik Tentang Budaya Di Jawa Timur
           </p>
           <div className="w-full flex items-center justify-center gap-2 flex-wrap">
-            <CardArticle />
-            <CardArticle />
-            <CardArticle />
+            {data &&
+              data.slice(0, 3).map((item) => (
+                <CardArticle
+                  id={item.id}
+                  key={item.id}
+                  img={item.photo}
+                  title={item.title}
+                  update={item.updated_at}
+                />
+              ))}
           </div>
           <div className="flex justify-center my-6">
             <Link
@@ -30,7 +40,7 @@ const ArticleHome = () => {
               <FontAwesomeIcon icon={faAngleRight} />
             </Link>
           </div>
-        <FooterArticle />
+          <FooterArticle />
         </div>
       </NavbarBlack>
     </>
