@@ -9,6 +9,7 @@ import ArticleList from "./pages/article/ArticleList";
 import ArticleDetail from "./pages/article/ArticleDetail";
 import ScrollTop from "./components/ScrollTop";
 import ProductList from "./pages/product/ProductList";
+import DetailProduct from "./pages/product/DetailProduct";
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
   { path: "/register", element: <Register /> },
@@ -25,6 +26,7 @@ const routes = [
       { path: "/article/list", element: <ArticleList /> },
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
+      { path: "/product/:id", element: <DetailProduct /> },
     ],
   },
 ];

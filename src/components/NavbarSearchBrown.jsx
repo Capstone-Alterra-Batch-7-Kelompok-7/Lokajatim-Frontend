@@ -43,7 +43,7 @@ const NavbarSearchBrown = ({ children }) => {
                 <img src={logo} alt="lgo" width={40} />
                 <p className="logo-font text-white text-3xl">Lokajatim</p>
               </div>
-              <div className="input focus-within:outline-none w-[60%] hidden text-black lg:flex gap-2 items-center focus:outline-none border-none focus:border-none">
+              <div className="input h-[2.5rem] focus-within:outline-none w-[60%] hidden text-black lg:flex gap-2 items-center focus:outline-none border-none focus:border-none">
                 <input
                   type="text"
                   placeholder="Search"

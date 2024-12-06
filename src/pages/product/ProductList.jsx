@@ -6,6 +6,7 @@ import prize from "../../assets/reward.png";
 import filterIcon from "../../assets/icon/filter.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faStar } from "@fortawesome/free-solid-svg-icons";
+import CheckBox from "../../components/CheckBox";
 const ProductList = () => {
   return (
     <NavbarSearchBrown>
@@ -293,20 +294,6 @@ const ProductList = () => {
       </div>
       <Footer />
     </NavbarSearchBrown>
-  );
-};
-
-const CheckBox = ({ label }) => {
-  return (
-    <div className="form-control">
-      <label className="flex items-center gap-2">
-        <input
-          type="checkbox"
-          className="checkbox checkbox-primary checkbox-xs bg-white rounded-none"
-        />
-        <span className="label-text text-primary text-sm">{label}</span>
-      </label>
-    </div>
   );
 };
 
