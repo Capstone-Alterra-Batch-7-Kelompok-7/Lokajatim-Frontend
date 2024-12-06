@@ -8,8 +8,8 @@ const CardProduct = ({ id, img, price, title }) => {
       <div className={`card card-compact bg-base-100 w-52 shadow-md`}>
         <figure className="relative">
           <img
-            // src={img}
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+            src={img}
+            // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
             alt="Image"
             className={`h-36 max-h-36 w-full object-cover md:object-fill`}
           />
