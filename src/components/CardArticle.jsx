@@ -1,12 +1,7 @@
 import {
-  faBookmark as bookmarkRegular,
   faComment,
   faThumbsUp,
 } from "@fortawesome/free-regular-svg-icons";
-import {
-  faBookmark as bookmarkSolid,
-  faLocationDot,
-} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
