@@ -20,7 +20,7 @@ const DetailProduct = () => {
     <>
       <NavbarSearchBrown>
         <div className="w-full px-4 md:px-[2rem] py-4 bg-[#FAFBFE]">
-          <div className="w-full flex md:flex-row flex-col justify-between items-start">
+          <div className="w-full flex md:flex-row flex-col justify-between items-start relative">
             <div className="md:w-[70%] w-full flex flex-wrap gap-4">
               {/* Image Product */}
               <div className="flex flex-col gap-2">
@@ -106,8 +106,409 @@ const DetailProduct = () => {
                   </p>
                 </div>
               </div>
+
+              <h2 className="py-2 text-lg font-bold">Ulasan Pembeli</h2>
+              {/* Rating Section */}
+              <div className="flex items-start md:flex-row flex-col md:justify-between gap-4 bg-white p-6 border border-gray-300 rounded-2xl w-full">
+                <div className="">
+                  <div className="flex items-center gap-1">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className="text-yellow-400 text-2xl"
+                    />
+                    <p className="text-gray-200 text-lg">
+                      <span className="text-2xl font-bold text-black">4.8</span>
+                      /5.0
+                    </p>
+                  </div>
+                  <p>98% Pembeli merasa puas</p>
+                  <p className="text-gray-400 font-light text-sm">
+                    238 rating • 5 ulasan
+                  </p>
+                </div>
+                <div className="">
+                  <div className="flex gap-2 items-center">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className="text-yellow-400"
+                    />
+                    <div className="flex items-center gap-1 text-sm">
+                      <p>5</p>
+                      <progress
+                        className="progress w-56 progress-secondary bg-gray-200"
+                        value="100"
+                        max="100"
+                      ></progress>
+                      <p className="">{"(228)"}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className="text-yellow-400"
+                    />
+                    <div className="flex items-center gap-1 text-sm">
+                      <p>4</p>
+                      <progress
+                        className="progress w-56 progress-secondary bg-gray-200"
+                        value="10"
+                        max="100"
+                      ></progress>
+                      <p className="">{"(10)"}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className="text-yellow-400"
+                    />
+                    <div className="flex items-center gap-1 text-sm">
+                      <p>3</p>
+                      <progress
+                        className="progress w-56 progress-secondary bg-gray-200"
+                        value="0"
+                        max="100"
+                      ></progress>
+                      <p className="">{"(0)"}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex gap-2 items-center">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className="text-yellow-400"
+                    />
+                    <div className="flex items-center gap-1 text-sm">
+                      <p>2</p>
+                      <progress
+                        className="progress w-56 progress-secondary bg-gray-200"
+                        value="0"
+                        max="100"
+                      ></progress>
+                      <p className="">{"(0)"}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className="text-yellow-400"
+                    />
+                    <div className="flex items-center gap-1 text-sm">
+                      <p>3</p>
+                      <progress
+                        className="progress w-56 progress-secondary bg-gray-200"
+                        value="0"
+                        max="100"
+                      ></progress>
+                      <p className="">{"(0)"}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Filter Section and Review Section */}
+              <div className="flex md:flex-row flex-col md:items-start items-center justify-center md:justify-between gap-4 w-full py-5">
+                <div className="md:w-[30%]  ">
+                  <h3 className="font-bold text-black uppercase pb-4">
+                    Ulasan Teratas
+                  </h3>
+
+                  {/* Filter Section */}
+                  <div className="md:w-52 w-full ">
+                    <div className="flex items-center justify-center bg-secondary rounded-t-2xl text-white">
+                      <img
+                        src={filterIcon}
+                        alt="profile"
+                        width={24}
+                        className=""
+                      />
+                      <p>Filter</p>
+                    </div>
+                    <div className="w-full bg-[#F7F7F7] rounded-b-2xl shadow-md px-5 py-4">
+                      <h2 className="font-medium mb-2 mt-4">Rating</h2>
+                      <div className="flex md:flex-col flex-wrap gap-2">
+                        <div className="flex items-center gap-1">
+                          <CheckBox label={"5"} />
+                          <div className="flex items-center gap-1">
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <CheckBox label={"4"} />
+                          <div className="flex items-center gap-1">
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <CheckBox label={"3"} />
+                          <div className="flex items-center gap-1">
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <CheckBox label={"2"} />
+                          <div className="flex items-center gap-1">
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="text-[#EBB467] text-xs"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <CheckBox label={"1"} />
+                          <FontAwesomeIcon
+                            icon={faStar}
+                            className="text-[#EBB467] text-xs"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="md:w-[70%] w-full">
+                  <h3 className="font-bold text-black uppercase pb-1">
+                    Ulasan Pilihan
+                  </h3>
+                  <p className="text-sm">Menampilkan 3 dari 5 ulasan</p>
+
+                  {/* Review Section Start */}
+                  <div className="flex flex-col gap-4 mt-5">
+                    <div className="flex items-center gap-1">
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <p className="pl-1">Hari Ini</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={profile}
+                        alt="photo profile"
+                        width={32}
+                        className="rounded-full"
+                      />
+                      <p className="font-medium">Khoiru Rizki</p>
+                    </div>
+                    <p className="-mt-2 -mb-1">
+                      Rambak pisangnya benar-benar enak! Teksturnya renyah, tapi
+                      tetap lembut saat digigit. Saya paling suka rasa gurihnya
+                      yang pas, tidak terlalu asin dan tidak terlalu manis.
+                      Cocok banget buat teman minum teh di sore hari.{" "}
+                    </p>
+                    <div className="flex items-end justify-between gap-2">
+                      <div className="flex gap-1">
+                        <img
+                          src={food1}
+                          alt=""
+                          width={64}
+                          className="rounded-md"
+                        />
+                        <img
+                          src={food2}
+                          alt=""
+                          width={64}
+                          className="rounded-md"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <FontAwesomeIcon icon={faThumbsUp} className=" " />
+                        <p>Membantu</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-4 mt-5">
+                    <div className="flex items-center gap-1">
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <p className="pl-1">Hari Ini</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={profile}
+                        alt="photo profile"
+                        width={32}
+                        className="rounded-full"
+                      />
+                      <p className="font-medium">Khoiru Rizki</p>
+                    </div>
+                    <p className="-mt-2 -mb-1">
+                      Rambak pisangnya benar-benar enak! Teksturnya renyah, tapi
+                      tetap lembut saat digigit. Saya paling suka rasa gurihnya
+                      yang pas, tidak terlalu asin dan tidak terlalu manis.
+                      Cocok banget buat teman minum teh di sore hari.{" "}
+                    </p>
+                    <div className="flex items-end justify-between gap-2">
+                      <div className="flex gap-1">
+                        <img
+                          src={food1}
+                          alt=""
+                          width={64}
+                          className="rounded-md"
+                        />
+                        <img
+                          src={food2}
+                          alt=""
+                          width={64}
+                          className="rounded-md"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <FontAwesomeIcon icon={faThumbsUp} className=" " />
+                        <p>Membantu</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-4 mt-5">
+                    <div className="flex items-center gap-1">
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="text-yellow-400"
+                      />
+                      <p className="pl-1">Hari Ini</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={profile}
+                        alt="photo profile"
+                        width={32}
+                        className="rounded-full"
+                      />
+                      <p className="font-medium">Khoiru Rizki</p>
+                    </div>
+                    <p className="-mt-2 -mb-1">
+                      Rambak pisangnya benar-benar enak! Teksturnya renyah, tapi
+                      tetap lembut saat digigit. Saya paling suka rasa gurihnya
+                      yang pas, tidak terlalu asin dan tidak terlalu manis.
+                      Cocok banget buat teman minum teh di sore hari.{" "}
+                    </p>
+                    <div className="flex items-end justify-between gap-2">
+                      <div className="flex gap-1">
+                        <img
+                          src={food1}
+                          alt=""
+                          width={64}
+                          className="rounded-md"
+                        />
+                        <img
+                          src={food2}
+                          alt=""
+                          width={64}
+                          className="rounded-md"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <FontAwesomeIcon icon={faThumbsUp} className=" " />
+                        <p>Membantu</p>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Review Section End */}
+                </div>
+              </div>
             </div>
-            <div className="md:w-[30%] md:mt-0 mt-5 w-full md:max-w-[342px] bg-gray-50 py-2 px-4 rounded-2xl border border-gray-300">
+
+            {/* Checkout Button */}
+            <div className="md:w-[30%] md:mt-0 mt-5 w-full md:max-w-[342px] bg-gray-50 py-2 px-4 rounded-2xl border border-gray-300 sticky top-0">
               <h2 className="font-medium mb-3">Atur Jumlah</h2>
               <div className="flex items-center gap-4">
                 <div className="border border-gray-500 bg-white flex items-center justify-between px-4 py-1 gap-2 max-w-[130px] rounded-lg">
@@ -153,309 +554,6 @@ const DetailProduct = () => {
                   <p>Share</p>
                 </div>
               </div> */}
-            </div>
-          </div>
-          <h2 className="py-4 text-lg font-bold">Ulasan Pembeli</h2>
-
-          {/* Rating Section */}
-          <div className="flex items-start md:flex-row flex-col md:justify-between gap-4 bg-white p-6 border border-gray-300 rounded-2xl w-full md:max-w-[70%]">
-            <div className="">
-              <div className="flex items-center gap-1">
-                <FontAwesomeIcon
-                  icon={faStar}
-                  className="text-yellow-400 text-2xl"
-                />
-                <p className="text-gray-200 text-lg">
-                  <span className="text-2xl font-bold text-black">4.8</span>/5.0
-                </p>
-              </div>
-              <p>98% Pembeli merasa puas</p>
-              <p className="text-gray-400 font-light text-sm">
-                238 rating • 5 ulasan
-              </p>
-            </div>
-            <div className="">
-              <div className="flex gap-2 items-center">
-                <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                <div className="flex items-center gap-1 text-sm">
-                  <p>5</p>
-                  <progress
-                    className="progress w-56 progress-secondary bg-gray-200"
-                    value="100"
-                    max="100"
-                  ></progress>
-                  <p className="">{"(228)"}</p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-center">
-                <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                <div className="flex items-center gap-1 text-sm">
-                  <p>4</p>
-                  <progress
-                    className="progress w-56 progress-secondary bg-gray-200"
-                    value="10"
-                    max="100"
-                  ></progress>
-                  <p className="">{"(10)"}</p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-center">
-                <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                <div className="flex items-center gap-1 text-sm">
-                  <p>3</p>
-                  <progress
-                    className="progress w-56 progress-secondary bg-gray-200"
-                    value="0"
-                    max="100"
-                  ></progress>
-                  <p className="">{"(0)"}</p>
-                </div>
-              </div>
-            </div>
-            <div className="">
-              <div className="flex gap-2 items-center">
-                <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                <div className="flex items-center gap-1 text-sm">
-                  <p>2</p>
-                  <progress
-                    className="progress w-56 progress-secondary bg-gray-200"
-                    value="0"
-                    max="100"
-                  ></progress>
-                  <p className="">{"(0)"}</p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-center">
-                <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                <div className="flex items-center gap-1 text-sm">
-                  <p>3</p>
-                  <progress
-                    className="progress w-56 progress-secondary bg-gray-200"
-                    value="0"
-                    max="100"
-                  ></progress>
-                  <p className="">{"(0)"}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Filter Section and Review Section */}
-          <div className="flex md:flex-row flex-col md:items-start items-center justify-center md:justify-between gap-4 md:max-w-[70%] w-full py-5">
-            <div className="md:w-[30%]  ">
-              <h3 className="font-bold text-black uppercase pb-4">
-                Ulasan Teratas
-              </h3>
-
-              {/* Filter Section */}
-              <div className="md:w-52 w-full ">
-                <div className="flex items-center justify-center bg-secondary rounded-t-2xl text-white">
-                  <img src={filterIcon} alt="profile" width={24} className="" />
-                  <p>Filter</p>
-                </div>
-                <div className="w-full bg-[#F7F7F7] rounded-b-2xl shadow-md px-5 py-4">
-                  <h2 className="font-medium mb-2 mt-4">Rating</h2>
-                  <div className="flex md:flex-col flex-wrap gap-2">
-                    <div className="flex items-center gap-1">
-                      <CheckBox label={"5"} />
-                      <div className="flex items-center gap-1">
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <CheckBox label={"4"} />
-                      <div className="flex items-center gap-1">
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <CheckBox label={"3"} />
-                      <div className="flex items-center gap-1">
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <CheckBox label={"2"} />
-                      <div className="flex items-center gap-1">
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                        <FontAwesomeIcon
-                          icon={faStar}
-                          className="text-[#EBB467] text-xs"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <CheckBox label={"1"} />
-                      <FontAwesomeIcon
-                        icon={faStar}
-                        className="text-[#EBB467] text-xs"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="md:w-[70%] w-full">
-              <h3 className="font-bold text-black uppercase pb-1">
-                Ulasan Pilihan
-              </h3>
-              <p className="text-sm">Menampilkan 3 dari 5 ulasan</p>
-
-              {/* Review Section Start */}
-              <div className="flex flex-col gap-4 mt-5">
-                <div className="flex items-center gap-1">
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <p className="pl-1">Hari Ini</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={profile}
-                    alt="photo profile"
-                    width={32}
-                    className="rounded-full"
-                  />
-                  <p className="font-medium">Khoiru Rizki</p>
-                </div>
-                <p className="-mt-2 -mb-1">
-                  Rambak pisangnya benar-benar enak! Teksturnya renyah, tapi
-                  tetap lembut saat digigit. Saya paling suka rasa gurihnya yang
-                  pas, tidak terlalu asin dan tidak terlalu manis. Cocok banget
-                  buat teman minum teh di sore hari.{" "}
-                </p>
-                <div className="flex items-end justify-between gap-2">
-                  <div className="flex gap-1">
-                    <img src={food1} alt="" width={64} className="rounded-md" />
-                    <img src={food2} alt="" width={64} className="rounded-md" />
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <FontAwesomeIcon icon={faThumbsUp} className=" " />
-                    <p>Membantu</p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col gap-4 mt-5">
-                <div className="flex items-center gap-1">
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <p className="pl-1">Hari Ini</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={profile}
-                    alt="photo profile"
-                    width={32}
-                    className="rounded-full"
-                  />
-                  <p className="font-medium">Khoiru Rizki</p>
-                </div>
-                <p className="-mt-2 -mb-1">
-                  Rambak pisangnya benar-benar enak! Teksturnya renyah, tapi
-                  tetap lembut saat digigit. Saya paling suka rasa gurihnya yang
-                  pas, tidak terlalu asin dan tidak terlalu manis. Cocok banget
-                  buat teman minum teh di sore hari.{" "}
-                </p>
-                <div className="flex items-end justify-between gap-2">
-                  <div className="flex gap-1">
-                    <img src={food1} alt="" width={64} className="rounded-md" />
-                    <img src={food2} alt="" width={64} className="rounded-md" />
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <FontAwesomeIcon icon={faThumbsUp} className=" " />
-                    <p>Membantu</p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col gap-4 mt-5">
-                <div className="flex items-center gap-1">
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
-                  <p className="pl-1">Hari Ini</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img
-                    src={profile}
-                    alt="photo profile"
-                    width={32}
-                    className="rounded-full"
-                  />
-                  <p className="font-medium">Khoiru Rizki</p>
-                </div>
-                <p className="-mt-2 -mb-1">
-                  Rambak pisangnya benar-benar enak! Teksturnya renyah, tapi
-                  tetap lembut saat digigit. Saya paling suka rasa gurihnya yang
-                  pas, tidak terlalu asin dan tidak terlalu manis. Cocok banget
-                  buat teman minum teh di sore hari.{" "}
-                </p>
-                <div className="flex items-end justify-between gap-2">
-                  <div className="flex gap-1">
-                    <img src={food1} alt="" width={64} className="rounded-md" />
-                    <img src={food2} alt="" width={64} className="rounded-md" />
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <FontAwesomeIcon icon={faThumbsUp} className=" " />
-                    <p>Membantu</p>
-                  </div>
-                </div>
-              </div>
-              {/* Review Section End */}
             </div>
           </div>
 
@@ -525,7 +623,6 @@ const DetailProduct = () => {
               />
             </div>
           </div>
-
           <Footer />
         </div>
       </NavbarSearchBrown>
