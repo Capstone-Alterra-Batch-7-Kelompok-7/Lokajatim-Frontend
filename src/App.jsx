@@ -8,6 +8,7 @@ import ArticleHome from "./pages/article/ArticleHome";
 import ArticleList from "./pages/article/ArticleList";
 import ArticleDetail from "./pages/article/ArticleDetail";
 import ScrollTop from "./components/ScrollTop";
+import ProductList from "./pages/product/ProductList";
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
   { path: "/register", element: <Register /> },
@@ -23,6 +24,7 @@ const routes = [
       { path: "/article", element: <ArticleHome /> },
       { path: "/article/list", element: <ArticleList /> },
       { path: "/article/:id", element: <ArticleDetail /> },
+      { path: "/products", element: <ProductList /> },
     ],
   },
 ];

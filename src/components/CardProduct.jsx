@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 const CardProduct = ({ id, img, price, title }) => {
   return (
     <>
-      <div className={`card card-compact bg-base-100 md:w-64 w-full shadow-md`}>
+      <div className={`card card-compact bg-base-100 w-52 shadow-md`}>
         <figure className="relative">
           <img
-            src={img}
-            // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+            // src={img}
+            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
             alt="Image"
-            className={`h-48 max-h-48 w-full object-cover md:object-fill`}
+            className={`h-36 max-h-36 w-full object-cover md:object-fill`}
           />
         </figure>
         <div className="card-body min-h-32 max-h-32">
           <div className="flex flex-col">
-          <Link to={`/product/${id}`} className="text-lg">
+          <Link to={`/product/${id}`} className="text-base">
             {title}
           </Link>
           <p className="text-xl font-bold">
