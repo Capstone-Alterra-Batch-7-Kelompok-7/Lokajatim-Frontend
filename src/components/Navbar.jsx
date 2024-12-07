@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-white shadow-md px-6">
-      <div className="flex-1">
+    <div className="navbar bg-white shadow-md px-6 flex items-center justify-between">
+      <div className="flex items-center">
         <Link to="/" className="flex items-center">
           {/* Logo */}
           <img src="logo-crop.png" alt="Logo" className="w-8 h-8 mr-2" />
@@ -45,17 +45,41 @@ const Navbar = () => {
       </div>
 
       {/* Buttons */}
-      <div className="flex space-x-2">
-        <Link to="/login">
-          <button className="btn btn-outline border-brown-700 text-brown-700 hover:bg-brown-100 hover:text-brown-900">
-            Masuk
-          </button>
-        </Link>
-        <Link to="/register">
-          <button className="btn bg-brown-700 text-white hover:bg-brown-800">
-            Daftar
-          </button>
-        </Link>
+      <div className="flex space-x-4">
+
+        {/* Tombol Masuk */}
+      <Link to="/login">
+        <button
+          className="w-[90px] h-[32px] border-[1px] border-[#8B5428] rounded-[8px] text-[#8B5428] text-sm font-medium hover:bg-[#F5E5DA]"
+          style={{ fontFamily: "Roboto, sans-serif",
+            fontSize: "14px",
+            fontWeight: "400",
+            lineHeight: "16px",
+            textAlign: "left",
+            textUnderlinePosition: "from-font",
+            textDecorationSkipInk: "none",
+            padding: "8px 24px", }}
+        >
+          Masuk
+        </button>
+      </Link>
+
+      {/* Tombol Daftar */}
+      <Link to="/register">
+        <button
+          className="w-[90px] h-[32px] bg-[#8B5428] rounded-[8px] text-white text-sm font-medium hover:bg-[#714221]"
+          style={{ fontFamily: "Roboto, sans-serif",
+            fontSize: "14px",
+            fontWeight: "400",
+            lineHeight: "16px",
+            textAlign: "left",
+            textUnderlinePosition: "from-font",
+            textDecorationSkipInk: "none",
+            padding: "8px 24px", }}
+        >
+          Daftar
+        </button>
+      </Link>
       </div>
     </div>
   );

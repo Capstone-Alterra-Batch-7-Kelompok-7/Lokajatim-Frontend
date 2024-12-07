@@ -5,12 +5,12 @@ const About = () => {
     <section
       className="relative text-white flex justify-center items-center py-16 px-4"
       style={{
-        backgroundImage: "au1.jpeg",
+        backgroundImage: "au1.png",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        backgroundColor: "#8B5428E5", // Warna latar dengan transparansi
-        backgroundBlendMode: "overlay", // Menggabungkan warna dengan gambar
+        backgroundColor: "#8B5428E5", 
+        backgroundBlendMode: "overlay", 
       }}
     >
       <div className="relative flex flex-col lg:flex-row items-center max-w-6xl mx-auto">
