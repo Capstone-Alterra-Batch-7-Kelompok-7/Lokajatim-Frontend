@@ -16,7 +16,7 @@ const ProductList = () => {
           <div className="breadcrumbs text-sm">
             <ul>
               <li>
-                <Link to={"/"}>Home</Link>
+                <Link to={"/"}>Beranda</Link>
               </li>
               <li className="font-medium">Product Lokal</li>
             </ul>
