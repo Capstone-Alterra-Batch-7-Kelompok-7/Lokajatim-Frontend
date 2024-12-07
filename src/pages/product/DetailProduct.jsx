@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../../components/Footer";
 import NavbarSearchBrown from "../../components/NavbarSearchBrown";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 // import {
 //   faHeart,
 //   faMessage,
@@ -14,12 +14,26 @@ import food1 from "../../assets/dumy/image1.jpg";
 import food2 from "../../assets/dumy/image2.png";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import CardProduct from "../../components/CardProduct";
+import { Link } from "react-router-dom";
+import { useCounter } from "../../hooks/useCounter";
 
 const DetailProduct = () => {
+  const { counter, handleClickAdd, handleClickReduce } = useCounter();
   return (
     <>
       <NavbarSearchBrown>
         <div className="w-full px-4 md:px-[2rem] py-4 bg-[#FAFBFE]">
+          <div className="breadcrumbs text-sm">
+            <ul>
+              <li>
+                <Link to={"/"}>Home</Link>
+              </li>
+              <li>
+                <Link to={"/products"}>Product Lokal</Link>
+              </li>
+              <li className="font-medium">Detail Product</li>
+            </ul>
+          </div>
           <div className="w-full flex md:flex-row flex-col justify-between items-start relative">
             <div className="md:w-[70%] w-full flex flex-wrap gap-4">
               {/* Image Product */}
@@ -104,6 +118,51 @@ const DetailProduct = () => {
                     mengurangi gula (diet). Camilan ini sudah mendapatkan
                     sertifikasi halal, merek dan PIRT.
                   </p>
+                </div>
+              </div>
+
+              {/* Checkout on Mobile */}
+              <div className="md:w-[30%] hidden md:block md:mt-0 mt-5 w-full md:max-w-[342px] bg-gray-50 py-2 px-4 rounded-2xl border border-gray-300 sticky top-0">
+                <h2 className="font-medium mb-3">Atur Jumlah</h2>
+                <div className="flex items-center gap-4">
+                  <div className="border border-gray-500 bg-white flex items-center justify-between px-2 py-1 gap-7 max-w-[200px] rounded-lg">
+                    <FontAwesomeIcon
+                      icon={faMinus}
+                      className="text-gray-500 font-bold text-lg cursor-pointer"
+                      onClick={handleClickReduce}
+                    />
+                    <p>{counter}</p>
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      className="text-orange-600 font-bold text-lg cursor-pointer"
+                      onClick={handleClickAdd}
+                    />
+                  </div>
+                  <p>
+                    Stock: <span className="font-medium">192</span>
+                  </p>
+                </div>
+                {/* <p className="text-xs font-light pt-1">Max. pembelian 12 pcs</p> */}
+                <div className="flex items-end justify-between mt-2">
+                  <p className="">SubTotal</p>
+                  <div className="text-right">
+                    {/* <p className="line-through text-sm">Rp.25.00</p> */}
+                    <p className="font-bold">Rp.18.000</p>
+                  </div>
+                </div>
+                {/* Button Action buy or cart */}
+                <div className="flex flex-col gap-2">
+                  <Link
+                    to="/buy-now"
+                    className="btn min-h-9 h-9 bg-[#ED7D31] border-none hover:bg-orange-900 text-white w-full"
+                  >
+                    Beli Langsung
+                  </Link>
+                  <div className="border border-[#ED7D31] rounded-lg hover:border-none">
+                    <button className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full">
+                      Keranjang
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -508,13 +567,21 @@ const DetailProduct = () => {
             </div>
 
             {/* Checkout Button */}
-            <div className="md:w-[30%] md:mt-0 mt-5 w-full md:max-w-[342px] bg-gray-50 py-2 px-4 rounded-2xl border border-gray-300 sticky top-0">
+            <div className="md:w-[30%] hidden md:block md:mt-0 mt-5 w-full md:max-w-[342px] bg-gray-50 py-2 px-4 rounded-2xl border border-gray-300 sticky top-0">
               <h2 className="font-medium mb-3">Atur Jumlah</h2>
               <div className="flex items-center gap-4">
-                <div className="border border-gray-500 bg-white flex items-center justify-between px-4 py-1 gap-2 max-w-[130px] rounded-lg">
-                  <p className="text-gray-500 font-bold text-lg">-</p>
-                  <p>1</p>
-                  <p className="text-orange-600 font-bold">+</p>
+                <div className="border border-gray-500 bg-white flex items-center justify-between px-2 py-1 gap-7 max-w-[200px] rounded-lg">
+                  <FontAwesomeIcon
+                    icon={faMinus}
+                    className="text-gray-500 font-bold text-lg cursor-pointer"
+                    onClick={handleClickReduce}
+                  />
+                  <p>{counter}</p>
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    className="text-orange-600 font-bold text-lg cursor-pointer"
+                    onClick={handleClickAdd}
+                  />
                 </div>
                 <p>
                   Stock: <span className="font-medium">192</span>
@@ -530,12 +597,15 @@ const DetailProduct = () => {
               </div>
               {/* Button Action buy or cart */}
               <div className="flex flex-col gap-2">
-                <button className="btn min-h-9 h-9 bg-[#ED7D31] border-none hover:bg-orange-900 text-white w-full">
-                  Keranjang
-                </button>
+                <Link
+                  to="/buy-now"
+                  className="btn min-h-9 h-9 bg-[#ED7D31] border-none hover:bg-orange-900 text-white w-full"
+                >
+                  Beli Langsung
+                </Link>
                 <div className="border border-[#ED7D31] rounded-lg hover:border-none">
                   <button className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full">
-                    Beli Langsung
+                    Keranjang
                   </button>
                 </div>
               </div>
