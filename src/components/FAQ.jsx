@@ -37,7 +37,7 @@ const FAQ = () => {
             </div>
             <div className="collapse-content">
               <p>
-                Di Lokajatim, Anda bisa menemukan berbagai hal yang...
+              Di Lokajatim, Anda bisa menemukan berbagai hal yang merepresentasikan keunikan dan kekayaan budaya Jawa Timur. Mulai dari produk UMKM seperti kerajinan tangan, batik, makanan khas, hingga fashion lokal yang berkualitas. Anda juga dapat menjelajahi event-event lokal, seperti festival budaya, pameran seni, dan acara tradisional yang menarik. Tak hanya itu, Lokajatim menyajikan artikel inspiratif yang membahas kisah sukses pelaku lokal, panduan wisata, hingga cerita mendalam tentang tradisi dan sejarah Jawa Timur. 
               </p>
             </div>
           </div>
@@ -81,9 +81,9 @@ const FAQ = () => {
         {/* Image Section */}
         <div className="flex justify-center items-center">
           <img
-            src="https://via.placeholder.com/400x400" // Ganti dengan link gambar sesuai kebutuhan
+            src="fq1.png" 
             alt="FAQ Illustration"
-            className="rounded-lg shadow-md"
+            className="w-[602px] h-[588px] rounded-tl-[32px]"
           />
         </div>
       </div>

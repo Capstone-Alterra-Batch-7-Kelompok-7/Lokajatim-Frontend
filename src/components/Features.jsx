@@ -39,7 +39,7 @@ const Features = () => {
           >
             {/* Feature 1 */}
             <div
-              className="bg-[#FCFAF7] p-6 rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
+              className="bg-[#FCFAF7] rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
               style={{ width: "306px", height: "206px", gap: "24px" }}
             >
               <div
@@ -52,7 +52,12 @@ const Features = () => {
                   backgroundColor: "#9E602E",
                   borderRadius: "12px",
                 }}
-              >
+                >
+                  <img
+                    src="" // Masukkan path ke file logo Anda
+                    alt="Marketplace"
+                    className="w-8 h-8"
+                  />
                 <i className="fas fa-store text-white text-xl"></i>
               </div>
               <h3 className="text-lg font-semibold text-gray-800 text-center">
@@ -65,7 +70,7 @@ const Features = () => {
 
             {/* Feature 2 */}
             <div
-              className="bg-[#FCFAF7] p-6 rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
+              className="bg-[#FCFAF7] rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
               style={{ width: "306px", height: "206px", gap: "24px" }}
             >
               <div
@@ -78,7 +83,12 @@ const Features = () => {
                   backgroundColor: "#9E602E",
                   borderRadius: "12px",
                 }}
-              >
+                >
+                <img
+                  src="/path/to/marketplace-logo.png" // Masukkan path ke file logo Anda
+                  alt="Marketplace"
+                  className="w-8 h-8"
+                />
                 <i className="fas fa-calendar-alt text-white text-xl"></i>
               </div>
               <h3 className="text-lg font-semibold text-gray-800 text-center">
@@ -91,7 +101,7 @@ const Features = () => {
 
             {/* Feature 3 */}
             <div
-              className="bg-[#FCFAF7] p-6 rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
+              className="bg-[#FCFAF7] rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
               style={{ width: "306px", height: "206px", gap: "24px" }}
             >
               <div
@@ -104,7 +114,12 @@ const Features = () => {
                   backgroundColor: "#9E602E",
                   borderRadius: "12px",
                 }}
-              >
+                >
+                <img
+                  src="/path/to/marketplace-logo.png" // Masukkan path ke file logo Anda
+                  alt="Marketplace"
+                  className="w-8 h-8"
+                />
                 <i className="fas fa-newspaper text-white text-xl"></i>
               </div>
               <h3 className="text-lg font-semibold text-gray-800 text-center">
@@ -118,7 +133,7 @@ const Features = () => {
 
             {/* Feature 4 */}
             <div
-              className="bg-[#FCFAF7] p-6 rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
+              className="bg-[#FCFAF7] rounded-tl-[12px] rounded-tr-none rounded-bl-none rounded-br-none shadow-md flex flex-col items-center"
               style={{ width: "306px", height: "206px", gap: "24px" }}
             >
               <div
@@ -131,7 +146,12 @@ const Features = () => {
                   backgroundColor: "#9E602E",
                   borderRadius: "12px",
                 }}
-              >
+                >
+                <img
+                  src="/path/to/marketplace-logo.png" // Masukkan path ke file logo Anda
+                  alt="Marketplace"
+                  className="w-8 h-8"
+                />
                 <i className="fas fa-robot text-white text-xl"></i>
               </div>
               <h3 className="text-lg font-semibold text-gray-800 text-center">

@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faTelegram, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
@@ -31,18 +33,21 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Follow Us Section */}
-        <div>
+      {/* Follow Us Section */}
+      <div>
           <h3 className="font-semibold mb-4">Follow us</h3>
           <div className="flex space-x-4">
-            <a href="#" className="text-black">
-              <i className="fab fa-facebook-f"></i>
+            {/* Facebook */}
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-blue-500">
+              <FontAwesomeIcon icon={faFacebookF} size="2x" />
             </a>
-            <a href="#" className="text-black">
-              <i className="fab fa-telegram"></i>
+            {/* Telegram */}
+            <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className="text-black hover:text-blue-500">
+              <FontAwesomeIcon icon={faTelegram} size="2x" />
             </a>
-            <a href="#" className="text-black">
-              <i className="fab fa-instagram"></i>
+            {/* Instagram */}
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-pink-500">
+              <FontAwesomeIcon icon={faInstagram} size="2x" />
             </a>
           </div>
           <p className="mt-4">Call us</p>
