@@ -1,102 +1,66 @@
-import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTelegram, faInstagram } from '@fortawesome/free-brands-svg-icons';
-
+import { Link } from "react-router-dom";
+import lgo from "../assets/logo-crop.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagram,
+  faTelegramPlane,
+} from "@fortawesome/free-brands-svg-icons";
 const Footer = () => {
   return (
-    <footer className="bg-white border-t-2 border-blue-500 py-8 text-black">
-      <div className="container mx-auto grid grid-cols-4 gap-4">
-        {/* Logo and Text Section */}
-        <div className="flex items-center space-x-4">
-          <img
-            src="logo-crop.png"
-            alt="Lokajatim Logo"
-            className="h-12"
-          />
-          <div
-            className="text-center"
-            style={{
-              width: "131px",
-              height: "32px",
-              fontFamily: "Cinzel Decorative, serif",
-              fontSize: "24px",
-              fontWeight: 400,
-              lineHeight: "32px",
-              letterSpacing: "0.1px",
-              textAlign: "center",
-              color: "#683F1E",
-              textUnderlinePosition: "from-font",
-              textDecorationSkipInk: "none",
-            }}
-          >
-            LOKAJATIM
+    <>
+      <footer className="footer bg-transparent py-4 text-black">
+        <aside className="flex items-center">
+          <img src={lgo} alt="logo" width={50} />
+          <p className="logo-font text-2xl">LOKAJATIM</p>
+        </aside>
+        <nav>
+          <h6 className=" footer-title text-black opacity-100 capitalize text-lg">
+            Follow us
+          </h6>
+          <div className="flex gap-3">
+            <FontAwesomeIcon icon={faFacebook} className="text-2xl" />
+            <FontAwesomeIcon icon={faTelegramPlane} className="text-2xl" />
+            <FontAwesomeIcon
+              icon={faInstagram}
+              className="text-base text-white bg-black p-1 rounded-full"
+            />
           </div>
-        </div>
-
-      {/* Follow Us Section */}
-      <div>
-          <h3 className="font-semibold mb-4">Follow us</h3>
-          <div className="flex space-x-4">
-            {/* Facebook */}
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-blue-500">
-              <FontAwesomeIcon icon={faFacebookF} size="2x" />
-            </a>
-            {/* Telegram */}
-            <a href="https://telegram.org" target="_blank" rel="noopener noreferrer" className="text-black hover:text-blue-500">
-              <FontAwesomeIcon icon={faTelegram} size="2x" />
-            </a>
-            {/* Instagram */}
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-pink-500">
-              <FontAwesomeIcon icon={faInstagram} size="2x" />
-            </a>
-          </div>
-          <p className="mt-4">Call us</p>
-          <a href="tel:+18008543680" className="text-blue-500">
-            +1 800 854-36-80
-          </a>
-        </div>
-
-        {/* Produk & Layanan */}
-        <div>
-          <h3 className="font-semibold mb-4">Produk & Layanan</h3>
-          <ul className="space-y-2">
-            <li><a href="#" className="text-black hover:text-blue-500">Produk Lokal</a></li>
-            <li><a href="#" className="text-black hover:text-blue-500">Event Lokal</a></li>
-            <li><a href="#" className="text-black hover:text-blue-500">Web Design</a></li>
-            <li><a href="#" className="text-black hover:text-blue-500">Artikel Seni & Budaya</a></li>
-            <li><a href="#" className="text-black hover:text-blue-500">Kalender Event Lokal</a></li>
-          </ul>
-        </div>
-
-        {/* Panduan Pengguna dan Tentang Kami */}
-        <div className="grid grid-cols-2 gap-8">
-          {/* Panduan Pengguna */}
-          <div>
-            <h3 className="font-semibold mb-4">Panduan Pengguna</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-black hover:text-blue-500">FAQ</a></li>
-              <li><a href="#" className="text-black hover:text-blue-500">Kebijakan Privasi</a></li>
-              <li><a href="#" className="text-black hover:text-blue-500">Syarat & Ketentuan</a></li>
-            </ul>
-          </div>
-
-          {/* Tentang Kami */}
-          <div>
-            <h3 className="font-semibold mb-4">Tentang Kami</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-black hover:text-blue-500">About Us</a></li>
-              <li><a href="#" className="text-black hover:text-blue-500">Careers</a></li>
-              <li><a href="#" className="text-black hover:text-blue-500">FAQs</a></li>
-              <li><a href="#" className="text-black hover:text-blue-500">Teams</a></li>
-              <li><a href="#" className="text-black hover:text-blue-500">Contact Us</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div className="text-center mt-8 text-sm">
-        © 2024 Lokajatim. Semua Hak Dilindungi.
-      </div>
-    </footer>
+          <h6 className=" text-black text-sm uppercase font-semibold pt-2">
+            Call us
+          </h6>
+          <p>+1 800 854-36-80</p>
+        </nav>
+        <nav>
+          <h6 className="footer-title text-black opacity-100 capitalize text-lg ">
+            Produk & Layanan
+          </h6>
+          <a className="link link-hover">Produk Lokal</a>
+          <a className="link link-hover">Event Lokal</a>
+          <a className="link link-hover">Web-design</a>
+          <a className="link link-hover">Artikel Seni & Budaya</a>
+          <a className="link link-hover">Kalender Event</a>
+        </nav>
+        <nav>
+          <h6 className="footer-title text-black opacity-100 capitalize text-lg">
+            Panduan Pengguna
+          </h6>
+          <a className="link link-hover">FAQ</a>
+          <a className="link link-hover">Kebijakan Privasi</a>
+          <a className="link link-hover">Syarat & Ketentuan</a>
+        </nav>
+        <nav>
+          <h6 className="footer-title text-black opacity-100 capitalize text-lg">
+            Tentang Kami
+          </h6>
+          <a className="link link-hover">About Us</a>
+          <a className="link link-hover">Careers</a>
+          <a className="link link-hover">FAQs</a>
+          <a className="link link-hover">Teams</a>
+          <a className="link link-hover">Contact Us</a>
+        </nav>
+      </footer>
+    </>
   );
 };
 

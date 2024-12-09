@@ -11,7 +11,7 @@ const Features = () => {
           style={{
             width: "538px",
             height: "588px",
-            borderRadius: "32px 0px 0px 0px",
+            borderRadius: "32px",
           }}
         >
           <img

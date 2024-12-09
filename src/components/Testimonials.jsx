@@ -52,19 +52,29 @@ const Testimonials = () => {
                 </h4>
                 <p className="text-sm text-gray-500">Seniman Tari</p>
               </div>
-              <div className="text-gray-400">
-                <span className="mr-2 text-sm italic">Testimonial</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5 text-[#8B5428]"
-                >
-                  <path d="M2 12l2-8h5v-2h6v2h5l2 8h-6v10h-6v-10h-6zm8 2v6h4v-6h-4z" />
-                </svg>
-              </div>
-            </div>
-          </div>
+              <div className="text-gray-800 flex items-center justify-center mt-4">
+  {/* Logo di kiri */}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#E9B763"
+    viewBox="0 0 24 24"
+    className="w-16 h-16 mr-2"
+  >
+    {/* Lingkaran */}
+    <circle cx="12" cy="12" r="12" fill="#E9B763" />
+    {/* Ikon jempol */}
+    <path
+      d="M7 12v6h3v-6H7zm6-5c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v5H7v6h6v-6h3.79l.91-4H13V7z"
+      fill="white"
+    />
+  </svg>
+  
+  {/* Text di kanan */}
+  <span className="text-sm italic font-bold">Testimonial</span>
+</div>
+
+  </div>
+  </div>
 
           {/* Testimonial 2 */}
           <div className="bg-white rounded-lg shadow-xl p-8 relative">
@@ -108,19 +118,29 @@ const Testimonials = () => {
                 </h4>
                 <p className="text-sm text-gray-500">Pengusaha Kecil</p>
               </div>
-              <div className="text-gray-400 flex items-center justify-center mt-4">
-    <span className="mr-2 text-sm italic">Testimonial</span>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      className="w-5 h-5 text-[#8B5428]"
-    >
-      <path d="M2 12l2-8h5v-2h6v2h5l2 8h-6v10h-6v-10h-6zm8 2v6h4v-6h-4z" />
-    </svg>
+              <div className="text-gray-800 flex items-center justify-center mt-4">
+  {/* Logo di kiri */}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#E9B763"
+    viewBox="0 0 24 24"
+    className="w-16 h-16 mr-2"
+  >
+    {/* Lingkaran */}
+    <circle cx="12" cy="12" r="12" fill="#E9B763" />
+    {/* Ikon jempol */}
+    <path
+      d="M7 12v6h3v-6H7zm6-5c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v5H7v6h6v-6h3.79l.91-4H13V7z"
+      fill="white"
+    />
+  </svg>
+  
+  {/* Text di kanan */}
+  <span className="text-sm italic font-bold">Testimonial</span>
+</div>
+
   </div>
-            </div>
-          </div>
+  </div>
 
           {/* Testimonial 3 */}
           <div className="bg-white rounded-lg shadow-xl p-8 relative">
@@ -163,21 +183,31 @@ const Testimonials = () => {
                 </h4>
                 <p className="text-sm text-gray-500">Penulis Konten</p>
               </div>
-              <div className="text-gray-400">
-                <span className="mr-2 text-sm italic">Testimonial</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5 text-[#8B5428]"
-                >
-                  <path d="M2 12l2-8h5v-2h6v2h5l2 8h-6v10h-6v-10h-6zm8 2v6h4v-6h-4z" />
-                </svg>
+              <div className="text-gray-800 flex items-center justify-center mt-4">
+  {/* Logo di kiri */}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="#E9B763"
+    viewBox="0 0 24 24"
+    className="w-16 h-16 mr-2"
+  >
+    {/* Lingkaran */}
+    <circle cx="12" cy="12" r="12" fill="#E9B763" />
+    {/* Ikon jempol */}
+    <path
+      d="M7 12v6h3v-6H7zm6-5c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v5H7v6h6v-6h3.79l.91-4H13V7z"
+      fill="white"
+    />
+  </svg>
+  
+  {/* Text di kanan */}
+  <span className="text-sm italic font-bold">Testimonial</span>
+</div>
+
               </div>
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 };
