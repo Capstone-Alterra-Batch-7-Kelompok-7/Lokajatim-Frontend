@@ -11,6 +11,8 @@ import imgsucces from "../../assets/auth/succes-login.png";
 import slide1 from "../../assets/auth/aut-slide1.png";
 import slide2 from "../../assets/auth/aut-slide2.png";
 import slide3 from "../../assets/auth/aut-slide3.png";
+import { use } from "react";
+import { Loading } from "../../components/Loading";
 
 const Slide = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,6 +76,7 @@ const Login = () => {
   const [inputLogin, setInputLogin] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoading, setIsloading] = useState(false);
 
   const handleChange = (e) => {
     setInputLogin({ ...inputLogin, [e.target.id]: e.target.value });
@@ -81,18 +84,36 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsloading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/login`, inputLogin);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/login`,
+        inputLogin
+      );
       if (response.status === 200) {
+        // Tampilkan modal setelah 4 detik
+        setIsloading(false);
+        localStorage.setItem("token", response.data.data.token);
         document.getElementById("success-login").showModal();
+
+        // Navigasi ke halaman home setelah modal ditampilkan
+        setTimeout(() => {
+          window.location.href = "/homepage";
+          console.log(response);
+        }, 1000);
       }
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Login gagal. Silakan coba lagi.");
+      setError(
+        err.response?.data?.message || "Login gagal. Silakan coba lagi."
+      );
+      setIsloading(false);
     }
   };
 
   return (
+    <>
+    {isLoading && <Loading />}
     <div className="w-full min-h-screen md:flex">
       {/* Bagian Kiri - Form Login */}
       <div
@@ -181,6 +202,7 @@ const Login = () => {
         description="Yeay, Selamat Datang Kembali!"
       />
     </div>
+    </>
   );
 };
 
