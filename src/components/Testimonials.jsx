@@ -1,4 +1,5 @@
 import React from "react";
+import "bootstrap-icons/font/bootstrap-icons.css"; 
 
 const Testimonials = () => {
   return (
@@ -20,28 +21,29 @@ const Testimonials = () => {
             </div>
             <div className="absolute top-4 right-6 flex text-[#8B5428] text-lg">
               {Array(5)
-                .fill("⭐")
-                .map((star, index) => (
-                  <span key={index}>{star}</span>
+                .fill()
+                .map((_, index) => (
+                  <i key={index} className="bi bi-star-fill text-[#8B5428] mx-1"></i>
                 ))}
             </div>
             <div className="mt-14 flex justify-center">
-            <p className="text-[#161616] text-left leading-4"
-            style={{
-            width: "323px",
-            height: "80px",
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "14px",
-            fontWeight: "400",
-            textUnderlinePosition: "from-font",
-            textDecorationSkipInk: "none",
-          }}
-           >
-              "Sebagai pecinta budaya lokal, saya sering kesulitan mencari
-              informasi event seni dan budaya. Lokajatim memberikan solusi
-              lengkap! Saya bisa tahu jadwal event sekaligus membeli tiketnya
-              dengan mudah."
-            </p>
+              <p
+                className="text-[#161616] text-left leading-4"
+                style={{
+                  width: "323px",
+                  height: "80px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  textUnderlinePosition: "from-font",
+                  textDecorationSkipInk: "none",
+                }}
+              >
+                "Sebagai pecinta budaya lokal, saya sering kesulitan mencari
+                informasi event seni dan budaya. Lokajatim memberikan solusi
+                lengkap! Saya bisa tahu jadwal event sekaligus membeli tiketnya
+                dengan mudah."
+              </p>
             </div>
             <div className="flex justify-between items-center mt-6">
               <div>
@@ -75,28 +77,29 @@ const Testimonials = () => {
             </div>
             <div className="absolute top-4 right-6 flex text-[#8B5428] text-lg">
               {Array(5)
-                .fill("⭐")
-                .map((star, index) => (
-                  <span key={index}>{star}</span>
+                .fill()
+                .map((_, index) => (
+                  <i key={index} className="bi bi-star-fill text-[#8B5428] mx-1"></i>
                 ))}
             </div>
             <div className="mt-14 flex justify-center">
-            <p className="text-[#161616] text-left leading-4"
-            style={{
-            width: "323px",
-            height: "80px",
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "14px",
-            fontWeight: "400",
-            textUnderlinePosition: "from-font",
-            textDecorationSkipInk: "none",
-          }}
-           >
-              "Saya sangat terkesan dengan kemudahan mencari produk lokal di
-              Lokajatim. Produk-produk yang tersedia benar-benar mencerminkan
-              keindahan budaya lokal kita. Sangat membantu untuk mendukung UMKM
-              di Jawa Timur!"
-            </p>
+              <p
+                className="text-[#161616] text-left leading-4"
+                style={{
+                  width: "323px",
+                  height: "80px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  textUnderlinePosition: "from-font",
+                  textDecorationSkipInk: "none",
+                }}
+              >
+                "Saya sangat terkesan dengan kemudahan mencari produk lokal di
+                Lokajatim. Produk-produk yang tersedia benar-benar mencerminkan
+                keindahan budaya lokal kita. Sangat membantu untuk mendukung UMKM
+                di Jawa Timur!"
+              </p>
             </div>
             <div className="flex justify-between items-center mt-6">
               <div>
@@ -105,17 +108,17 @@ const Testimonials = () => {
                 </h4>
                 <p className="text-sm text-gray-500">Pengusaha Kecil</p>
               </div>
-              <div className="text-gray-400">
-                <span className="mr-2 text-sm italic">Testimonial</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5 text-[#8B5428]"
-                >
-                  <path d="M2 12l2-8h5v-2h6v2h5l2 8h-6v10h-6v-10h-6zm8 2v6h4v-6h-4z" />
-                </svg>
-              </div>
+              <div className="text-gray-400 flex items-center justify-center mt-4">
+    <span className="mr-2 text-sm italic">Testimonial</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      className="w-5 h-5 text-[#8B5428]"
+    >
+      <path d="M2 12l2-8h5v-2h6v2h5l2 8h-6v10h-6v-10h-6zm8 2v6h4v-6h-4z" />
+    </svg>
+  </div>
             </div>
           </div>
 
@@ -130,27 +133,28 @@ const Testimonials = () => {
             </div>
             <div className="absolute top-4 right-6 flex text-[#8B5428] text-lg">
               {Array(5)
-                .fill("⭐")
-                .map((star, index) => (
-                  <span key={index}>{star}</span>
+                .fill()
+                .map((_, index) => (
+                  <i key={index} className="bi bi-star-fill text-[#8B5428] mx-1"></i>
                 ))}
             </div>
             <div className="mt-14 flex justify-center">
-            <p className="text-[#161616] text-left leading-4"
-            style={{
-            width: "323px",
-            height: "80px",
-            fontFamily: "Roboto, sans-serif",
-            fontSize: "14px",
-            fontWeight: "400",
-            textUnderlinePosition: "from-font",
-            textDecorationSkipInk: "none",
-          }}
-           >
-              "Artikel-artikel tentang budaya lokal di Lokajatim sangat
-              informatif dan inspiratif. Rasanya seperti menjelajah setiap sudut
-              Jawa Timur tanpa harus ke sana langsung. Terima kasih, Lokajatim!"
-            </p>
+              <p
+                className="text-[#161616] text-left leading-4"
+                style={{
+                  width: "323px",
+                  height: "80px",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  textUnderlinePosition: "from-font",
+                  textDecorationSkipInk: "none",
+                }}
+              >
+                "Artikel-artikel tentang budaya lokal di Lokajatim sangat
+                informatif dan inspiratif. Rasanya seperti menjelajah setiap sudut
+                Jawa Timur tanpa harus ke sana langsung. Terima kasih, Lokajatim!"
+              </p>
             </div>
             <div className="flex justify-between items-center mt-6">
               <div>
