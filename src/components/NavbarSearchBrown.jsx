@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faSearch } from "@fortawesome/free-solid-svg-icons";
 import {
   faBell,
-  faBookmark,
   faEnvelope,
 } from "@fortawesome/free-regular-svg-icons";
 import cart from "../assets/icon/cart.png";
+import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { instance } from "../config/config";
 const NavbarSearchBrown = ({ children }) => {
   const navbarItems = [
     {
@@ -21,23 +23,36 @@ const NavbarSearchBrown = ({ children }) => {
       link: "/article",
     },
     {
-
       id: 3,
-
-      id: 2,
-
       title: "Event",
       link: "/event",
     },
     {
       id: 4,
-
-      id: 3,
-
       title: "Produk Lokal",
-      link: "/product",
+      link: "/products",
     },
   ];
+  const [userId, setUserId] = useState(null);
+  const [dataUser, setDataUser] = useState(null);
+  useEffect(() => {
+    const fetch = async (id) => {
+      try {
+        const response = await instance.get(`/users/${id}`);
+        setDataUser(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const token = localStorage.getItem("token");
+    if (token) {
+      const tokenDecode = jwtDecode(token);
+      setUserId(tokenDecode.userID);
+    }
+    if (userId) {
+      fetch(userId);
+    }
+  }, [userId]);
   return (
     <>
       <div className="drawer drawer-end  ">
@@ -64,36 +79,45 @@ const NavbarSearchBrown = ({ children }) => {
             </div> */}
             <div className="lg:navbar-end hidden lg:flex">
               <div className="flex items-center gap-4">
-                <img src={cart} alt="cart" width={24} />
-                <FontAwesomeIcon
-                  icon={faBell}
-                  className="text-2xl font-light"
-                />
-                <FontAwesomeIcon
-                  icon={faEnvelope}
-                  className="text-2xl font-light"
-                />
-                <div className="flex gap-2 items-center">
-                  <img
-                    src="https://placehold.co/400"
-                    alt=""
-                    width={30}
-                    className="rounded-full"
-                  />
-                  <p className="text-sm">Siti Sabrina</p>
-                </div>
-                {/* <Link
-                  to="/login"
-                  className="btn bg-transparent text-white hover:bg-white hover:text-[#404040]"
-                >
-                  Masuk
-                </Link>
-                <Link
-                  to="/login"
-                  className="btn text-[#404040] bg-white hover:bg-[#404040] hover:text-white"
-                >
-                  Daftar
-                </Link> */}
+                {dataUser ? (
+                  <>
+                  <Link to={'/cart'}>
+                    <img src={cart} alt="cart" width={24} />
+                  </Link>
+                    <FontAwesomeIcon
+                      icon={faBell}
+                      className="text-2xl font-light"
+                    />
+                    <FontAwesomeIcon
+                      icon={faEnvelope}
+                      className="text-2xl font-light"
+                    />
+                    <div className="flex gap-2 items-center">
+                      <img
+                        src="https://placehold.co/400"
+                        alt=""
+                        width={30}
+                        className="rounded-full"
+                      />
+                      <p className="text-sm">{dataUser?.name}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="btn bg-transparent text-white hover:bg-white hover:text-[#404040]"
+                    >
+                      Masuk
+                    </Link>
+                    <Link
+                      to="/login"
+                      className="btn text-[#404040] bg-white hover:bg-[#404040] hover:text-white"
+                    >
+                      Daftar
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
             <div className="navbar-end lg:hidden">

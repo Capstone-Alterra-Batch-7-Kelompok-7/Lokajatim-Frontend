@@ -1,4 +1,7 @@
-import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import ForgotPass from "./pages/Auth/forgotPass";
@@ -12,9 +15,12 @@ import ProductList from "./pages/product/ProductList";
 import DetailProduct from "./pages/product/DetailProduct";
 import BuyNowProduct from "./pages/product/BuyNowProduct";
 import PaymentSucces from "./pages/PaymentSucces";
+import { ProtectedRoute } from "./ProtectedRoute";
+import CartProducts from "./pages/product/CartProduct";
+import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/homepage/HomePage";
 const routes = [
-  { path: "/", element: <Navigate to="/login" replace /> },
+  { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
   { path: "/aturulang", element: <ForgotPass /> },
   { path: "*", element: <div>404 - Page Not Found</div> },
@@ -34,7 +40,14 @@ const routes = [
       { path: "/products", element: <ProductList /> },
       { path: "/product/:id", element: <DetailProduct /> },
       { path: "/buy-now", element: <BuyNowProduct /> },
-      { path: "/success", element: <PaymentSucces /> },
+      {
+        path: "/",
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/cart", element: <CartProducts /> },
+          { path: "/success", element: <PaymentSucces /> },
+        ],
+      },
     ],
   },
 ];

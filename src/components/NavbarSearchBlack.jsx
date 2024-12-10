@@ -16,14 +16,14 @@ const NavbarSearchBlack = ({ children }) => {
       link: "/article",
     },
     {
-      id: 2,
+      id: 3,
       title: "Event",
       link: "/event",
     },
     {
-      id: 3,
+      id: 4,
       title: "Produk Lokal",
-      link: "/product",
+      link: "/products",
     },
   ];
   return (

@@ -7,8 +7,13 @@ import filterIcon from "../../assets/icon/filter.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faStar } from "@fortawesome/free-solid-svg-icons";
 import CheckBox from "../../components/CheckBox";
+import { useFetch } from "../../hooks/useFetch";
+import { Loading } from "../../components/Loading";
 const ProductList = () => {
+  const { data, isLoading, error } = useFetch("/products");
   return (
+    <>
+    {isLoading && <Loading />}
     <NavbarSearchBrown>
       <div className="md:px-[2rem] p-4 bg-[#FAFBFE] relative">
         {/* BreadCrumbs */}
@@ -47,7 +52,7 @@ const ProductList = () => {
         <h1 className="text-2xl font-medium">Produk Lokal</h1>
 
         {/* Button Category */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           <button className="btn btn-sm bg-[#ED7D311A] text-[#ED7D31] border-[#ED7D31] rounded-2xl">
             Makanan
           </button>
@@ -66,7 +71,6 @@ const ProductList = () => {
         </div>
 
         <div className="flex justify-center gap-4 md:flex-row flex-col mt-4">
-
           {/* Filter Section Start */}
           <div className="md:w-[20%] w-full">
             <div className="md:w-52 w-full flex-col">
@@ -180,120 +184,66 @@ const ProductList = () => {
 
           {/* Card Product section */}
           <div className="md:w-[80%] w-full">
-            <div className="flex justify-between gap-4 flex-wrap my-4">
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci edisi terbatas"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              <CardProduct
-                img={""}
-                price={"Rp 16.000"}
-                title={"Gantungan Kunci"}
-                id={2}
-              />
-              {/* {data &&
+            <div className="flex md:justify-around justify-center gap-4 flex-wrap my-4">
+              {data &&
                 data
-                  .slice(0, 3)
+                  .slice()
+                  .reverse()
                   .map((item) => (
-                    <CardArticle
-                      id={item.id}
+                    <CardProduct
                       key={item.id}
-                      img={item.photo}
-                      title={item.title}
-                      update={item.updated_at}
+                      id={item.id}
+                      img={item.photos[0].url_photo}
+                      title={item.name}
+                      price={item.price}
                     />
-                  ))} */}
+                  ))}
             </div>
           </div>
 
           {/* Pagination */}
         </div>
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center  items-center ">
           <div className="join gap-2 border-none ">
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
+            <button className="join-item text-gray-600 border-none bg-white hover:bg-orange-500 hover:text-white md:btn btn-xs">
               1
             </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
+            <button className="join-item text-gray-600 border-none bg-white hover:bg-orange-500 hover:text-white md:btn btn-xs">
               2
             </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
+            <button className="join-item text-gray-600 border-none bg-white hover:bg-orange-500 hover:text-white md:btn btn-xs">
               3
             </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
-              4
+            <button
+              className="join-item text-gray-600 border-none bg-white md:btn btn-xs"
+              disabled={true}
+            >
+              ...
             </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
-              5
+            <button className="join-item text-gray-600 border-none bg-white hover:bg-orange-500 hover:text-white md:btn btn-xs">
+              12
             </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
-              6
-            </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
-              7
-            </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
-              8
-            </button>
-            <button className="join-item bg-white text-gray-600 border-gray-300 btn-secondary hover:text-white btn">
+
+            <button className="join-item text-gray-600 border-none bg-white hover:bg-orange-500 hover:text-white md:btn btn-xs">
               {">"}
             </button>
           </div>
         </div>
 
         {/* Scroll Top */}
-        <div className="w-full flex justify-end sticky bottom-4 cursor-pointer hover:bg-gray-300" onClick={() => window.scrollTo(0, 0)}>
-        <FontAwesomeIcon
-          icon={faArrowUp}
-          className="bg-white rounded-full text-4xl px-2 py-1 shadow-md -my-12"
-        />
+        <div
+          className="w-full flex justify-end sticky bottom-4 cursor-pointer hover:bg-gray-300"
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          <FontAwesomeIcon
+            icon={faArrowUp}
+            className="bg-white rounded-full text-4xl px-2 py-1 shadow-md -my-12"
+          />
         </div>
       </div>
       <Footer />
     </NavbarSearchBrown>
+    </>
   );
 };
 

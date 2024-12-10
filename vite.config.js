@@ -6,8 +6,9 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@components': '/src/components',
+      "bootstrap-icons": "/node_modules/bootstrap-icons/",
+       '@components': '/src/components',
       '@assets': '/src/assets'
-    }
-  }
-});
+    },
+  },
+})
