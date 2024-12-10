@@ -7,7 +7,6 @@ import Login from "./pages/Auth/Login";
 import ForgotPass from "./pages/Auth/forgotPass";
 import VerifyCode from "./pages/Auth/verifyCode";
 import ResetPassword from "./pages/Auth/resetPassword";
-import ArticleHome from "./pages/article/ArticleHome";
 import ArticleList from "./pages/article/ArticleList";
 import ArticleDetail from "./pages/article/ArticleDetail";
 import ScrollTop from "./components/ScrollTop";
@@ -26,17 +25,16 @@ const routes = [
   { path: "/aturulang", element: <ForgotPass /> },
   { path: "*", element: <div>404 - Page Not Found</div> },
   { path: "/login", element: <Login /> },
-  { path: "/homepage", element: <HomePage/> },
+  { path: "/homepage", element: <HomePage /> },
 
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
-  
+
   {
     path: "/",
     element: <ScrollTop />,
     children: [
-      { path: "/article", element: <ArticleHome /> },
-      { path: "/article/list", element: <ArticleList /> },
+      { path: "/article", element: <ArticleList /> },
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
       { path: "/events", element: <EventList /> },

@@ -1,39 +1,40 @@
-import {
-  faComment,
-  faThumbsUp,
-} from "@fortawesome/free-regular-svg-icons";
+import { faCalendar, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { dateConvertion } from "../utils/dateConvertion";
 
-const CardArticle = ({ id, img, title, update }) => {
+const CardArticle = ({ id, img, category, title, time = "20/10/2023" }) => {
   return (
     <>
-      <div className={`card card-compact bg-base-100 md:w-64 w-full shadow-md`}>
+      <div className={`card card-compact bg-base-100 w-52 shadow-md`}>
         <figure className="relative">
           <img
             src={img}
+            // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
             alt="Image"
-            className={`h-48 max-h-48 w-full object-cover md:object-fill`}
+            className={`h-36 max-h-36 w-full object-cover md:object-fill`}
           />
         </figure>
         <div className="card-body min-h-32 max-h-32">
-          <Link to={`/article/${id}`} className="text-xl">
-            {title}
-          </Link>
-          <div className="border-t pt-1 border-gray-400">
+          <div className="flex flex-col">
+            <Link to={`/article/${id}`} className="text-base font-bold">
+              {title}
+            </Link>
+            <p className="text-sm">{category}</p>
+          </div>
+          <div className=" pt-1 border-gray-400">
             <div className="flex justify-between gap-2 items-center text-xs">
-              <p>{update}</p>
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
-                  <FontAwesomeIcon icon={faThumbsUp} />
-                  <p>1.5K</p>
-                </div>
-                <div className="flex items-center gap-1">
-                  <FontAwesomeIcon icon={faComment} />
-                  <p>200</p>
+                  <FontAwesomeIcon icon={faCalendar} className="" />
+                  <p>{dateConvertion(time)}</p>
                 </div>
                 {/* <p className="">Fashion</p>
                 <p className="badge badge-outline">Products</p> */}
+              </div>
+              <div className="flex gap-2">
+                <FontAwesomeIcon icon={faThumbsUp} />
+                <p>1.5k</p>
               </div>
             </div>
           </div>
