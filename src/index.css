@@ -13,3 +13,7 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.article-gradient-bg {
+  @apply bg-[linear-gradient(180deg,#FDE6D4,#FFFFFF,#FDE6D4,#FFFFFF)]
+}

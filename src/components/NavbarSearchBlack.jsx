@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/lgo-putih.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faSearch } from "@fortawesome/free-solid-svg-icons";
-import {
-  faBell,
-  faBookmark,
-  faEnvelope,
-} from "@fortawesome/free-regular-svg-icons";
-import cart from "../assets/icon/cart.png";
-const NavbarSearchBrown = ({ children }) => {
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faBookmark } from "@fortawesome/free-regular-svg-icons";
+const NavbarSearchBlack = ({ children }) => {
   const navbarItems = [
     {
       id: 1,
@@ -21,19 +16,12 @@ const NavbarSearchBrown = ({ children }) => {
       link: "/article",
     },
     {
-
-      id: 3,
-
       id: 2,
-
       title: "Event",
       link: "/event",
     },
     {
-      id: 4,
-
       id: 3,
-
       title: "Produk Lokal",
       link: "/product",
     },
@@ -44,13 +32,13 @@ const NavbarSearchBrown = ({ children }) => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <div className="navbar bg-[#3B2411] w-full text-white px-2 md:px-[2rem]">
+          <div className="navbar bg-[#404040] w-full text-white px-2 md:px-[2rem]">
             <div className="navbar-start flex items-center gap-2">
               <div className="flex gap-2 items-center lg:w-[40%] w-full">
                 <img src={logo} alt="lgo" width={40} />
                 <p className="logo-font text-white text-3xl">Lokajatim</p>
               </div>
-              <div className="input h-[2.5rem] focus-within:outline-none w-[60%] hidden text-black lg:flex gap-2 items-center focus:outline-none border-none focus:border-none">
+              <div className="input focus-within:outline-none w-[60%] hidden text-black lg:flex gap-2 items-center focus:outline-none border-none focus:border-none">
                 <input
                   type="text"
                   placeholder="Search"
@@ -64,25 +52,9 @@ const NavbarSearchBrown = ({ children }) => {
             </div> */}
             <div className="lg:navbar-end hidden lg:flex">
               <div className="flex items-center gap-4">
-                <img src={cart} alt="cart" width={24} />
-                <FontAwesomeIcon
-                  icon={faBell}
-                  className="text-2xl font-light"
-                />
-                <FontAwesomeIcon
-                  icon={faEnvelope}
-                  className="text-2xl font-light"
-                />
-                <div className="flex gap-2 items-center">
-                  <img
-                    src="https://placehold.co/400"
-                    alt=""
-                    width={30}
-                    className="rounded-full"
-                  />
-                  <p className="text-sm">Siti Sabrina</p>
-                </div>
-                {/* <Link
+                <FontAwesomeIcon icon={faBell} className="text-2xl" />
+                <FontAwesomeIcon icon={faBookmark} className="text-2xl" />
+                <Link
                   to="/login"
                   className="btn bg-transparent text-white hover:bg-white hover:text-[#404040]"
                 >
@@ -93,7 +65,7 @@ const NavbarSearchBrown = ({ children }) => {
                   className="btn text-[#404040] bg-white hover:bg-[#404040] hover:text-white"
                 >
                   Daftar
-                </Link> */}
+                </Link>
               </div>
             </div>
             <div className="navbar-end lg:hidden">
@@ -127,44 +99,25 @@ const NavbarSearchBrown = ({ children }) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-white min-h-full w-80 overflow-auto">
+          <ul className="menu bg-white min-h-full w-80 p-4">
             <div className="flex items-center justify-between gap-4 my-4">
-              <div className="flex gap-2 items-center">
-                <img
-                  src="https://placehold.co/400"
-                  alt=""
-                  width={30}
-                  className="rounded-full"
-                />
-                <p className="text-sm">Siti Sabrina</p>
+              <div className="flex items- gap-2">
+              <Link
+                to="/login"
+                className="btn btn-sm text-[#404040] bg-white hover:bg-[#404040] hover:text-white"
+              >
+                Masuk
+              </Link>
+              <Link
+                to="/login"
+                className="btn btn-sm text-[#404040] bg-white hover:bg-[#404040] hover:text-white"
+              >
+                Daftar
+              </Link>
               </div>
-              {/* <div className="flex items- gap-2">
-                <Link
-                  to="/login"
-                  className="btn btn-sm text-[#404040] bg-white hover:bg-[#404040] hover:text-white"
-                >
-                  Masuk
-                </Link>
-                <Link
-                  to="/login"
-                  className="btn btn-sm text-[#404040] bg-white hover:bg-[#404040] hover:text-white"
-                >
-                  Daftar
-                </Link>
-              </div> */}
               <div className="flex items-center gap-2">
-                <FontAwesomeIcon
-                  icon={faCartShopping}
-                  className="text-2xl font-light"
-                />
-                <FontAwesomeIcon
-                  icon={faBell}
-                  className="text-2xl font-light"
-                />
-                <FontAwesomeIcon
-                  icon={faEnvelope}
-                  className="text-2xl font-light"
-                />
+              <FontAwesomeIcon icon={faBell} className="text-2xl" />
+              <FontAwesomeIcon icon={faBookmark} className="text-2xl" />
               </div>
             </div>
             <div className="input focus-within:outline-none bg-gray-200 w-full text-black flex gap-2 items-center focus:outline-none border-none focus:border-none">
@@ -188,4 +141,4 @@ const NavbarSearchBrown = ({ children }) => {
     </>
   );
 };
-export default NavbarSearchBrown;
+export default NavbarSearchBlack;

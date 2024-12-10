@@ -11,6 +11,9 @@ import imgsucces from "../../assets/auth/succes-login.png";
 import slide1 from "../../assets/auth/aut-slide1.png";
 import slide2 from "../../assets/auth/aut-slide2.png";
 import slide3 from "../../assets/auth/aut-slide3.png";
+import { use } from "react";
+import { Loading } from "../../components/Loading";
+
 
 const Slide = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -63,6 +66,8 @@ const Slide = () => {
             className={`cursor-pointer transition-colors duration-300 ${
               currentIndex === index ? "text-secondary" : "text-gray-300"
             }`}
+            className={`cursor-pointer transition-colors duration-300 ${currentIndex === index ? "text-secondary" : "text-gray-300"
+              }`}
             onClick={() => setCurrentIndex(index)}
           />
         ))}
@@ -75,6 +80,7 @@ const Login = () => {
   const [inputLogin, setInputLogin] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoading, setIsloading] = useState(false);
 
   const handleChange = (e) => {
     setInputLogin({ ...inputLogin, [e.target.id]: e.target.value });
@@ -82,6 +88,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsloading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/login`,
@@ -100,10 +107,29 @@ const Login = () => {
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "Login gagal. Silakan coba lagi.");
+        // Tampilkan modal setelah 4 detik
+        setIsloading(false);
+        localStorage.setItem("token", response.data.data.token);
+        document.getElementById("success-login").showModal();
+
+        // Navigasi ke halaman home setelah modal ditampilkan
+        setTimeout(() => {
+          window.location.href = "/homepage";
+          console.log(response);
+        }, 1000);
+      }
+    } catch (err) {
+      console.error(err);
+      setError(
+        err.response?.data?.message || "Login gagal. Silakan coba lagi."
+      );
+      setIsloading(false);
     }
   };
 
   return (
+    <>
+    {isLoading && <Loading />}
     <div className="w-full min-h-screen md:flex">
       {/* Bagian Kiri - Form Login */}
       <div
@@ -150,6 +176,7 @@ const Login = () => {
               to="/aturulang"
               className="text-secondary font-semibold hover:underline"
             >
+            <Link to="/aturulang" className="text-secondary font-semibold hover:underline">
               Atur Ulang
             </Link>
           </p>
@@ -163,6 +190,7 @@ const Login = () => {
           <button type="submit" className="btn btn-secondary text-white">
             Masuk Akun
           </button>
+
         </form>
         <p className="text-[16px] leading-[20px] font-normal text-center text-[#FEFEFE]">
           Atau masuk dengan:
@@ -194,6 +222,7 @@ const Login = () => {
         description="Yeay, Selamat Datang Kembali!"
       />
     </div>
+    </>
   );
 };
 
