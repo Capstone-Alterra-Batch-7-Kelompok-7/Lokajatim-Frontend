@@ -70,7 +70,7 @@ const Testimonials = () => {
   </svg>
   
   {/* Text di kanan */}
-  <span className="text-sm italic font-bold">Testimonial</span>
+  <span className="text-sm font-bold">Testimonial</span>
 </div>
 
   </div>
@@ -136,7 +136,7 @@ const Testimonials = () => {
   </svg>
   
   {/* Text di kanan */}
-  <span className="text-sm italic font-bold">Testimonial</span>
+  <span className="text-sm font-bold">Testimonial</span>
 </div>
 
   </div>
@@ -183,25 +183,25 @@ const Testimonials = () => {
                 </h4>
                 <p className="text-sm text-gray-500">Penulis Konten</p>
               </div>
-              <div className="text-gray-800 flex items-center justify-center mt-4">
+
+              <div className="flex items-center justify-center mt-4 text-gray-800">
   {/* Logo di kiri */}
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="#E9B763"
     viewBox="0 0 24 24"
-    className="w-16 h-16 mr-2"
+    className="w-16 h-16 mr-4"
   >
     {/* Lingkaran */}
     <circle cx="12" cy="12" r="12" fill="#E9B763" />
     {/* Ikon jempol */}
     <path
-      d="M7 12v6h3v-6H7zm6-5c0-.55-.45-1-1-1h-1c-.55 0-1 .45-1 1v5H7v6h6v-6h3.79l.91-4H13V7z"
-      fill="white"
+      d="M9 10V8c0-.55.45-1 1-1h2.72c.42 0 .83-.26.96-.66l.54-1.61C14.5 4.3 15.13 4 15.83 4c.98 0 1.58.92 1.38 1.87L16.6 8H19c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1h-.26l.27 1.34c.11.55-.26 1.1-.81 1.22L16.5 14h-.66l.2 1.6c.08.64-.4 1.25-1.06 1.37l-2.03.4a1.5 1.5 0 0 1-1.76-1.17l-.44-2.22H10c-.55 0-1-.45-1-1v-4z"
+      fill="#FFFFFF"
     />
   </svg>
-  
+
   {/* Text di kanan */}
-  <span className="text-sm italic font-bold">Testimonial</span>
+  <span className="text-sm font-bold">Testimonial</span>
 </div>
 
               </div>

@@ -25,21 +25,21 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className="flex-1 flex justify-center">
-        <ul className="menu menu-horizontal p-0 space-x-4 text-sm font-medium text-gray-800">
+      <ul className="menu menu-horizontal p-0 space-x-4 text-sm font-medium text-gray-800">
           <li>
-            <Link to="/about">ABOUT US</Link>
+            <a href="#about">ABOUT US</a>
           </li>
           <li>
-            <Link to="/features">CATALOG</Link>
+            <a href="#features">CATALOG</a>
           </li>
           <li>
-            <Link to="/testimonials">PLACES</Link>
+            <a href="#testimonials">PLACES</a>
           </li>
           <li>
-            <Link to="/FAQ">BLOG</Link>
+            <a href="#faq">BLOG</a>
           </li>
           <li>
-            <Link to="/footer">CONTACT</Link>
+            <a href="#footer">CONTACT</a>
           </li>
         </ul>
       </div>

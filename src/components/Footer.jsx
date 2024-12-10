@@ -12,7 +12,7 @@ const Footer = () => {
       <footer className="footer bg-transparent py-4 text-black">
         <aside className="flex items-center">
           <img src={lgo} alt="logo" width={50} />
-          <p className="logo-font text-2xl">LOKAJATIM</p>
+          <p className="logo-font text-2xl"style={{ color: '#683F1E' }}>LOKAJATIM</p>
         </aside>
         <nav>
           <h6 className=" footer-title text-black opacity-100 capitalize text-lg">
