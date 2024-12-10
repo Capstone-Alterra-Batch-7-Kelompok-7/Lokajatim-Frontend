@@ -4,7 +4,6 @@ import Login from "./pages/Auth/Login";
 import ForgotPass from "./pages/Auth/forgotPass";
 import VerifyCode from "./pages/Auth/verifyCode";
 import ResetPassword from "./pages/Auth/resetPassword";
-import HomePage from "./pages/homepage/HomePage";
 import ArticleHome from "./pages/article/ArticleHome";
 import ArticleList from "./pages/article/ArticleList";
 import ArticleDetail from "./pages/article/ArticleDetail";
@@ -13,16 +12,18 @@ import ProductList from "./pages/product/ProductList";
 import DetailProduct from "./pages/product/DetailProduct";
 import BuyNowProduct from "./pages/product/BuyNowProduct";
 import PaymentSucces from "./pages/PaymentSucces";
-import HomePage from "./pages/homepage/HomePage"
+import HomePage from "./pages/homepage/HomePage";
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
   { path: "/register", element: <Register /> },
   { path: "/aturulang", element: <ForgotPass /> },
   { path: "*", element: <div>404 - Page Not Found</div> },
   { path: "/login", element: <Login /> },
+  { path: "/homepage", element: <HomePage/> },
+
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
-  { path: "/homepage", element: <HomePage /> },
+  
   {
     path: "/",
     element: <ScrollTop />,
