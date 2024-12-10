@@ -1,14 +1,13 @@
-import React from "react";
-
 const HeroSection = () => {
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero w-full min-h-screen bg-base-200 overflow-hidden">
       <div className="hero-content flex-col lg:flex-row-reverse relative pt-[80px] pb-[56px] pl-[60px] pr-[60px] w-[1440px] h-[676px] justify-between">
         {/* Gambar Hero */}
         <img 
           src="hs1.png" 
           alt="Hero" 
-          className="w-[684px] h-[564px] rounded-[32px_0_0_0] shadow-2xl relative right-[-150px]" 
+          width={500}
+          className=" rounded-[32px_0_0_0] shadow-2xl relative right-[-150px]" 
         />
         {/* Bagian Konten */}
         <div className="w-[593px] h-[352px] gap-[36px]">

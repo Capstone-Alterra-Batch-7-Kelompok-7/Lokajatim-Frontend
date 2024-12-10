@@ -1,11 +1,10 @@
-import React from "react";
-import Navbar from "../../components/Navbar";
-import HeroSection from "../../components/HeroSection";
-import About from "../../components/About"
-import Features from "../../components/Features";
-import Testimonials from "../../components/Testimonials";
-import FAQ from "../../components/FAQ";
-import Footer from "../../components/Footer";
+import Navbar from "../components/landingPage/Navbar";
+import HeroSection from "../components/landingPage/HeroSection";
+import About from "../components/landingPage/About"
+import Features from "../components/landingPage/Features";
+import Testimonials from "../components/landingPage/Testimonials";
+import FAQ from "../components/landingPage/FAQ";
+import Footer from "../components/landingPage/Footer";
 
 const LandingPage = () => {
   return (

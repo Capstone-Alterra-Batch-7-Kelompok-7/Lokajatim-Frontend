@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import lgo from "../assets/logo-crop.png";
+import lgo from "../../assets/logo-crop.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
