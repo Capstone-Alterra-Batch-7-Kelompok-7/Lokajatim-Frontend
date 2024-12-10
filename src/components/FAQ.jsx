@@ -12,6 +12,7 @@ const FAQ = () => {
           Dapatkan jawaban instan untuk semua hal yang perlu kamu ketahui tentang Lokajatim.
         </p>
       </div>
+
       {/* Content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* FAQ Section */}
