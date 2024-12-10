@@ -416,9 +416,9 @@ const HomePage = () => {
         )}
 
         <div className="flex justify-center mt-8">
-          <button className="btn btn-sm btn-outline text-black border-black hover:text-[#ED7D31] hover:border-[#ED7D31] hover:bg-[#ED7D311A] rounded-md">
+          <Link to={"/article"} className="btn btn-sm btn-outline text-black border-black hover:text-[#ED7D31] hover:border-[#ED7D31] hover:bg-[#ED7D311A] rounded-md">
             Jelajahi Semua
-          </button>
+          </Link>
         </div>
       </section>
 
