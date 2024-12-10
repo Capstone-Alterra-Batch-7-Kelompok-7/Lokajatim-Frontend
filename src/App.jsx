@@ -1,4 +1,8 @@
-import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  Navigate,
+} from "react-router-dom";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import ForgotPass from "./pages/Auth/forgotPass";
@@ -12,6 +16,7 @@ import ProductList from "./pages/product/ProductList";
 import DetailProduct from "./pages/product/DetailProduct";
 import BuyNowProduct from "./pages/product/BuyNowProduct";
 import PaymentSucces from "./pages/PaymentSucces";
+import { ProtectedRoute } from "./ProtectedRoute";
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
   { path: "/register", element: <Register /> },
@@ -29,8 +34,14 @@ const routes = [
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
       { path: "/product/:id", element: <DetailProduct /> },
-      { path: "/buy-now", element: <BuyNowProduct /> },
-      { path: "/success", element: <PaymentSucces /> },
+      {
+        path: "/",
+        element: <ProtectedRoute />,
+        children: [
+          { path: "/buy-now", element: <BuyNowProduct /> },
+          { path: "/success", element: <PaymentSucces /> },
+        ],
+      },
     ],
   },
 ];
