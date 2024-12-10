@@ -4,7 +4,7 @@ import { Loading } from "./components/Loading";
 import { jwtDecode } from "jwt-decode";
 // import { useUserStore } from "./store/userStore";
 
-export const ProtectedRoute = () => {
+export const useValidateLogin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(null); // null sebagai nilai awal
   // const {setId} = useUserStore();
 

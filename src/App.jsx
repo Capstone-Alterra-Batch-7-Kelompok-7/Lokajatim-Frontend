@@ -17,6 +17,7 @@ import DetailProduct from "./pages/product/DetailProduct";
 import BuyNowProduct from "./pages/product/BuyNowProduct";
 import PaymentSucces from "./pages/PaymentSucces";
 import { ProtectedRoute } from "./ProtectedRoute";
+import CartProducts from "./pages/product/CartProduct";
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
   { path: "/register", element: <Register /> },
@@ -34,6 +35,7 @@ const routes = [
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
       { path: "/product/:id", element: <DetailProduct /> },
+      { path: "/cart", element: <CartProducts /> },
       {
         path: "/",
         element: <ProtectedRoute />,

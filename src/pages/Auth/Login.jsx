@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import CustomModal from "../../components/modal/CustomModal";
@@ -11,7 +11,6 @@ import imgsucces from "../../assets/auth/succes-login.png";
 import slide1 from "../../assets/auth/aut-slide1.png";
 import slide2 from "../../assets/auth/aut-slide2.png";
 import slide3 from "../../assets/auth/aut-slide3.png";
-import { use } from "react";
 import { Loading } from "../../components/Loading";
 
 const Slide = () => {

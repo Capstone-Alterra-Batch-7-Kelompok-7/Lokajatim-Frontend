@@ -14,9 +14,16 @@ import alertCircle from "../../assets/icon/alert-circle.png";
 import Footer from "../../components/Footer";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { useCounter } from "../../hooks/useCounter";
+// import { useEffect } from "react";
+import { useFetch } from "../../hooks/useFetch";
 const BuyNowProduct = () => {
-  const id = 0;
   const { counter, handleClickAdd, handleClickReduce } = useCounter();
+  const id = localStorage.getItem("product_id");
+  const {data} = useFetch(`/products/${id}`)
+  console.log(data)
+  // useEffect(() => {
+    
+  // }, []);
   return (
     <>
       <NavbarSearchBrown>
@@ -56,14 +63,14 @@ const BuyNowProduct = () => {
                 <div className="flex items-center gap-2 w-full">
                   <div className="flex items-start gap-5">
                     <img
-                      src={food1}
+                      src={data.photos[0]}
                       alt="prize"
                       width={100}
                       className="max-h-[100px] rounded-2xl"
                     />
                     <div className="">
                       <h3 className="font-bold">
-                        Rambak Pisang 80 gr HONEAST SIDOARJO
+                        {data?.name}
                       </h3>
                       <p>80gr</p>
                     </div>
@@ -89,6 +96,7 @@ const BuyNowProduct = () => {
               <div className="">
                 <h2 className="text-lg font-bold my-4">Pengiriman</h2>
                 <CardAddressInfo />
+                {/* <CardAddressInfo /> */}
               </div>
             </div>
             <div className="md:max-w-[40%] w-full flex justify-end ">
