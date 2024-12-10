@@ -1,7 +1,7 @@
 import {
   RouterProvider,
   createBrowserRouter,
-  Navigate,
+  // Navigate,
 } from "react-router-dom";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
@@ -18,8 +18,9 @@ import BuyNowProduct from "./pages/product/BuyNowProduct";
 import PaymentSucces from "./pages/PaymentSucces";
 import { ProtectedRoute } from "./ProtectedRoute";
 import CartProducts from "./pages/product/CartProduct";
+import LandingPage from "./pages/LandingPage";
 const routes = [
-  { path: "/", element: <Navigate to="/login" replace /> },
+  { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
   { path: "/aturulang", element: <ForgotPass /> },
   { path: "*", element: <div>404 - Page Not Found</div> },
@@ -35,12 +36,12 @@ const routes = [
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
       { path: "/product/:id", element: <DetailProduct /> },
-      { path: "/cart", element: <CartProducts /> },
+      { path: "/buy-now", element: <BuyNowProduct /> },
       {
         path: "/",
         element: <ProtectedRoute />,
         children: [
-          { path: "/buy-now", element: <BuyNowProduct /> },
+          { path: "/cart", element: <CartProducts /> },
           { path: "/success", element: <PaymentSucces /> },
         ],
       },

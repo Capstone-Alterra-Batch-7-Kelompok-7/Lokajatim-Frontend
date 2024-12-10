@@ -20,7 +20,7 @@ const NavbarBlack = ({ children }) => {
     {
       id: 3,
       title: "Produk Lokal",
-      link: "/product",
+      link: "/products",
     },
   ];
   return (

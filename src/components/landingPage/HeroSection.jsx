@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const HeroSection = () => {
   return (
     <div className="hero w-full min-h-screen bg-base-200 overflow-hidden">
@@ -28,7 +30,8 @@ const HeroSection = () => {
             Dukung UMKM Lokal dan jelajahi kekayaan budaya bersama kami.
           </p>
           {/* Tombol Explore */}
-          <button 
+          <Link
+          to={'/homepage'} 
             className="w-[201px] h-[52px] px-[24px] py-[16px] gap-[8px] rounded-[6px] bg-[#8B5428] text-[#FFFFFF] font-roboto text-[16px] font-medium leading-[20px] text-left flex items-center justify-center"
           >
             <span>Jelajahi Sekarang</span>
@@ -42,7 +45,7 @@ const HeroSection = () => {
             >
               <path fill="none" stroke="#FFFFFF" strokeWidth="1.5" d="M6 3l4 4-4 4" />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

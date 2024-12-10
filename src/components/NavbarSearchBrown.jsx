@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faSearch } from "@fortawesome/free-solid-svg-icons";
 import {
   faBell,
-  faBookmark,
   faEnvelope,
 } from "@fortawesome/free-regular-svg-icons";
 import cart from "../assets/icon/cart.png";
-import { useFetch } from "../hooks/useFetch";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { instance } from "../config/config";
@@ -32,7 +30,7 @@ const NavbarSearchBrown = ({ children }) => {
     {
       id: 4,
       title: "Produk Lokal",
-      link: "/product",
+      link: "/products",
     },
   ];
   const [userId, setUserId] = useState(null);

@@ -23,7 +23,7 @@ const NavbarSearchBlack = ({ children }) => {
     {
       id: 4,
       title: "Produk Lokal",
-      link: "/product",
+      link: "/products",
     },
   ];
   return (

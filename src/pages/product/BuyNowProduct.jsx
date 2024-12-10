@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import NavbarSearchBrown from "../../components/NavbarSearchBrown";
 import ProductInCart from "../../assets/product-in-cart.png";
-import food1 from "../../assets/dumy/image1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleRight,
@@ -14,18 +13,61 @@ import alertCircle from "../../assets/icon/alert-circle.png";
 import Footer from "../../components/Footer";
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { useCounter } from "../../hooks/useCounter";
-// import { useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
+// import { useEffect } from "react";
+import { useValidateLogin } from "../../hooks/useValidateLogin";
+import { useEffect, useState } from "react";
+import { instance } from "../../config/config";
+import { Loading } from "../../components/Loading";
 const BuyNowProduct = () => {
   const { counter, handleClickAdd, handleClickReduce } = useCounter();
   const id = localStorage.getItem("product_id");
-  const {data} = useFetch(`/products/${id}`)
-  console.log(data)
-  // useEffect(() => {
-    
-  // }, []);
+  const { data } = useFetch(`/products/${id}`);
+  const [dataUser, setDataUser] = useState(null);
+  const [address, setAddress] = useState("");
+  const [isLoading, setIsloading] = useState(false);
+  const idUser = useValidateLogin();
+  useEffect(() => {
+    const fetch = async (id) => {
+      try {
+        const response = await instance.get(`/users/${id}`);
+        setDataUser(response.data.data);
+        setAddress(response.data.data.address);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (idUser) {
+      fetch(idUser);
+    }
+  }, [idUser]);
+
+  const handleChange = (e) => {
+    setDataUser({ ...dataUser, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmitAddress = async () => {
+    setIsloading(true);
+    try {
+      const response = await instance.put(`/users/${idUser}`, dataUser);
+      console.log(response);
+      document.getElementById("add-address").close();
+      window.location.reload();
+      setIsloading(false);
+    } catch (error) {
+      console.error(error);
+      setIsloading(false);
+    }
+  };
   return (
     <>
+      <ModalAddAddress
+        address={dataUser?.address}
+        noTelp={dataUser?.phone_number}
+        handleChange={handleChange}
+        handleSubmit={handleSubmitAddress}
+        isLoading={isLoading}
+      />
       <NavbarSearchBrown>
         <div className="md:px-[2rem] w-full min-h-screen p-4 bg-[#FAFBFE]">
           <div className="breadcrumbs text-sm">
@@ -63,15 +105,13 @@ const BuyNowProduct = () => {
                 <div className="flex items-center gap-2 w-full">
                   <div className="flex items-start gap-5">
                     <img
-                      src={data.photos[0]}
+                      src={data?.photos[0]}
                       alt="prize"
                       width={100}
                       className="max-h-[100px] rounded-2xl"
                     />
                     <div className="">
-                      <h3 className="font-bold">
-                        {data?.name}
-                      </h3>
+                      <h3 className="font-bold">{data?.name}</h3>
                       <p>80gr</p>
                     </div>
                   </div>
@@ -95,7 +135,11 @@ const BuyNowProduct = () => {
               {/* Shipment Section */}
               <div className="">
                 <h2 className="text-lg font-bold my-4">Pengiriman</h2>
-                <CardAddressInfo />
+                {!idUser || address?.length === 0 ? (
+                  <AlertAddresNone />
+                ) : (
+                  <CardAddressInfo address={dataUser?.address} name={dataUser?.name} noTelp={dataUser?.phone_number} key={1} />
+                )}
                 {/* <CardAddressInfo /> */}
               </div>
             </div>
@@ -170,7 +214,10 @@ const AlertAddresNone = () => {
           <p>
             Cuma satu langkah lagi sebelum melanjutkan proses pembayaran {":)"}
           </p>
-          <button className="btn btn-secondary text-white">
+          <button
+            className="btn btn-secondary text-white"
+            onClick={() => document.getElementById("add-address").showModal()}
+          >
             Tambah Alamat
           </button>
         </div>
@@ -179,25 +226,27 @@ const AlertAddresNone = () => {
   );
 };
 
-const CardAddressInfo = () => {
+const CardAddressInfo = ({ address, noTelp, name }) => {
   return (
     <div className="w-full py-4 border rounded-2xl shadow-lg bg-white">
       <div className=" px-4 pb-4 flex items-center gap-4 justify-between">
         <p className="font-bold">Alamat Pengirim</p>
-        <button className="btn bg-[#FEF2EB] text-orange-400 hover:bg-orange-500 hover:text-white btn-sm">
+        <button
+          className="btn bg-[#FEF2EB] text-orange-400 hover:bg-orange-500 hover:text-white btn-sm"
+          onClick={() => document.getElementById("add-address").showModal()}
+        >
           <FontAwesomeIcon icon={faPenToSquare} />
           Ganti alamat
         </button>
       </div>
       <div className="p-4 border-y border-gray-400 bg-white font-normal ">
         <p className="font-bold">
-          Khoiru Rizki Bani Adam{" "}
+          {name}
           <span className="font-normal">{"(Rumah)"}</span>
         </p>
-        <p className="text-sm">081234567890</p>
+        <p className="text-sm">{noTelp}</p>
         <p className="text-sm">
-          Budi Santoso, Jl. Dr. Soetomo No. 123, Kel. Tegalsari, Kec.Tegalsari,
-          Kab, Sidoarjo
+          {address}
         </p>
       </div>
       <div className="p-4 bg-white ">
@@ -218,8 +267,8 @@ const CardAddressInfo = () => {
               <option disabled selected>
                 J&T (Rp17.00)
               </option>
-              <option>Homer</option>
-              <option>Marge</option>
+              <option>Ninja</option>
+              <option>J&E</option>
             </select>
             <p className="text-xs pt-1">Estimasi tiba 16 - 19 Nov</p>
           </div>
@@ -228,4 +277,62 @@ const CardAddressInfo = () => {
     </div>
   );
 };
+
+const ModalAddAddress = ({
+  address,
+  noTelp,
+  handleChange,
+  handleSubmit,
+  isLoading,
+}) => {
+  return (
+    <>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <dialog id="add-address" className="modal">
+        {isLoading && <Loading />}
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Tambah Alamat</h3>
+          <form
+            onSubmit={handleSubmit}
+            action=""
+            className="w-full flex flex-col gap-2"
+          >
+            <label htmlFor="phone_number">No. Telp</label>
+            <input
+              type="number"
+              name="phone_number"
+              id="phone_number"
+              defaultValue={noTelp}
+              className="input input-bordered w-full"
+              required
+              onChange={handleChange}
+            />
+            <label htmlFor="">Alamat Lengkap</label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              defaultValue={address}
+              required
+              className="input input-bordered w-full"
+              onChange={handleChange}
+            />
+            <div className="modal-action">
+              <form method="dialog">
+                <button className="btn">Batal</button>
+                {/* if there is a button in form, it will close the modal */}
+              </form>
+              <button className="btn btn-primary text-white">Simpan</button>
+            </div>
+          </form>
+        </div>
+
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    </>
+  );
+};
+
 export default BuyNowProduct;

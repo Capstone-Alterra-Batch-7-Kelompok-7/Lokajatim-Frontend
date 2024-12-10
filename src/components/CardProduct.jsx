@@ -20,7 +20,7 @@ const CardProduct = ({ id, img, price, title }) => {
             {title}
           </Link>
           <p className="text-xl font-bold">
-            {price}
+            Rp.{price}
           </p>
           </div>
           <div className=" pt-1 border-gray-400">

@@ -12,11 +12,13 @@ import CardProduct from "../../components/CardProduct";
 import { Link, useParams } from "react-router-dom";
 import { useCounter } from "../../hooks/useCounter";
 import { useFetch } from "../../hooks/useFetch";
+import { useValidateLogin } from "../../hooks/useValidateLogin";
 
 const DetailProduct = () => {
   const { counter, handleClickAdd, handleClickReduce } = useCounter();
   const { id } = useParams();
   const { data } = useFetch(`/products/${id}`);
+  const userId = useValidateLogin();
 
   const handleBuyNow = () => {
     localStorage.setItem("product_id", id);
@@ -24,6 +26,7 @@ const DetailProduct = () => {
   };
   return (
     <>
+      <AlertLogin />
       {data && (
         <NavbarSearchBrown>
           <div className="w-full px-4 md:px-[2rem] py-4 bg-[#FAFBFE]">
@@ -128,12 +131,27 @@ const DetailProduct = () => {
                       <div className="flex flex-col gap-2">
                         <button
                           className="btn min-h-9 h-9 bg-[#ED7D31] border-none hover:bg-orange-900 text-white w-full"
-                          onClick={handleBuyNow}
+                          onClick={() => {
+                            userId
+                              ? handleBuyNow()
+                              : document
+                                  .getElementById("alert-login")
+                                  .showModal();
+                          }}
                         >
                           Beli Langsung
                         </button>
                         <div className="border border-[#ED7D31] rounded-lg hover:border-none">
-                          <button className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full">
+                          <button
+                            className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full"
+                            onClick={() => {
+                              userId
+                                ? (window.location.href = "/cart")
+                                : document
+                                    .getElementById("alert-login")
+                                    .showModal();
+                            }}
+                          >
                             Keranjang
                           </button>
                         </div>
@@ -590,12 +608,23 @@ const DetailProduct = () => {
                   <button
                     // to="/buy-now"
                     className="btn min-h-9 h-9 bg-[#ED7D31] border-none hover:bg-orange-900 text-white w-full"
-                    onClick={handleBuyNow}
+                    onClick={() => {
+                      userId
+                        ? handleBuyNow()
+                        : document.getElementById("alert-login").showModal();
+                    }}
                   >
                     Beli Langsung
                   </button>
                   <div className="border border-[#ED7D31] rounded-lg hover:border-none">
-                    <button className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full">
+                    <button
+                      className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full"
+                      onClick={() => {
+                        userId
+                          ? (window.location.href = "/cart")
+                          : document.getElementById("alert-login").showModal();
+                      }}
+                    >
                       Keranjang
                     </button>
                   </div>
@@ -688,6 +717,33 @@ const DetailProduct = () => {
           </div>
         </NavbarSearchBrown>
       )}
+    </>
+  );
+};
+
+const AlertLogin = () => {
+  return (
+    <>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <dialog id="alert-login" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Belum Login {":("}</h3>
+          <p>Silahkan login terlebih dahulu untuk membeli produk ini</p>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Batal</button>
+              {/* if there is a button in form, it will close the modal */}
+            </form>
+            <Link to={"/login"} className="btn btn-primary text-white">
+              Login
+            </Link>
+          </div>
+        </div>
+
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </>
   );
 };
