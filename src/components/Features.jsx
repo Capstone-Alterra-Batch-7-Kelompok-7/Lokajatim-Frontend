@@ -22,14 +22,14 @@ const Features = () => {
         </div>
 
         {/* Content Section */}
-        <div className="flex flex-col" style={{ width: "736px", gap: "48px" }}>
-          <h2 className="text-3xl font-bold text-gray-800">
-            Kenapa Harus Memilih Lokajatim?
-          </h2>
-          <p className="text-gray-600">
-            Platform terbaik untuk mendukung produk lokal, budaya, dan informasi
-            seputar Jawa Timur.
-          </p>
+<div className="flex flex-col" style={{ width: "736px" }}>
+  <h2 className="text-3xl font-bold text-gray-800">
+    Kenapa Harus Memilih Lokajatim?
+  </h2>
+  <p className="font-roboto text-gray-600 m-0 text-base" style={{ lineHeight: "20px" }}>
+    Platform terbaik untuk mendukung produk lokal, budaya, dan informasi
+    seputar Jawa Timur.
+  </p>
 
           {/* Features Grid */}
           <div className="grid grid-cols-2 gap-8">
