@@ -1,7 +1,6 @@
 import {
   RouterProvider,
   createBrowserRouter,
-  // Navigate,
 } from "react-router-dom";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
@@ -19,14 +18,18 @@ import PaymentSucces from "./pages/PaymentSucces";
 import { ProtectedRoute } from "./ProtectedRoute";
 import CartProducts from "./pages/product/CartProduct";
 import LandingPage from "./pages/LandingPage";
+import HomePage from "./pages/homepage/HomePage";
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
   { path: "/aturulang", element: <ForgotPass /> },
   { path: "*", element: <div>404 - Page Not Found</div> },
   { path: "/login", element: <Login /> },
+  { path: "/homepage", element: <HomePage/> },
+
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
+  
   {
     path: "/",
     element: <ScrollTop />,
