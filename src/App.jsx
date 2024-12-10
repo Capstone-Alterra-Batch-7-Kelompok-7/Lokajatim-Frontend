@@ -19,6 +19,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import CartProducts from "./pages/product/CartProduct";
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/homepage/HomePage";
+import EventList from "./pages/event/EventList";
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
@@ -38,6 +39,7 @@ const routes = [
       { path: "/article/list", element: <ArticleList /> },
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
+      { path: "/events", element: <EventList /> },
       { path: "/product/:id", element: <DetailProduct /> },
       { path: "/buy-now", element: <BuyNowProduct /> },
       {

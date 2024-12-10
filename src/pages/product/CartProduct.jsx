@@ -2,26 +2,16 @@ import { Link } from "react-router-dom";
 import NavbarSearchBrown from "../../components/NavbarSearchBrown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleRight,
   faMinus,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import promoIcon from "../../assets/icon/promo.png";
-import alertCircle from "../../assets/icon/alert-circle.png";
 import Footer from "../../components/Footer";
 import { useCounter } from "../../hooks/useCounter";
 // import { useEffect } from "react";
-import { useFetch } from "../../hooks/useFetch";
 import food1 from "../../assets/dumy/image1.jpg";
 import CheckBox from "../../components/CheckBox";
 
 const CartProducts = () => {
-  // const id = localStorage.getItem("product_id");
-  // const { data } = useFetch(`/products/${id}`);
-  // console.log(data);
-  // // useEffect(() => {
-
-  // // }, []);
   return (
     <>
       <ModalDelete />

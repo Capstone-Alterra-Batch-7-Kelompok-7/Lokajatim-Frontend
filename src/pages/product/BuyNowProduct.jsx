@@ -73,7 +73,7 @@ const BuyNowProduct = () => {
           <div className="breadcrumbs text-sm">
             <ul>
               <li>
-                <Link to={"/"}>Home</Link>
+                <Link to={"/homepage"}>Beranda</Link>
               </li>
               <li>
                 <Link to={"/products"}>Product Lokal</Link>

@@ -24,6 +24,7 @@ import kesenianIcon from '../../assets/icon/kesenian.png';
 import konserIcon from '../../assets/icon/konser.png';
 import festivalIcon from '../../assets/icon/festival.png';
 import umumIcon from '../../assets/icon/umum.png';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
 
@@ -252,9 +253,9 @@ const HomePage = () => {
                     />
                   </figure>
                   <div className="card-body p-4 text-black">
-                    <h3 className="card-title text-sm font-semibold">
+                    <Link to={`/${activeTab === "products" ? "product" : "event"}/${item.id}`} className="card-title text-sm font-semibold">
                       {item.name || "Judul Tidak Tersedia"}
-                    </h3>
+                    </Link>
                     {activeTab === "products" ? (
                       <>
                         <p className="font-bold text-black-500 mt-2">
@@ -293,9 +294,9 @@ const HomePage = () => {
 
           {/* Tombol Jelajahi Semua */}
           <div className="flex justify-center mt-8">
-            <button className="btn btn-sm btn-outline bg-[#EB6B1480] text-white hover:bg-white hover:text-[#8B5428] rounded-md">
+            <Link to={activeTab === "products" ? "/products" : "/events"} className="btn btn-sm btn-outline bg-[#EB6B1480] text-white hover:bg-white hover:text-[#8B5428] rounded-md">
               Jelajahi Semua
-            </button>
+            </Link>
 
           </div>
         </div>
@@ -375,7 +376,8 @@ const HomePage = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {articles.map((article) => (
-              <div
+              <Link
+                to={`/article/${article.id}`}
                 key={article.id}
                 className="card shadow-md bg-white rounded-lg overflow-hidden border border-gray-200 transform transition-transform duration-300 hover:scale-105"
               >
@@ -408,7 +410,7 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
