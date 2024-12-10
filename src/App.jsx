@@ -13,6 +13,7 @@ import ProductList from "./pages/product/ProductList";
 import DetailProduct from "./pages/product/DetailProduct";
 import BuyNowProduct from "./pages/product/BuyNowProduct";
 import PaymentSucces from "./pages/PaymentSucces";
+import HomePage from "./pages/homepage/HomePage"
 const routes = [
   { path: "/", element: <Navigate to="/login" replace /> },
   { path: "/register", element: <Register /> },
@@ -21,6 +22,7 @@ const routes = [
   { path: "/login", element: <Login /> },
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
+  { path: "/homepage", element: <HomePage /> },
   {
     path: "/",
     element: <ScrollTop />,
