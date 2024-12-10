@@ -51,9 +51,11 @@ const HomePage = () => {
     { name: 'Festival', icon: festivalIcon },
     { name: 'Umum', icon: umumIcon },
   ];
-  const [articles, setArticles] = useState([]); // Initialize as an empty array
-  const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [articles, setArticles] = useState([]);
+  const [likes, setLikes] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Fetch articles
   const fetchArticles = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/articles`);
@@ -66,9 +68,29 @@ const HomePage = () => {
     }
   };
 
+  // Fetch likes
+  const fetchLikes = async (articleId) => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/likes/articles/${articleId}`);
+      setLikes(prevLikes => ({
+        ...prevLikes,
+        [articleId]: response.data.likes // Ganti 'likes' dengan nama kolom yang sesuai dengan data Anda
+      }));
+    } catch (error) {
+      console.error("Error fetching likes:", error);
+    }
+  };
+
+  // UseEffect to fetch data
   useEffect(() => {
     fetchArticles();
   }, []);
+
+  // Fetch likes for each article when articles are loaded
+  useEffect(() => {
+    articles.forEach(article => fetchLikes(article.id)); // Fetch likes untuk setiap artikel
+  }, [articles]);
+
   const cardsData = [
     {
       title: "Workshop Batik Tradisi",
@@ -109,6 +131,7 @@ const HomePage = () => {
     setLoading(true);
     try {
       const response = await axios.get(endpoint);
+      console.log("Data diterima:", response.data); // Periksa data yang diterima
       setData(response.data.data || []); // Set data sesuai struktur yang diterima dari API
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -140,7 +163,8 @@ const HomePage = () => {
       {/* Promo Section */}
       <section className="bg-white text-white py-6">
         <div className="max-w-screen-xl mx-auto flex justify-center">
-          <div className="card w-full lg:w-4/5 bg-orange-600 shadow-xl">
+          <div className="card w-full lg:w-[90%] bg-orange-600 shadow-xl">
+
             <figure>
               <img
                 src={promoImages[currentImageIndex]} // Gambar berdasarkan indeks saat ini
@@ -190,18 +214,18 @@ const HomePage = () => {
           {/* Tabs untuk Produk dan Event */}
           <div className="flex gap-4 mb-8">
             <button
-              className={`btn btn-sm btn-outline ${activeTab === "products"
-                ? "bg-[#EB6B1480] text-white"
-                : "bg-white text-[#8B5428]"
+              className={`btn btn-sm ${activeTab === "products"
+                ? "bg-white text-[#8B5428] hover:bg-[#EB6B1480] hover:text-white  rounded-full"
+                : "bg-[#EB6B1480] text-white hover:bg-white hover:text-[#8B5428]  rounded-full"
                 }`}
               onClick={() => setActiveTab("products")}
             >
               Produk
             </button>
             <button
-              className={`btn btn-sm btn-outline ${activeTab === "events"
-                ? "bg-[#EB6B1480] text-white"
-                : "bg-white text-[#8B5428]"
+              className={`btn btn-sm ${activeTab === "events"
+                ? "bg-white text-[#8B5428] hover:bg-[#EB6B1480] hover:text-white  rounded-full"
+                : "bg-[#EB6B1480] text-white hover:bg-white hover:text-[#8B5428] rounded-full"
                 }`}
               onClick={() => setActiveTab("events")}
             >
@@ -219,9 +243,9 @@ const HomePage = () => {
                   <figure>
                     <img
                       src={
-                        item.photos?.[0]?.url_photo || // Untuk produk
-                        item.url_photo || // Untuk event
-                        "https://via.placeholder.com/300x200"
+                        item.url_photo ||  // Cek gambar event terlebih dahulu
+                        (item.photos?.[0]?.url_photo || "") || // Cek gambar produk
+                        "https://via.placeholder.com/300x200"  // Gambar fallback jika tidak ada
                       }
                       alt={item.name || "Item"}
                       className="h-36 object-cover w-full"
@@ -240,7 +264,7 @@ const HomePage = () => {
                           Stok: {item.stock || "Tidak Tersedia"}
                         </p>
                       </>
-                    ) : (
+                    ) : activeTab === "events" ? (
                       <>
                         <p className="text-sm text-gray-600">
                           Lokasi: {item.location || "Lokasi Tidak Tersedia"}
@@ -257,7 +281,7 @@ const HomePage = () => {
                           {item.price ? formatRupiah(item.price) : "Gratis"}
                         </p>
                       </>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               ))
@@ -266,14 +290,19 @@ const HomePage = () => {
             )}
           </div>
 
+
           {/* Tombol Jelajahi Semua */}
           <div className="flex justify-center mt-8">
-            <button className="btn btn-sm btn-outline bg-white text-[#8B5428] hover:bg-[#EB6B1480] hover:text-white rounded-md">
+            <button className="btn btn-sm btn-outline bg-[#EB6B1480] text-white hover:bg-white hover:text-[#8B5428] rounded-md">
               Jelajahi Semua
             </button>
+
           </div>
         </div>
       </section>
+
+
+
 
 
 
@@ -351,37 +380,47 @@ const HomePage = () => {
                 className="card shadow-md bg-white rounded-lg overflow-hidden border border-gray-200 transform transition-transform duration-300 hover:scale-105"
               >
                 <img
-                  src={article.photo || 'fallback-image.jpg'}
+                  src={article.photo || "fallback-image.jpg"}
                   alt={article.title}
                   className="w-full h-40 object-cover"
                 />
-                <div className="p-4 flex flex-col h-full"> {/* Flex memastikan konsistensi tinggi */}
-                  <h2 className="font-bold text-lg mb-2 line-clamp-2">{article.title}</h2>
+                <div className="p-4 flex flex-col h-full">
+                  {/* Title */}
+                  <h2 className="font-bold text-lg mb-2 line-clamp-2">
+                    {article.title}
+                  </h2>
+                  {/* Content */}
                   <p className="text-sm text-gray-500 mb-4 line-clamp-3 flex-grow">
                     {article.content}
                   </p>
                   <hr className="border-t border-gray-300 mb-4" />
+                  {/* Footer */}
                   <div className="flex items-center justify-between text-gray-600 text-sm">
                     <div>
                       <span>{new Date(article.created_at).toLocaleDateString()}</span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <FontAwesomeIcon icon={faThumbsUpRegular} className="text-black text-sm" />
-                      <span>{article.likes || 0}</span>
+                      <FontAwesomeIcon
+                        icon={faThumbsUpRegular}
+                        className="text-black text-sm"
+                      />
+                      <span>{likes[article.id] || 0}</span>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-
         )}
+
         <div className="flex justify-center mt-8">
           <button className="btn btn-sm btn-outline text-black border-black hover:text-[#ED7D31] hover:border-[#ED7D31] hover:bg-[#ED7D311A] rounded-md">
             Jelajahi Semua
           </button>
         </div>
       </section>
+
+
 
 
       <Footer />
