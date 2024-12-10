@@ -14,6 +14,7 @@ import slide3 from "../../assets/auth/aut-slide3.png";
 import { use } from "react";
 import { Loading } from "../../components/Loading";
 
+
 const Slide = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const dataSlider = [
@@ -62,6 +63,9 @@ const Slide = () => {
           <FontAwesomeIcon
             key={index}
             icon={faCircle}
+            className={`cursor-pointer transition-colors duration-300 ${
+              currentIndex === index ? "text-secondary" : "text-gray-300"
+            }`}
             className={`cursor-pointer transition-colors duration-300 ${currentIndex === index ? "text-secondary" : "text-gray-300"
               }`}
             onClick={() => setCurrentIndex(index)}
@@ -91,6 +95,18 @@ const Login = () => {
         inputLogin
       );
       if (response.status === 200) {
+        const modal = document.getElementById("success-login");
+        modal.showModal();
+
+        // Tunggu 3 detik, lalu alihkan ke /homepage
+        setTimeout(() => {
+          modal.close();
+          window.location.href = "/homepage"; // Pengalihan ke halaman beranda
+        }, 3000);
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || "Login gagal. Silakan coba lagi.");
         // Tampilkan modal setelah 4 detik
         setIsloading(false);
         localStorage.setItem("token", response.data.data.token);
@@ -156,6 +172,10 @@ const Login = () => {
           </div>
           <p className="text-white mt-2">
             Lupa Kata Sandi?{" "}
+            <Link
+              to="/aturulang"
+              className="text-secondary font-semibold hover:underline"
+            >
             <Link to="/aturulang" className="text-secondary font-semibold hover:underline">
               Atur Ulang
             </Link>

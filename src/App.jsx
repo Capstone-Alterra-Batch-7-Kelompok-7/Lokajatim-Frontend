@@ -4,6 +4,19 @@ import Login from "./pages/Auth/Login";
 import ForgotPass from "./pages/Auth/forgotPass";
 import VerifyCode from "./pages/Auth/verifyCode";
 import ResetPassword from "./pages/Auth/resetPassword";
+import HomePage from "./pages/homepage/HomePage";
+
+const routes = [
+  { path: "/", element: <Navigate to="/login" replace /> },
+  { path: "/register", element: <Register /> }, 
+  { path: "/aturulang", element: <ForgotPass /> },
+  { path: "*", element: <div>404 - Page Not Found</div> },
+  { path: "/login", element: <Login /> },
+  { path: "/reset", element: <ResetPassword/> },
+  { path: "/verify", element: <VerifyCode /> },
+  { path: "/homepage", element: <HomePage /> },
+
+
 import ArticleHome from "./pages/article/ArticleHome";
 import ArticleList from "./pages/article/ArticleList";
 import ArticleDetail from "./pages/article/ArticleDetail";

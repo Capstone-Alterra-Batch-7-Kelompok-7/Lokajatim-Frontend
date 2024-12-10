@@ -21,12 +21,19 @@ const NavbarSearchBrown = ({ children }) => {
       link: "/article",
     },
     {
+
+      id: 3,
+
       id: 2,
+
       title: "Event",
       link: "/event",
     },
     {
+      id: 4,
+
       id: 3,
+
       title: "Produk Lokal",
       link: "/product",
     },
