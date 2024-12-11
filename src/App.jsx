@@ -19,7 +19,6 @@ import CartProducts from "./pages/product/CartProduct";
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/homepage/HomePage";
 import EventList from "./pages/event/EventList";
-import { Test } from "./pages/Test";
 import ProductDataDashboard from "./pages/admin/product/ProductDataDashboard";
 const routes = [
   { path: "/", element: <LandingPage /> },
