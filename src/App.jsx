@@ -19,6 +19,7 @@ import CartProducts from "./pages/product/CartProduct";
 import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/homepage/HomePage";
 import EventList from "./pages/event/EventList";
+import ProductDataDashboard from "./pages/admin/product/ProductDataDashboard";
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
@@ -46,6 +47,8 @@ const routes = [
         children: [
           { path: "/cart", element: <CartProducts /> },
           { path: "/success", element: <PaymentSucces /> },
+          { path: "/dashboard/product", element: <ProductDataDashboard /> },
+
         ],
       },
     ],
