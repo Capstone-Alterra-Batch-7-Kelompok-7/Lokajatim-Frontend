@@ -1,17 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { WrapperDashboard } from "../../../components/WrapperDashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import upload from "../../../assets/icon/upload-file.png";
 import { instance } from "../../../config/config";
 import { useFetch } from "../../../hooks/useFetch";
 import { Loading } from "../../../components/Loading";
 
-const FormAddProduct = () => {
+const FormEditProduct = () => {
   const [isFormImage, setIsFormImage] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [files, setFiles] = useState([]);
+  const { id } = useParams();
+
+  const { data, isLoading, setIsLoading } = useFetch(`/products/${id}`);
+  useEffect(() => {
+    if (data) {
+      setInputData({
+        name: data.name,
+        description: data.description,
+        category_id: data.category_id,
+        price: data.price,
+        stock: data.stock,
+        photos: data.photos,
+      });
+    }
+  }, [data]);
   const [inputData, setInputData] = useState({
     name: "",
     description: "",
@@ -21,38 +35,54 @@ const FormAddProduct = () => {
     photos: [],
   });
 
+  console.log(inputData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
       // Konversi file menjadi Base64
-      const base64Photos = await Promise.all(
-        files.map((file) => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result); // Base64 string
-            reader.onerror = (error) => reject(error);
-            reader.readAsDataURL(file); // Konversi file ke Base64
-          });
-        })
-      );
+      if (files.length > 0) {
+        const base64Photos = await Promise.all(
+          files.map((file) => {
+            return new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result); // Base64 string
+              reader.onerror = (error) => reject(error);
+              reader.readAsDataURL(file); // Konversi file ke Base64
+            });
+          })
+        );
+        const updatedData = {
+          ...inputData,
+          price: parseInt(inputData.price),
+          stock: parseInt(inputData.stock),
+          category_id: parseInt(inputData.category_id),
+          photos: base64Photos, // Ganti dengan array Base64
+        };
+        await instance.put(`/products/${id}`, updatedData);
 
-      // Tambahkan foto Base64 ke inputData.photos
+        alert("Produk berhasil diupdate");
+        window.location.href = "/dashboard/product";
+        setIsLoading(false);
+      }
+
       const updatedData = {
         ...inputData,
         price: parseInt(inputData.price),
         stock: parseInt(inputData.stock),
         category_id: parseInt(inputData.category_id),
-        photos: base64Photos, // Ganti dengan array Base64
+        photos: inputData.photos,
       };
+      await instance.put(`/products/${id}`, updatedData);
 
-      // Kirim data ke backend
-      await instance.post("/products", updatedData);
-
-      alert("Produk berhasil ditambahkan");
+      alert("Produk berhasil diupdate");
       window.location.href = "/dashboard/product";
       setIsLoading(false);
+      // Tambahkan foto Base64 ke inputData.photos
+
+      // Kirim data ke backend
     } catch (e) {
       console.error(e);
       setIsLoading(false);
@@ -78,7 +108,11 @@ const FormAddProduct = () => {
           </div>
           <form action="" onSubmit={handleSubmit}>
             {isFormImage ? (
-              <ImageInput files={files} setFiles={setFiles} />
+              <ImageInput
+                files={files}
+                setFiles={setFiles}
+                filesDefault={inputData.photos}
+              />
             ) : (
               <InfoProduct
                 handleChange={handleChangeInput}
@@ -138,16 +172,19 @@ const FormAddProduct = () => {
   );
 };
 
-const ImageInput = ({ files, setFiles }) => {
+const ImageInput = ({ files, setFiles, filesDefault }) => {
   const [onDrag, setOnDrag] = useState(false);
   const imageRef = useRef(null);
 
   const handleOnDragOver = (e) => {
     e.preventDefault();
+    // console.log(e);
     setOnDrag(true);
   };
   const handleOnDrop = (e) => {
     e.preventDefault();
+    // console.log(e.dataTransfer.files);
+    // setFiles(e.dataTransfer.files);
     const selectedFiles = Array.from(e.dataTransfer.files); // Ubah FileList ke array
     setFiles(selectedFiles); //
     setOnDrag(false);
@@ -162,6 +199,7 @@ const ImageInput = ({ files, setFiles }) => {
     setFiles(selectedFiles); //
   };
 
+  console.log(files)
   return (
     <>
       <div className="flex flex-col w-[90%] mx-auto bg-white rounded-2xl mt-5 px-4 py-5">
@@ -197,25 +235,35 @@ const ImageInput = ({ files, setFiles }) => {
             </button>
           </p>
         </div>
-        {files.length > 0 &&
-          files.map((file, index) => (
-            <div
-              className="flex items-center border border-gray-300 gap-3 p-4 mt-5 rounded-2xl w-full"
-              key={index}
-            >
-              <img src={URL.createObjectURL(file)} width={36} />
-              <div className="">
-                <p className="font-medium">testasd</p>
-                <p className="text-sm">500Kb</p>
+        {files.length > 0
+          ? files.map((file, index) => (
+              <div
+                className="flex items-center border border-gray-300 gap-3 p-4 mt-5 rounded-2xl w-full"
+                key={index}
+              >
+                <img src={URL.createObjectURL(file)} width={36} />
+                <div className="">
+                  <p className="font-medium">testasd</p>
+                  <p className="text-sm">{(file.size / 1024).toFixed(2)}Kb</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          : filesDefault.length > 0
+          ? filesDefault.map((file, index) => (
+              <div
+                className="flex items-center border border-gray-300 gap-3 p-4 mt-5 rounded-2xl w-full"
+                key={index}
+              >
+                <img src={file} width={36} />
+                <div className="">
+                  <p className="font-medium">testasd</p>
+                  <p className="text-sm">500Kb</p>
+                </div>
+              </div>
+            ))
+          : ""}
       </div>
-      <div
-        className={`flex justify-center items-center mt-5 ${
-          files.length > 0 ? "block" : "hidden"
-        }`}
-      >
+      <div className={`flex justify-center items-center mt-5`}>
         <button
           className="btn btn-primary text-white  md:w-[50%] w-full"
           type="submit"
@@ -303,4 +351,4 @@ const InfoProduct = ({ handleChange, inputData }) => {
   );
 };
 
-export default FormAddProduct;
+export default FormEditProduct;

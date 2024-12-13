@@ -6,10 +6,23 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { useFetch } from "../../../hooks/useFetch";
 import { Loading } from "../../../components/Loading";
 import { Link } from "react-router-dom";
+import { instance } from "../../../config/config";
 
 const ProductDataDashboard = () => {
-  const { data, isLoading } = useFetch("/products");
+  const { data, isLoading, setIsLoading } = useFetch("/products");
   console.log(data);
+  const handleDeleteProduct = async (id) => {
+    setIsLoading(true);
+    try {
+      await instance.delete(`/products/${id}`);
+      alert("Produk berhasil dihapus");
+      window.location.reload();
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
+  };
   return (
     <>
       <WrapperDashboard tabActive="product" key={"product"}>
@@ -23,7 +36,10 @@ const ProductDataDashboard = () => {
                 <FontAwesomeIcon icon={faFileLines} />
                 Impor CSV
               </button>
-              <Link to={"/dashboard/product/add"} className="btn btn-sm bg-[#4F3017] text-white">
+              <Link
+                to={"/dashboard/product/add"}
+                className="btn btn-sm bg-[#4F3017] text-white"
+              >
                 <FontAwesomeIcon icon={faPlus} />
                 Tambah
               </Link>
@@ -55,7 +71,7 @@ const ProductDataDashboard = () => {
                       </th>
                       <td>
                         <img
-                          src={item.photos[0].url_photo}
+                          src={item.photos[0]?.url_photo}
                           // src="https://placehold.co/400"
                           width={80}
                           alt=""
@@ -68,10 +84,14 @@ const ProductDataDashboard = () => {
                       <td>{item.stock}</td>
                       <td>
                         <div className="flex">
-                          <button className="btn btn-sm text-black bg-[#FAFBFD] rounded-r-none border-[#D5D5D5]">
+                          <Link to={`/dashboard/product/edit/${item.id}`} className="btn btn-sm text-black bg-[#FAFBFD] rounded-r-none border-[#D5D5D5]">
                             <FontAwesomeIcon icon={faPenToSquare} />
-                          </button>
-                          <button className="btn btn-sm text-red-500 bg-[#FAFBFD] rounded-l-none border-[#D5D5D5]">
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteProduct(item.id)}
+                            className="btn btn-sm text-red-500 bg-[#FAFBFD] rounded-l-none border-[#D5D5D5]"
+                          >
                             <FontAwesomeIcon icon={faTrashCan} />
                           </button>
                         </div>
