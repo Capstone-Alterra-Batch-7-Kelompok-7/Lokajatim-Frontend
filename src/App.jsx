@@ -22,6 +22,9 @@ import EventList from "./pages/event/EventList";
 import ProductDataDashboard from "./pages/admin/product/ProductDataDashboard";
 import FormAddProduct from "./pages/admin/product/FormAddProduct";
 import FormEditProduct from "./pages/admin/product/FormEditProduct";
+import DashboardHome from "./components/AdminDashboard";
+import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
+
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
@@ -29,6 +32,7 @@ const routes = [
   { path: "*", element: <div>404 - Page Not Found</div> },
   { path: "/login", element: <Login /> },
   { path: "/homepage", element: <HomePage /> },
+  { path: "/dashboard", element: <DashboardHome /> },
 
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
@@ -52,6 +56,8 @@ const routes = [
           { path: "/dashboard/product", element: <ProductDataDashboard /> },
           { path: "/dashboard/product/add", element: <FormAddProduct /> },
           { path: "/dashboard/product/edit/:id", element: <FormEditProduct /> },
+          { path: "/dashboard/article", element: <ArticleDataDashboard /> },
+
         ],
       },
     ],
