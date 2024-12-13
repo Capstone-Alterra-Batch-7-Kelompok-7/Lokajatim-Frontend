@@ -17,3 +17,10 @@
 .article-gradient-bg {
   @apply bg-[linear-gradient(180deg,#FDE6D4,#FFFFFF,#FDE6D4,#FFFFFF)]
 }
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
