@@ -1,4 +1,4 @@
-import {
+/*import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -72,6 +72,19 @@ const router = createBrowserRouter(routes, {
 
 function App() {
   return <RouterProvider router={router} />;
+}
+
+export default App;*/
+
+import React from "react";
+import Chatbot from "./pages/homepage/ChatBot";
+
+function App() {
+  return (
+    <div className="App">
+      <Chatbot />
+    </div>
+  );
 }
 
 export default App;
