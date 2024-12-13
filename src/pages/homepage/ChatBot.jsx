@@ -14,7 +14,7 @@ function Chatbot() {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
     try {
-      const response = await fetch("https://your-backend-domain.com/chatbot", {
+      const response = await fetch("/chatbot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
