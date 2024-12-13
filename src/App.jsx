@@ -20,8 +20,11 @@ import LandingPage from "./pages/LandingPage";
 import HomePage from "./pages/homepage/HomePage";
 import EventList from "./pages/event/EventList";
 import ProductDataDashboard from "./pages/admin/product/ProductDataDashboard";
+import FormAddProduct from "./pages/admin/product/FormAddProduct";
+import FormEditProduct from "./pages/admin/product/FormEditProduct";
 import DashboardHome from "./components/AdminDashboard";
 import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
+
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
@@ -51,6 +54,8 @@ const routes = [
           { path: "/cart", element: <CartProducts /> },
           { path: "/success", element: <PaymentSucces /> },
           { path: "/dashboard/product", element: <ProductDataDashboard /> },
+          { path: "/dashboard/product/add", element: <FormAddProduct /> },
+          { path: "/dashboard/product/edit/:id", element: <FormEditProduct /> },
           { path: "/dashboard/article", element: <ArticleDataDashboard /> },
 
         ],
