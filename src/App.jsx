@@ -21,6 +21,7 @@ import HomePage from "./pages/homepage/HomePage";
 import EventList from "./pages/event/EventList";
 import ProductDataDashboard from "./pages/admin/product/ProductDataDashboard";
 import DashboardHome from "./components/AdminDashboard";
+import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
@@ -50,6 +51,7 @@ const routes = [
           { path: "/cart", element: <CartProducts /> },
           { path: "/success", element: <PaymentSucces /> },
           { path: "/dashboard/product", element: <ProductDataDashboard /> },
+          { path: "/dashboard/article", element: <ArticleDataDashboard /> },
 
         ],
       },
