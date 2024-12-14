@@ -143,6 +143,7 @@ const Login = () => {
               className="input w-full"
               placeholder="Email"
               onChange={handleChange}
+              required
             />
             <div className="relative">
               <input
@@ -151,6 +152,7 @@ const Login = () => {
                 className="input w-full"
                 placeholder="Password"
                 onChange={handleChange}
+                required
               />
               <FontAwesomeIcon
                 icon={showPassword ? faEye : faEyeSlash}
@@ -160,12 +162,15 @@ const Login = () => {
             </div>
             <p className="text-white mt-2">
               Lupa Kata Sandi?{" "}
-              <Link to="/aturulang" className="text-secondary font-semibold hover:underline">
+              <Link
+                to="/aturulang"
+                className="text-secondary font-semibold hover:underline"
+              >
                 Atur Ulang
               </Link>
             </p>
             <div className="flex gap-4">
-              <input type="checkbox" className="checkbox bg-white" />
+              <input type="checkbox" className="checkbox checkbox-primary " required />
               <p className="text-white">
                 Saya menyetujui{" "}
                 <Link className="text-secondary">Syarat dan Ketentuan</Link>
@@ -174,19 +179,7 @@ const Login = () => {
             <button type="submit" className="btn btn-secondary text-white">
               Masuk Akun
             </button>
-
           </form>
-          <p className="text-[16px] leading-[20px] font-normal text-center text-[#FEFEFE]">
-            Atau masuk dengan:
-          </p>
-          <div className="flex justify-center gap-4 mt-3">
-            <button className="btn bg-white border-none hover:bg-slate-100 text-primary w-[50%]">
-              Google
-            </button>
-            <button className="btn bg-white border-none hover:bg-slate-100 text-primary w-[50%]">
-              Facebook
-            </button>
-          </div>
         </div>
 
         {/* Slide kanan */}
