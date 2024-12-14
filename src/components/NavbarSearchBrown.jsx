@@ -10,6 +10,7 @@ import cart from "../assets/icon/cart.png";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { instance } from "../config/config";
+import profile from "../assets/dumy/profile.jpg";
 const NavbarSearchBrown = ({ children }) => {
   const navbarItems = [
     {
@@ -81,9 +82,9 @@ const NavbarSearchBrown = ({ children }) => {
               <div className="flex items-center gap-4">
                 {dataUser ? (
                   <>
-                  <Link to={'/cart'}>
-                    <img src={cart} alt="cart" width={24} />
-                  </Link>
+                    <Link to={"/cart"}>
+                      <img src={cart} alt="cart" width={24} />
+                    </Link>
                     <FontAwesomeIcon
                       icon={faBell}
                       className="text-2xl font-light"
@@ -94,7 +95,7 @@ const NavbarSearchBrown = ({ children }) => {
                     />
                     <div className="flex gap-2 items-center">
                       <img
-                        src="https://placehold.co/400"
+                        src={profile}
                         alt=""
                         width={30}
                         className="rounded-full"
