@@ -1,4 +1,4 @@
-/*import {
+import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -22,6 +22,10 @@ import EventList from "./pages/event/EventList";
 import ProductDataDashboard from "./pages/admin/product/ProductDataDashboard";
 import DashboardHome from "./components/AdminDashboard";
 import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
+import EventTable from "./pages/event/crud event/EventTable";
+import AddEventPage from "./pages/event/crud event/AddEventPage";
+import { WrapperDashboard } from "./components/WrapperDashboard";
+
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
@@ -33,6 +37,9 @@ const routes = [
 
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
+  {path:"/event-table", element: <EventTable />},
+  {path:"/add-event", element: <AddEventPage />},
+  {path:"/wrapper", element:<WrapperDashboard/>}, 
 
   {
     path: "/",
@@ -74,25 +81,7 @@ function App() {
   return <RouterProvider router={router} />;
 }
 
-export default App;*/
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import EventTable from "./pages/event/crud event/EventTable";
-import AddEventPage from "./pages/event/crud event/AddEventPage";
-import { WrapperDashboard } from "./components/WrapperDashboard";
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<EventTable />} />
-        <Route path="/add-event" element={<AddEventPage />} />
-        <Route path="/wrapper" element={<WrapperDashboard/>} />
-      </Routes>
-    </Router>
-  );
-}
-
 export default App;
+
 
 

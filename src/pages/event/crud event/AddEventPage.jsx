@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import LocationModal from "./LocationModal";
 import DateTimePickerModal from "./DateTimePickerModal";
 import CategoryModal from "./CategoryModal";
@@ -65,6 +66,60 @@ function AddEventPage() {
     setUploadedFile(null);
   };
 
+  const handleSubmit = async () => {
+    // Periksa apakah token ada
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("You are not authorized. Please log in first.");
+        return;
+    }
+
+    // Data event
+    const data = {
+        capacity: 100,
+        category_id: 1,
+        date_time: "2024-12-25T10:00:00",
+        description: "Event description here.",
+        location: "Surabaya, Indonesia",
+        name: "Amazing Event",
+        price: 50000,
+        rating: 4.5,
+        url_photo: "https://example.com/photo.jpg",
+    };
+
+    try {
+        // Kirim permintaan POST ke endpoint
+        const response = await axios.post("https://lokajatim.org/events", data, {
+            headers: {
+                Authorization: `Bearer ${token}`, // Tambahkan token JWT di header
+                "Content-Type": "application/json", // Tentukan format data
+            },
+        });
+
+        // Periksa apakah respons memiliki status sukses
+        if (response.status >= 200 && response.status < 300) {
+            console.log("Success:", response.data);
+            alert("Event successfully submitted!");
+        } else {
+            console.error("Unexpected response:", response);
+            alert("Something went wrong. Please try again.");
+        }
+    } catch (error) {
+        // Tangani kesalahan, termasuk kesalahan jaringan
+        if (error.response) {
+            console.error("Error response data:", error.response.data);
+            alert(`Failed to submit event: ${error.response.data.message || "Unknown error"}`);
+        } else if (error.request) {
+            console.error("No response received:", error.request);
+            alert("No response from the server. Please check your internet connection.");
+        } else {
+            console.error("Error setting up request:", error.message);
+            alert("An error occurred while submitting the event.");
+        }
+    }
+};
+
+  
   return (
     <div className="w-[1119px] h-[1694px] top-[162px] left-[20px] gap-[16px] absolute bg-gray-50 p-8 rounded-[var(--radixxl)]">
       <div className="bg-white shadow-md rounded-lg p-6">
@@ -307,6 +362,9 @@ function AddEventPage() {
         </div>
       </div>
     ))}
+
+<button onClick={handleSubmit}>Submit Event</button>
+
 </div>
 
         {/* Modals */}
