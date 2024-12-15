@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-crop.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -15,14 +15,15 @@ const ForgotPass = () => {
   // const [email, setEmail] = useState(null);
   const [isLoading, setIsloading] = useState(false);
   const { email, setEmail } = useResetStore();
+  const navigate = useNavigate();
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
     setIsloading(true);
     try {
-      const response = await instance.post("/forgot-password", {
+       await instance.post("/forgot-password", {
         email: email,
       });
-      console.log(response);
+      navigate("/verify");
       setIsloading(false);
     } catch (error) {
       console.error(error);

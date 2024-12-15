@@ -8,6 +8,7 @@ import { Loading } from "../../../components/Loading";
 import { Link } from "react-router-dom";
 import { instance } from "../../../config/config";
 import { useRef } from "react";
+import { formatRupiah } from "../../../utils/rupiahFormater";
 
 const ProductDataDashboard = () => {
   const { data, isLoading, setIsLoading } = useFetch("/products");
@@ -60,7 +61,13 @@ const ProductDataDashboard = () => {
                 <FontAwesomeIcon icon={faFileLines} />
                 Impor CSV
               </button>
-              <input type="file" className="hidden" id="csv" ref={inputCsvRef} onChange={handleChangeCSV} />
+              <input
+                type="file"
+                className="hidden"
+                id="csv"
+                ref={inputCsvRef}
+                onChange={handleChangeCSV}
+              />
               <Link
                 to={"/dashboard/product/add"}
                 className="btn btn-sm bg-[#4F3017] text-white"
@@ -105,7 +112,7 @@ const ProductDataDashboard = () => {
                       </td>
                       <td>{item.name}</td>
                       <td>{item.category.name}</td>
-                      <td>Rp {item.price}</td>
+                      <td>{formatRupiah(item.price)}</td>
                       <td>{item.stock}</td>
                       <td>
                         <div className="flex">

@@ -23,7 +23,8 @@ const VerifyCode = () => {
           <h1 className="text-3xl font-bold">Kode Verifikasi</h1>
           <br />
           <p>
-            Kode verifikasi telah dikirim ke {email}. Masukkan kode di bawah
+            Kode verifikasi telah dikirim ke{" "}
+            <span className="font-bold">{email}.</span> Masukkan kode di bawah
             untuk melanjutkan
           </p>
 
