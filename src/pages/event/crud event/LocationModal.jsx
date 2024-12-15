@@ -6,12 +6,13 @@ function LocationModal({ isOpen, onClose, onSave }) {
   const [url, setUrl] = useState("");
 
   const handleSave = () => {
-    if (locationName && address) {
-      onSave({ locationName, address, url });
-      onClose();
-    } else {
-      alert("Nama tempat dan alamat wajib diisi!");
-    }
+    // if (!locationName || !address) {
+    //   alert("Nama tempat dan alamat wajib diisi!");
+    //   return;
+    // }
+
+    onSave({ locationName, address, url }); 
+    onClose(); 
   };
 
   if (!isOpen) return null;
@@ -50,7 +51,7 @@ function LocationModal({ isOpen, onClose, onSave }) {
           />
         </div>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Lokasi di Google Maps
           </label>
@@ -63,9 +64,9 @@ function LocationModal({ isOpen, onClose, onSave }) {
               loading="lazy"
             ></iframe>
           </div>
-        </div>
+        </div> */}
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             URL (Opsional)
           </label>
@@ -76,16 +77,13 @@ function LocationModal({ isOpen, onClose, onSave }) {
             placeholder="Masukkan URL jika ada"
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
           />
-        </div>
+        </div> */}
 
           {/* Tombol Simpan */}
           <div className="flex justify-end space-x-4">
         <button
           className="w-[622px] h-[40px] bg-[#4F3017] text-white rounded-[6px] font-semibold hover:bg-[#3C2411] transition duration-200"
-          onClick={() => {
-            onSave(startDate, endDate);
-            onClose();
-          }}
+          onClick={handleSave}
         >
           Simpan
         </button>

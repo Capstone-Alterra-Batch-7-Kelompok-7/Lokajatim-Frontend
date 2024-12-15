@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function DateTimePickerModal({ isOpen, onClose, onSave }) {
   const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [time, settime] = useState("");
 
   if (!isOpen) return null;
 
@@ -35,13 +35,13 @@ function DateTimePickerModal({ isOpen, onClose, onSave }) {
         {/* Input Tanggal Berakhir */}
         <div className="mb-6">
           <label className="block text-[14px] font-medium text-[#7D787B] mb-2">
-            Tanggal Berakhir Event <span className="text-red-500">*</span>
+           Waktu Event <span className="text-red-500">*</span>
           </label>
           <input
-            type="date"
+            type="time"
             className="block w-full h-[48px] text-[#BBBBBB] border border-[#E0E0E0] rounded-[6px] px-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FF6F00]"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
+            value={time}
+            onChange={(e) => settime(e.target.value)}
           />
         </div>
   
@@ -49,7 +49,7 @@ function DateTimePickerModal({ isOpen, onClose, onSave }) {
         <button
           className="w-[622px] h-[40px] bg-[#4F3017] text-white rounded-[6px] font-semibold hover:bg-[#3C2411] transition duration-200"
           onClick={() => {
-            onSave(startDate, endDate);
+            onSave(startDate, time);
             onClose();
           }}
         >

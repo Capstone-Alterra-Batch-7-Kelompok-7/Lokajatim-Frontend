@@ -81,17 +81,14 @@ const Login = () => {
   const handleChange = (e) => {
     setInputLogin({ ...inputLogin, [e.target.id]: e.target.value });
   };
+  console.log("Input Login Data:", inputLogin);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsloading(true);
     try {
-      /*const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/login`,
-        inputLogin
-      );*/
       const response = await axios.post(
-        `https://lokajatim.org/login`,
+        `${import.meta.env.VITE_BASE_URL}/login`,
         inputLogin
       );
 
@@ -117,6 +114,7 @@ const Login = () => {
       setIsloading(false);
     }
   };
+  
 
 
   return (

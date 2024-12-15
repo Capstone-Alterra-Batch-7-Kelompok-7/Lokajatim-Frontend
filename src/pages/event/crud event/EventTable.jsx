@@ -5,6 +5,8 @@ import DeleteEventPopup from "./DeleteEventPopup";
 import EditEventPopup from "./EditEventPopup";
 import { WrapperDashboard } from "../../../components/WrapperDashboard";
 import EventDeleteErrorPopup from "./EventDeleteErrorPopup";
+import axios from "axios";
+
 
 const EventTable = () => {
   const navigate = useNavigate();
@@ -23,7 +25,9 @@ const EventTable = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch("https://lokajatim.org/events");
+
         const result = await response.json();
+        console.log(result)
         if (result.status && result.data && Array.isArray(result.data)) {
           setEvents(result.data);
         } else {
@@ -42,8 +46,10 @@ const EventTable = () => {
   }, []);
 
   const handleEdit = (event) => {
-    setSelectedEvent(event);
-    setIsPopupOpen(true);
+    navigate(`/event-table/${event.id}`)
+    // console.log(event)
+    // setSelectedEvent(event);
+    // setIsPopupOpen(true);
   };
 
   const handleConfirmEdit = () => {
@@ -56,16 +62,31 @@ const EventTable = () => {
     setDeletePopupOpen(true);
   };
 
+  const token = localStorage.getItem("token");
+    if (!token) {
+        alert("You are not authorized. Please log in first.");
+        return;
+    }
+
+
   const handleConfirmDelete = async () => {
+
     if (eventToDelete?.id) {
       try {
-        const response = await fetch(`https://lokajatim.org/events/${eventToDelete.id}`, {
-          method: "DELETE",
-        });
-  
-        if (response.ok) {
+        const response = await axios.delete(`https://lokajatim.org/events/${eventToDelete.id}`,
+         {
+          headers: {
+            Authorization: `Bearer ${token}`, // JWT Token in header
+            "Content-Type": "application/json", // Content type header
+          },
+            },
+        );
+
+      
+        if (response.data.data.message === "Event deleted") {
           setEvents((prevEvents) => prevEvents.filter((e) => e.id !== eventToDelete.id));
           setErrorPopupOpen(false); // Tutup popup error jika penghapusan berhasil
+          navigate("/event-table")
         } else {
           console.error("Gagal menghapus event.");
           setErrorPopupOpen(true);  // Tampilkan popup error jika penghapusan gagal

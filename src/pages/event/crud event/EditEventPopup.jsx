@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import EditSuccessPopup from './SuccesEditPopup'; // Pastikan SuccesEditPopup adalah file yang benar
 
-const EditEventPopup = ({ isOpen, onClose }) => {
-  const navigate = useNavigate(); 
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false); 
+const EditEventPopup = ({ eventData, onCancel, onEdit, isOpen }) => {
+  const navigate = useNavigate();
 
   const handleEditClick = () => {
-    navigate('/add-event'); 
-    setShowSuccessPopup(true);
-
-    // Menutup popup sukses setelah 3 detik
-    setTimeout(() => {
-      setShowSuccessPopup(false);
-    }, 3000);
+    navigate('/addevent', { state: { eventData } });
+    if (onEdit) onEdit();
   };
 
   if (!isOpen) return null;
@@ -27,26 +20,19 @@ const EditEventPopup = ({ isOpen, onClose }) => {
         </p>
         <div className="flex justify-end space-x-4">
           <button
-            onClick={onClose}
+            onClick={onCancel}
             className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400"
           >
             Batal
           </button>
           <button
-            onClick={handleEditClick} // Pastikan nama fungsi benar
+            onClick={handleEditClick}
             className="px-4 py-2 bg-[#8B4513] text-white rounded-lg hover:bg-[#6f370f]"
           >
             Edit
           </button>
         </div>
       </div>
-      {showSuccessPopup && (
-        <EditSuccessPopup 
-          message="Event berhasil diedit!" 
-          subMessage="Pindah ke halaman baru untuk melanjutkan." 
-          onClose={() => setShowSuccessPopup(false)}
-        />
-      )}
     </div>
   );
 };

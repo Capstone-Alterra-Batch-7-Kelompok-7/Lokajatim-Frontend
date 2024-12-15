@@ -25,6 +25,7 @@ import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
 import EventTable from "./pages/event/crud event/EventTable";
 import AddEventPage from "./pages/event/crud event/AddEventPage";
 import { WrapperDashboard } from "./components/WrapperDashboard";
+import EditEventPage from "./pages/event/crud event/editEventPage";
 
 const routes = [
   { path: "/", element: <LandingPage /> },
@@ -38,6 +39,7 @@ const routes = [
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
   {path:"/event-table", element: <EventTable />},
+  {path:"/event-table/:id", element: <EditEventPage />},
   {path:"/add-event", element: <AddEventPage />},
   {path:"/wrapper", element:<WrapperDashboard/>}, 
 

@@ -1,39 +1,92 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom"; // Import useParams hook
 import LocationModal from "./LocationModal";
 import DateTimePickerModal from "./DateTimePickerModal";
 import CategoryModal from "./CategoryModal";
 import TicketPopup from "./TicketPopup";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-function AddEventPage() {
+function EditEventPage() {
+  const { id } = useParams(); // Get the event ID from the URL
+  const [eventData, setEventData] = useState(null); // To hold the fetched event data
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isDateTimePickerOpen, setIsDateTimePickerOpen] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [eventStartDate, setEventStartDate] = useState("");
-  const [time, settime] = useState("");
+  const [time, setTime] = useState("");
   const [isTicketPopupOpen, setIsTicketPopupOpen] = useState(false);
   const [tickets, setTickets] = useState([]);
-  const [eventDescription, setEventDescription] = useState("")
+  const [eventDescription, setEventDescription] = useState("");
 
-  const handleAddTicket = (newTicket) => {
-    setTickets((prevTickets) => [...prevTickets, newTicket]);
-  };
-
- 
   const [categoryDetails, setCategoryDetails] = useState({
-    category: 0 ,
+    category: 0,
     namaEvent: "",
     capacity: "",
   });
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You are not authorized. Please log in first.");
+    return;
+  }
+
   const [locationDetails, setLocationDetails] = useState({
     locationName: "Univ. Airlangga",
     address: "",
     url: "",
   });
+
   const [activeTab, setActiveTab] = useState("description"); // State for tab management
 
   const [uploadedFile, setUploadedFile] = useState(""); // State for uploaded file
+
+  // Fetch event data based on the event ID
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const response = await axios.get(`https://lokajatim.org/events/${id}`,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const event = response.data.data;
+        console.log(response.data.data)
+        // Set event data to state
+        setEventData(event);
+        
+        setCategoryDetails({
+          category: event.category_id,
+          namaEvent: event.name,
+          capacity: event.capacity,
+        });
+        setLocationDetails({
+          locationName: event.location,
+          
+         
+        });
+        const dateTime = event.date_time.split("/");
+
+// Pisahkan bagian tanggal dan waktu
+setEventStartDate(dateTime[0]); // Ini akan memberikan "2024-12-18"
+setTime(dateTime[1]);    
+  
+        setEventDescription(event.description);
+        setUploadedFile(event.url_photo);
+      } catch (error) {
+        console.error("Error fetching event data:", error);
+      }
+    };
+
+    if (id) {
+      fetchEventData();
+    }
+  }, [id]); // Re-fetch when the event ID changes
+
+  const handleAddTicket = (newTicket) => {
+    setTickets((prevTickets) => [...prevTickets, newTicket]);
+  };
 
   const openLocationModal = () => setIsLocationModalOpen(true);
   const closeLocationModal = () => setIsLocationModalOpen(false);
@@ -46,112 +99,82 @@ function AddEventPage() {
 
   const handleSaveDateTime = (startDate, time) => {
     setEventStartDate(`${startDate}/${time}`);
-    // settime(endDate);
-    console.log(time)
+    setTime(time);
   };
 
-   
   const handleSaveLocation = (details) => {
-
     setLocationDetails(details);
   };
 
   const handleSaveCategory = (details) => {
     setCategoryDetails(details);
-   
   };
-  
+
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        // Convert file to Base64 string
         const base64String = reader.result;
         setUploadedFile(base64String); // Store the Base64 string
       };
       reader.readAsDataURL(file); // Convert file to Base64
     }
   };
-  
-  // locationDetails
-  // categoryDetails
-  // uploadedFile
-  
+
   const handleFileRemove = () => {
     setUploadedFile(null);
   };
 
   const handleSubmit = async () => {
-    console.log(categoryDetails.category)
-    // Periksa apakah token ada
-    const token = localStorage.getItem("token");
-    if (!token) {
-        alert("You are not authorized. Please log in first.");
-        return;
-    }
+   
 
-
-  
-    // Data event
     const data = {
-      name:  categoryDetails.namaEvent,
+      name: categoryDetails.namaEvent,
       description: eventDescription,
-      category_id:  parseInt(categoryDetails.category,10) || 100, // Use category selected
-      date_time: `${eventStartDate}/${time}`, // Date and Time input
-      location: `${locationDetails.locationName}, ${locationDetails.address}`, // Location input
-      capacity: parseInt(categoryDetails.capacity,10) || 100, // Default capacity or from state
+      category_id: parseInt(categoryDetails.category, 10) || 100,
+      date_time: `${eventStartDate}/${time}`,
+      location: `${locationDetails.locationName}, ${locationDetails.address}`,
+      capacity: parseInt(categoryDetails.capacity, 10) || 100,
       url_photo: uploadedFile,
       rating: 30000,
       price: 40000,
     };
-    try {
-        // Kirim permintaan POST ke endpoint
-        const response = await axios.post("https://lokajatim.org/events", data, {
-            headers: {
-                Authorization: `Bearer ${token}`, // Tambahkan token JWT di header
-                "Content-Type": "application/json", // Tentukan format data
-            },
-        });
-      
-        // Periksa apakah respons memiliki status sukses
-        if (response.status >= 200 && response.status < 300) {
-            alert("Event successfully submitted!");
-        } else {
-            console.error("Unexpected response:", response);
-            alert("Something went wrong. Please try again.");
-        }
-    } catch (error) {
-      console.log(error)
-        // Tangani kesalahan, termasuk kesalahan jaringan
-        // if (error.response) {
-        //     console.error("Error response data:", error.response.data);
-        //     alert(`Failed to submit event: ${error.response.data.message || "Unknown error"}`);
-        // } else if (error.request) {
-        //     console.error("No response received:", error.request);
-        //     alert("No response from the server. Please check your internet connection.");
-        // } else {
-        //     console.error("Error setting up request:", error.message);
-        //     alert("An error occurred while submitting the event.");
-        // }
-    }
-};
 
-  
+    try {
+      const response = await axios.put(`https://lokajatim.org/events/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status >= 200 && response.status < 300) {
+        alert("Event successfully updated!");
+      } else {
+        console.error("Unexpected response:", response);
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting event:", error);
+      alert("Failed to submit event. Please try again.");
+    }
+  };
+
+  if (!eventData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="w-[1119px] h-[1694px] top-[162px] left-[20px] gap-[16px] absolute bg-gray-50 p-8 rounded-[var(--radixxl)]">
       <div className="bg-white shadow-md rounded-lg p-6">
-        {/* Breadcrumb */}
         <h2 className="text-gray-600 mb-6 text-sm">
-          Daftar Produk &gt; <span className="font-semibold">Tambah Event</span>
+          Daftar Produk &gt; <span className="font-semibold">Edit Event</span>
         </h2>
 
         {/* File Upload */}
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-6">
-          <p className="text-gray-500 text-sm font-medium">
-            Unggah Gambar/Poster/Banner
-          </p>
+          <p className="text-gray-500 text-sm font-medium">Unggah Gambar/Poster/Banner</p>
           {uploadedFile ? (
             <div className="mt-4 text-gray-600">
               <p>File: {uploadedFile.name}</p>
@@ -192,33 +215,32 @@ function AddEventPage() {
             </label>
             <button
               type="button"
-              onClick={openCategoryModal} // Open Category Modal on click
+              onClick={openCategoryModal}
               className="block w-full rounded-md border border-gray-300 bg-white shadow-sm px-4 py-2 text-left text-sm text-[#B2B2B2] font-normal focus:border-orange-500 focus:ring-orange-500"
             >
               {categoryDetails.namaEvent || "Pilih Kategori"}
             </button>
           </div>
-          
 
           <div>
             <label className="block text-sm font-medium text-[#B2B2B2] font-normal mb-1">
-             Jumlah Kapasitas
+              Jumlah Kapasitas
             </label>
             <input
-                type="number"
-                value={categoryDetails.capacity}
-                onChange={(e) => setCategoryDetails({ ...categoryDetails, capacity: parseInt(e.target.value, 10) || 0 })}
-                className="block w-full rounded-md border border-gray-300 bg-white shadow-sm px-4 py-2 text-sm text-[#B2B2B2] font-normal"
-                placeholder="Jumlah Kapasitas"
-              />
+              type="number"
+              value={categoryDetails.capacity}
+              onChange={(e) =>
+                setCategoryDetails({ ...categoryDetails, capacity: parseInt(e.target.value, 10) || 0 })
+              }
+              className="block w-full rounded-md border border-gray-300 bg-white shadow-sm px-4 py-2 text-sm text-[#B2B2B2] font-normal"
+              placeholder="Jumlah Kapasitas"
+            />
           </div>
 
-          {/* Event Info */}
           <div className="grid grid-cols-3 gap-6 text-sm">
             <div className="flex items-center space-x-3">
-              {/* Logo Bundar */}
               <img
-                src="logoloka.png"
+                src={uploadedFile}
                 alt="Penyelenggara Logo"
                 className="w-12 h-12 rounded-full object-cover border border-gray-300 shadow-sm"
               />
@@ -236,9 +258,7 @@ function AddEventPage() {
                   onClick={openDateTimePicker}
                   className="text-[#BBBBBB] font-normal"
                 >
-                  {
-                     `${eventStartDate}/ ${time}` ||
-                     "15 Desember 2024/10:10"}
+                  {`${eventStartDate}` || "15 Desember 2024/10:10"}
                 </button>
               </div>
             </div>
@@ -254,7 +274,7 @@ function AddEventPage() {
                   {locationDetails.locationName}
                 </button>
               </div>
-              <p className="text-gray-700 mt-2">{locationDetails.address}</p>
+            
             </div>
           </div>
         </form>
@@ -286,14 +306,12 @@ function AddEventPage() {
         {/* Content */}
         {activeTab === "description" && (
           <div className="w-[1,072px] h-[289px] p-[24px] gap-[24px] rounded-[6px] border border-[1px] bg-[#DEE2E6] p-4">
-
-<textarea
+            <textarea
               value={eventDescription}
               onChange={(e) => setEventDescription(e.target.value)}
               rows="4"
               className="block w-full h-full rounded-md border border-gray-300 bg-white shadow-sm px-4 py-2 text-sm text-[#B2B2B2] font-normal"
             />
-            
           </div>
         )}
 
@@ -332,84 +350,79 @@ function AddEventPage() {
           </div>
         )}
 
- {/* Menampilkan daftar tiket yang telah diinput */}
-<div>
-  {tickets.length > 0 &&
-    tickets.map((ticket, index) => (
-      <div
-        key={index}
-        className="relative w-[779px] h-[191px] bg-[#E9B763] rounded-[16px] mt-6"
-      >
-        {/* Garis Putus-Putus */}
-        <div className="absolute top-1/2 left-0 w-full border-t-[2px] border-dashed border-[#7D787B]"></div>
+        {/* Menampilkan daftar tiket yang telah diinput */}
+        <div>
+          {tickets.length > 0 &&
+            tickets.map((ticket, index) => (
+              <div
+                key={index}
+                className="relative w-[779px] h-[191px] bg-[#E9B763] rounded-[16px] mt-6"
+              >
+                <div className="absolute top-1/2 left-0 w-full border-t-[2px] border-dashed border-[#7D787B]"></div>
 
-        {/* Setengah Lingkaran Kiri */}
-        <div className="absolute top-1/2 left-[-14px] transform -translate-y-1/2 w-[30px] h-[60px] bg-white rounded-r-full"></div>
+                <div className="absolute top-1/2 left-[-14px] transform -translate-y-1/2 w-[30px] h-[60px] bg-white rounded-r-full"></div>
 
-        {/* Setengah Lingkaran Kanan */}
-        <div className="absolute top-1/2 right-[-14px] transform -translate-y-1/2 w-[30px] h-[60px] bg-white rounded-l-full"></div>
+                <div className="absolute top-1/2 right-[-14px] transform -translate-y-1/2 w-[30px] h-[60px] bg-white rounded-l-full"></div>
 
-        {/* Konten Tiket */}
-        <div className="flex flex-col justify-between h-full p-6">
-          {/* Bagian Atas */}
-          <div className="mb-4">
-            <h3 className="text-[20px] font-bold">{ticket.ticketName}</h3>
-            <p className="text-[14px] text-[#7D787B] mt-1">
-              Tersisa {ticket.ticketAmount} kursi
-            </p>
-          </div>
+                <div className="flex flex-col justify-between h-full p-6">
+                  <div className="mb-4">
+                    <h3 className="text-[20px] font-bold">{ticket.ticketName}</h3>
+                    <p className="text-[14px] text-[#7D787B] mt-1">
+                      Tersisa {ticket.ticketAmount} kursi
+                    </p>
+                  </div>
 
-          {/* Bagian Harga dan Tombol */}
-          <div className="flex justify-between items-center">
-            {/* Harga */}
-            <div className="text-[24px] font-bold">
-              Rp. {Number(ticket.price).toLocaleString()}
-            </div>
+                  <div className="flex justify-between items-center">
+                    <div className="text-[24px] font-bold">
+                      Rp. {Number(ticket.price).toLocaleString()}
+                    </div>
 
-            {/* Tombol Tambah & Kurang */}
-            <div className="flex items-center space-x-4">
-              <button className="border-[2px] border-black text-[20px] text-black w-8 h-8 flex items-center justify-center rounded-full">
-                -
-              </button>
-              <span className="text-[16px] font-bold">0</span>
-              <button className="border-[2px] border-black text-[20px] text-black w-8 h-8 flex items-center justify-center rounded-full">
-                +
-              </button>
-            </div>
-          </div>
+                    <div className="flex items-center space-x-4">
+                      <button className="border-[2px] border-black text-[20px] text-black w-8 h-8 flex items-center justify-center rounded-full">
+                        -
+                      </button>
+                      <span className="text-[16px] font-bold">0</span>
+                      <button className="border-[2px] border-black text-[20px] text-black w-8 h-8 flex items-center justify-center rounded-full">
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
+
+        <button
+          className="w-[565px] h-[52px] bg-[#4F3017] text-white rounded-[6px] font-semibold hover:bg-[#3C2411]"
+          onClick={handleSubmit}
+        >
+          Submit Event
+        </button>
       </div>
-    ))}
 
-<button className="w-[565px] h-[52px] bg-[#4F3017] text-white rounded-[6px] font-semibold hover:bg-[#3C2411]"
- onClick={handleSubmit}>Submit Event</button>
-
-</div>
-
-        {/* Modals */}
-        <LocationModal
-          isOpen={isLocationModalOpen}
-          onClose={closeLocationModal}
-          onSave={handleSaveLocation}
-        />
-        <DateTimePickerModal
-          isOpen={isDateTimePickerOpen}
-          onClose={closeDateTimePicker}
-          onSave={handleSaveDateTime}
-        />
-        <CategoryModal
-          isOpen={isCategoryModalOpen}
-          onClose={closeCategoryModal}
-          onSave={handleSaveCategory}
-        />
-        <TicketPopup
-          isOpen={isTicketPopupOpen}
-          onClose={closeTicketPopup}
-          onSave={handleAddTicket}
-        />
-      </div>
+      {/* Modals */}
+      <LocationModal
+        isOpen={isLocationModalOpen}
+        onClose={closeLocationModal}
+        onSave={handleSaveLocation}
+      />
+      <DateTimePickerModal
+        isOpen={isDateTimePickerOpen}
+        onClose={closeDateTimePicker}
+        onSave={handleSaveDateTime}
+      />
+      <CategoryModal
+        isOpen={isCategoryModalOpen}
+        onClose={closeCategoryModal}
+        onSave={handleSaveCategory}
+      />
+      <TicketPopup
+        isOpen={isTicketPopupOpen}
+        onClose={closeTicketPopup}
+        onSave={handleAddTicket}
+      />
     </div>
   );
 }
 
-export default AddEventPage;
+export default EditEventPage;
