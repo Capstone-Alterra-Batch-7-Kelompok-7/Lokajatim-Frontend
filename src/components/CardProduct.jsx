@@ -1,6 +1,7 @@
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { formatRupiah } from "../utils/rupiahFormater";
 
 const CardProduct = ({ id, img, price, title }) => {
   return (
@@ -9,19 +10,16 @@ const CardProduct = ({ id, img, price, title }) => {
         <figure className="relative">
           <img
             src={img}
-            // src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
             alt="Image"
             className={`h-36 max-h-36 w-full object-cover md:object-fill`}
           />
         </figure>
         <div className="card-body min-h-32 max-h-32">
           <div className="flex flex-col">
-          <Link to={`/product/${id}`} className="text-base">
-            {title}
-          </Link>
-          <p className="text-xl font-bold">
-            Rp.{price}
-          </p>
+            <Link to={`/product/${id}`} className="text-base">
+              {title}
+            </Link>
+            <p className="text-xl font-bold">{formatRupiah(price)}</p>
           </div>
           <div className=" pt-1 border-gray-400">
             <div className="flex justify-between gap-2 items-center text-xs">
@@ -30,11 +28,7 @@ const CardProduct = ({ id, img, price, title }) => {
                   <FontAwesomeIcon icon={faStar} className="text-yellow-400" />
                   <p>4.8</p>
                 </div>
-                <div className="flex items-center gap-1">
-                  | 80rb+terjual
-                </div>
-                {/* <p className="">Fashion</p>
-                <p className="badge badge-outline">Products</p> */}
+                <div className="flex items-center gap-1">| 80rb+terjual</div>
               </div>
             </div>
           </div>
