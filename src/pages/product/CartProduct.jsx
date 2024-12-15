@@ -18,12 +18,17 @@ const CartProducts = () => {
   const userId = useValidateLogin();
   const { data, isLoading, setIsLoading } = useFetch(`/carts/${userId}`);
   const [idDelete, setIdDelete] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    setTotalPrice(data?.total_price);
+  }, [data])
+  
   const handleDeleteItemCart = async (id) => {
     setIsLoading(true);
     try {
-      const response = await instance.delete(`/carts/${id}`);
+      await instance.delete(`/carts/${id}`);
       alert("Produk berhasil dihapus");
-      console.log(response);
       setIsLoading(false);
       window.location.reload();
     } catch (error) {
@@ -68,6 +73,7 @@ const CartProducts = () => {
                     quantity={item.quantity}
                     id={item.id}
                     setIdDelete={setIdDelete}
+                    setTotalPrice={setTotalPrice}
                   />
                 ))}
 
@@ -82,7 +88,7 @@ const CartProducts = () => {
                   <div className="flex items-center justify-between">
                     <p>Total Harga {"(1 Barang)"}</p>
                     <p className="font-bold">
-                      {formatRupiah(data?.total_price)}
+                      {formatRupiah(totalPrice)}
                     </p>
                   </div>
 
@@ -108,7 +114,14 @@ const CartProducts = () => {
   );
 };
 
-const CardProduct = ({ name, price, quantity, setIdDelete, id }) => {
+const CardProduct = ({
+  name,
+  price,
+  quantity,
+  setIdDelete,
+  id,
+  setTotalPrice,
+}) => {
   const { counter, handleClickAdd, handleClickReduce, setCounter } =
     useCounter();
   const [idEditQuantity, setIdEditQuantity] = useState(null);
@@ -122,9 +135,10 @@ const CardProduct = ({ name, price, quantity, setIdDelete, id }) => {
   useEffect(() => {
     const editQuantity = async (id) => {
       try {
-        await instance.put(`/carts/${id}`, {
+        const response = await instance.put(`/carts/${id}`, {
           quantity: counter,
         });
+        setTotalPrice(response.data.data.total_price);
       } catch (error) {
         console.error(error);
       }
