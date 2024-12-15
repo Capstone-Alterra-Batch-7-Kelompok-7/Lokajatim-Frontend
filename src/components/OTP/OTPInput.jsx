@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useResetStore } from "../../store/resetPasswordStore";
 
 const OTPVerification = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const { setOtpFix } = useResetStore();
+  useEffect(() => {
+    setOtpFix(otp.join(""));
+  }, [otp]);
 
   // Fungsi untuk menangani perubahan input
   const handleChange = (e, index) => {

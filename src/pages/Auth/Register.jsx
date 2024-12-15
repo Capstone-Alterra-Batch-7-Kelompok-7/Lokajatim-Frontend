@@ -12,6 +12,7 @@ import imgsucces from "../../assets/auth/succes-regis.png";
 import CustomModal from "../../components/modal/CustomModal";
 import { instance } from "../../config/config";
 import bg from "../../assets/auth/bg-auth.jpg";
+import CheckBox from "../../components/CheckBox";
 const Register = () => {
   return (
     <>
@@ -110,6 +111,14 @@ const FormRegister = () => {
   const [inputRegister, setInputRegister] = useState();
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  // import { useValidateLogin } from "../../hooks/useValidateLogin";
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     window.location.href = "/homepage";
+  //   }
+  // }, [userId]);
+
   const handleChange = (e) => {
     setInputRegister({ ...inputRegister, [e.target.id]: e.target.value });
   };
@@ -136,7 +145,10 @@ const FormRegister = () => {
         description={"Terimakasih Telah Mendaftar"}
         title={"Berhasil Daftar Akun"}
       />
-      <div className={`md:w-[40%] w-full min-h-screen bg-cover flex flex-col justify-center px-[2rem] text-white`} style={{ backgroundImage: `url(${bg})` }}>
+      <div
+        className={`md:w-[40%] w-full min-h-screen bg-cover flex flex-col justify-center px-[2rem] text-white`}
+        style={{ backgroundImage: `url(${bg})` }}
+      >
         <AlertError error={error} setError={setError} />
         <h1 className="text-3xl font-bold">Daftar Akun Baru</h1>
         <p>
@@ -161,6 +173,7 @@ const FormRegister = () => {
               id="first_name"
               placeholder="Nama Depan"
               onChange={handleChange}
+              required
             />
             <input
               type="text"
@@ -168,6 +181,7 @@ const FormRegister = () => {
               id="last_name"
               placeholder="Nama Belakang"
               onChange={handleChange}
+              required
             />
           </div>
           <input
@@ -176,6 +190,7 @@ const FormRegister = () => {
             className="input w-full"
             placeholder="Email"
             onChange={handleChange}
+            required
           />
           <InputPassword
             placeholder="Password"
@@ -183,11 +198,16 @@ const FormRegister = () => {
             showPassword={showPassword}
             setShowPassword={setShowPassword}
             onChange={handleChange}
+            required
           />
-          <div className="flex gap-4">
-            <input type="checkbox" className="checkbox bg-white" />
+          <div className="flex gap-4 text-white">
+            <input
+              type="checkbox"
+              className="checkbox checkbox-primary "
+              required
+            />
             <p className="text-white">
-              Saya Menyetujui{" "}
+              Saya menyetujui{" "}
               <Link className="text-secondary">Syarat dan Ketentuan</Link>
             </p>
           </div>

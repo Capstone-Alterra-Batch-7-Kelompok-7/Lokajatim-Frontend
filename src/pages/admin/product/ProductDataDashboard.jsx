@@ -7,9 +7,12 @@ import { useFetch } from "../../../hooks/useFetch";
 import { Loading } from "../../../components/Loading";
 import { Link } from "react-router-dom";
 import { instance } from "../../../config/config";
+import { useRef } from "react";
+import { formatRupiah } from "../../../utils/rupiahFormater";
 
 const ProductDataDashboard = () => {
   const { data, isLoading, setIsLoading } = useFetch("/products");
+  const inputCsvRef = useRef(null);
   console.log(data);
   const handleDeleteProduct = async (id) => {
     setIsLoading(true);
@@ -23,6 +26,24 @@ const ProductDataDashboard = () => {
       console.error(error);
     }
   };
+
+  const handleChangeCSV = async (e) => {
+    const file = e.target.files[0];
+    if(!file) return
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+      const response = await instance.post("/products/import", formData);
+      console.log(response);
+      alert("Produk berhasil diimport");
+      setIsLoading(false);
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
   return (
     <>
       <WrapperDashboard tabActive="product" key={"product"}>
@@ -32,10 +53,21 @@ const ProductDataDashboard = () => {
             <h1 className="text-2xl font-bold">Data Produk</h1>
             {/* Button Add and import csv */}
             <div className="flex gap-4 items-center">
-              <button className="btn btn-sm bg-[#5BA53B] text-white">
+              <button
+                type="button"
+                className="btn btn-sm bg-[#5BA53B] text-white"
+                onClick={() => inputCsvRef.current.click()}
+              >
                 <FontAwesomeIcon icon={faFileLines} />
                 Impor CSV
               </button>
+              <input
+                type="file"
+                className="hidden"
+                id="csv"
+                ref={inputCsvRef}
+                onChange={handleChangeCSV}
+              />
               <Link
                 to={"/dashboard/product/add"}
                 className="btn btn-sm bg-[#4F3017] text-white"
@@ -80,11 +112,14 @@ const ProductDataDashboard = () => {
                       </td>
                       <td>{item.name}</td>
                       <td>{item.category.name}</td>
-                      <td>Rp {item.price}</td>
+                      <td>{formatRupiah(item.price)}</td>
                       <td>{item.stock}</td>
                       <td>
                         <div className="flex">
-                          <Link to={`/dashboard/product/edit/${item.id}`} className="btn btn-sm text-black bg-[#FAFBFD] rounded-r-none border-[#D5D5D5]">
+                          <Link
+                            to={`/dashboard/product/edit/${item.id}`}
+                            className="btn btn-sm text-black bg-[#FAFBFD] rounded-r-none border-[#D5D5D5]"
+                          >
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </Link>
                           <button

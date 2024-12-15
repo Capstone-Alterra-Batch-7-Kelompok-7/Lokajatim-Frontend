@@ -12,6 +12,7 @@ import slide1 from "../../assets/auth/aut-slide1.png";
 import slide2 from "../../assets/auth/aut-slide2.png";
 import slide3 from "../../assets/auth/aut-slide3.png";
 import { Loading } from "../../components/Loading";
+// import { useValidateLogin } from "../../hooks/useValidateLogin";
 
 
 const Slide = () => {
@@ -77,6 +78,13 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsloading] = useState(false);
+  // const userId = useValidateLogin();
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     window.location.href = "/homepage";
+  //   }
+  // }, [userId]);
 
   const handleChange = (e) => {
     setInputLogin({ ...inputLogin, [e.target.id]: e.target.value });
