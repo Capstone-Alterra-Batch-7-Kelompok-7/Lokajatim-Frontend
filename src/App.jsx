@@ -1,4 +1,4 @@
-import {
+/*import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -74,4 +74,25 @@ function App() {
   return <RouterProvider router={router} />;
 }
 
+export default App;*/
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import EventTable from "./pages/event/crud event/EventTable";
+import AddEventPage from "./pages/event/crud event/AddEventPage";
+import { WrapperDashboard } from "./components/WrapperDashboard";
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<EventTable />} />
+        <Route path="/add-event" element={<AddEventPage />} />
+        <Route path="/wrapper" element={<WrapperDashboard/>} />
+      </Routes>
+    </Router>
+  );
+}
+
 export default App;
+
+
