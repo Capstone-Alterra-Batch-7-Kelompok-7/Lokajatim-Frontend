@@ -2,15 +2,37 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo-crop.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import slide1 from '../../assets/auth/aut-slide1.png'
-import slide2 from '../../assets/auth/aut-slide2.png'
-import slide3 from '../../assets/auth/aut-slide3.png'
+import slide1 from "../../assets/auth/aut-slide1.png";
+import slide2 from "../../assets/auth/aut-slide2.png";
+import slide3 from "../../assets/auth/aut-slide3.png";
 import { useEffect, useState } from "react";
 import bg from "../../assets/auth/bg-auth.jpg";
+import { instance } from "../../config/config";
+import { Loading } from "../../components/Loading";
+import { useResetStore } from "../../store/resetPasswordStore";
 
 const ForgotPass = () => {
+  // const [email, setEmail] = useState(null);
+  const [isLoading, setIsloading] = useState(false);
+  const { email, setEmail } = useResetStore();
+  const handleSubmitEmail = async (e) => {
+    e.preventDefault();
+    setIsloading(true);
+    try {
+      const response = await instance.post("/forgot-password", {
+        email: email,
+      });
+      console.log(response);
+      setIsloading(false);
+    } catch (error) {
+      console.error(error);
+      setIsloading(false);
+    }
+  };
+
   return (
     <>
+      {isLoading && <Loading />}
       <div className="w-full min-h-screen md:flex">
         {/* ForgotPass Form Start */}
 
@@ -24,20 +46,26 @@ const ForgotPass = () => {
             Masukkan email Anda yang terdaftar untuk mendapatkan kode verifikasi
           </p>
           <br />
-          <form action="" className="text-primary py-4 flex flex-col gap-4">
+          <form
+            action=""
+            className="text-primary py-4 flex flex-col gap-4"
+            onSubmit={handleSubmitEmail}
+          >
             <input
               type="email"
               className="input w-full border-0 focus:outline-none focus:ring-0"
               placeholder="Masukan Email"
               onFocus={(e) => (e.target.placeholder = "")}
               onBlur={(e) => (e.target.placeholder = "Masukan Email")}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <br />
-            <Link to="/verify">
-              <button className="btn btn-secondary w-full text-white">
-                Kirim
-              </button>
-            </Link>
+            <button
+              className="btn btn-secondary w-full text-white"
+              type="submit"
+            >
+              Kirim
+            </button>
           </form>
         </div>
         {/* ForgotPass Form End */}
@@ -80,7 +108,7 @@ const Slide = () => {
 
     return () => clearInterval(interval); // Bersihkan interval saat komponen unmount
   }, [dataSileder.length]);
-  console.log(currentIndex)
+  // console.log(currentIndex);
   return (
     <>
       {
@@ -101,17 +129,23 @@ const Slide = () => {
           <div className="flex justify-center gap-2 mt-3">
             <FontAwesomeIcon
               icon={faCircle}
-              className={`${currentIndex === 0 ? "text-secondary" : "text-gray-300"}`}
+              className={`${
+                currentIndex === 0 ? "text-secondary" : "text-gray-300"
+              }`}
               onClick={() => setCurrentIndex(0)}
             />
             <FontAwesomeIcon
               icon={faCircle}
-              className={`${currentIndex === 1 ? "text-secondary" : "text-gray-300"}`}
+              className={`${
+                currentIndex === 1 ? "text-secondary" : "text-gray-300"
+              }`}
               onClick={() => setCurrentIndex(1)}
             />
             <FontAwesomeIcon
               icon={faCircle}
-              className={`${currentIndex === 2 ? "text-secondary" : "text-gray-300"}`}
+              className={`${
+                currentIndex === 2 ? "text-secondary" : "text-gray-300"
+              }`}
               onClick={() => setCurrentIndex(2)}
             />
           </div>
@@ -119,7 +153,6 @@ const Slide = () => {
       }
     </>
   );
-}
-
+};
 
 export default ForgotPass;
