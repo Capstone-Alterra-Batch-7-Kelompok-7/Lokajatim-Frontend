@@ -25,7 +25,8 @@ import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
 import EventTable from "./pages/event/crud event/EventTable";
 import AddEventPage from "./pages/event/crud event/AddEventPage";
 import { WrapperDashboard } from "./components/WrapperDashboard";
-import EditEventPage from "./pages/event/crud event/editEventPage";
+import EditEventPage from "./pages/event/crud event/EditEventPage";
+import Chatbot from "./pages/homepage/ChatBot";
 
 const routes = [
   { path: "/", element: <LandingPage /> },
@@ -42,6 +43,7 @@ const routes = [
   {path:"/event-table/:id", element: <EditEventPage />},
   {path:"/add-event", element: <AddEventPage />},
   {path:"/wrapper", element:<WrapperDashboard/>}, 
+  { path: "/chatbot", element: <Chatbot /> },
 
   {
     path: "/",
@@ -84,6 +86,4 @@ function App() {
 }
 
 export default App;
-
-
 
