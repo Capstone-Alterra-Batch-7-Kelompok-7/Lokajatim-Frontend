@@ -51,7 +51,7 @@ function LocationModal({ isOpen, onClose, onSave }) {
           />
         </div>
 
-        {/* <div className="mb-4">
+        { <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Lokasi di Google Maps
           </label>
@@ -64,9 +64,9 @@ function LocationModal({ isOpen, onClose, onSave }) {
               loading="lazy"
             ></iframe>
           </div>
-        </div> */}
+        </div> }
 
-        {/* <div className="mb-4">
+        { <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             URL (Opsional)
           </label>
@@ -77,7 +77,7 @@ function LocationModal({ isOpen, onClose, onSave }) {
             placeholder="Masukkan URL jika ada"
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500"
           />
-        </div> */}
+        </div> }
 
           {/* Tombol Simpan */}
           <div className="flex justify-end space-x-4">

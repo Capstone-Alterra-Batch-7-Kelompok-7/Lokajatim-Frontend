@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function DateTimePickerModal({ isOpen, onClose, onSave }) {
   const [startDate, setStartDate] = useState("");
   const [time, settime] = useState("");
-
+  
   if (!isOpen) return null;
 
   return (
@@ -19,7 +19,7 @@ function DateTimePickerModal({ isOpen, onClose, onSave }) {
   
       {/* Modal Content */}
       <div>
-        {/* Input Tanggal Mulai */}
+        {/* Input Tanggal */}
         <div className="mb-4">
           <label className="block text-[14px] font-medium text-[#7D787B] mb-2">
             Tanggal Mulai Event <span className="text-red-500">*</span>
@@ -32,7 +32,7 @@ function DateTimePickerModal({ isOpen, onClose, onSave }) {
           />
         </div>
   
-        {/* Input Tanggal Berakhir */}
+        {/* Input Waktu */}
         <div className="mb-6">
           <label className="block text-[14px] font-medium text-[#7D787B] mb-2">
            Waktu Event <span className="text-red-500">*</span>
