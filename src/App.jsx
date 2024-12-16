@@ -24,7 +24,12 @@ import FormAddProduct from "./pages/admin/product/FormAddProduct";
 import FormEditProduct from "./pages/admin/product/FormEditProduct";
 import DashboardHome from "./components/AdminDashboard";
 import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
+
+import DetailEvent from "./pages/event/DetailEvent";
+import BuyTicket from "./pages/event/buyTicket";
+import Eticket from "./pages/event/BarcodeTicket";
 import TransactionDashboard from "./pages/admin/transactions/TransactionDashboard";
+
 
 const routes = [
   { path: "/", element: <LandingPage /> },
@@ -37,6 +42,9 @@ const routes = [
 
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
+  { path: "/events/buyticket/eticket", element: <Eticket /> },
+
+
 
   {
     path: "/",
@@ -46,8 +54,10 @@ const routes = [
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
       { path: "/events", element: <EventList /> },
+      { path: "/event/:id", element: <DetailEvent/> },
       { path: "/product/:id", element: <DetailProduct /> },
       { path: "/buy-now", element: <BuyNowProduct /> },
+      { path: "/events/buyticket", element: <BuyTicket />},
       {
         path: "/",
         element: <ProtectedRoute />,
