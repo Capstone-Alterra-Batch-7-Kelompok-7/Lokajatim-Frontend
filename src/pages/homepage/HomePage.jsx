@@ -234,7 +234,7 @@ const HomePage = () => {
               Yuk Cek Apa Yang Populer Di Lokajatim!
             </h2>
           </div>
-          {/* Tabs untuk Produk dan Event */}
+
           <div className="flex gap-4 mb-8">
             <button
               className={`btn btn-sm ${activeTab === "products"
