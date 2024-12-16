@@ -12,6 +12,7 @@ import { useResetStore } from "../../store/resetPasswordStore";
 import { instance } from "../../config/config";
 import { Loading } from "../../components/Loading";
 import axios from "axios";
+import bg from "../../assets/auth/bg-auth.jpg";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false); // Password visibility state
@@ -78,7 +79,9 @@ const ResetPassword = () => {
     <div className="w-full min-h-screen md:flex">
       {/* Left Section */}
       {isLoading && <Loading />}
-      <div className="md:w-[40%] w-full min-h-screen bg-[url(https://s3-alpha-sig.figma.com/img/eb4e/b918/44e6350c01c34560f40f77de606e7121?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=q8qiibStLA7oGlsidbjujFs5zQ-tYRV4dkDH2nd9MLYXKp2ts8Cx9vRojSiscnL8LC~AQvNniSuD5CCe4JtmrzkF1id~TQ3In~upprgSjwhlZowQKF9Jj~QXxZcaV69MCHv5gNB73A0AzooE8Yww25u-aApLJprwM8DqSBa5mX9yTovjfApV~uRq9WML-Q0nTUvcd3--buLKv5nVZ9wIj1JNorHLXX8Pcfdc306EJbDA--ieZb2wPK3~Ow0OuzuDVxgORQ7H2C2~LLl1dLmia-SFaYiHqZg2hMwJeaW4cslbgxc75mHQVuF0w9gtTaFx0xpymtruRLM4EyV1L5rCCw__)] bg-cover flex flex-col justify-center px-[2rem] text-white">
+      <div className="md:w-[40%] w-full min-h-screen bg-cover flex flex-col justify-center px-[2rem] text-white" 
+      style={{ backgroundImage: `url(${bg})` }}
+      >
         <h1 className="text-3xl font-bold">Lupa Kata Sandi</h1>
         <br />
         <p>
