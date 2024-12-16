@@ -1,4 +1,4 @@
-/*import {
+import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -22,6 +22,8 @@ import EventList from "./pages/event/EventList";
 import ProductDataDashboard from "./pages/admin/product/ProductDataDashboard";
 import DashboardHome from "./components/AdminDashboard";
 import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
+import Chatbot from "./pages/homepage/ChatBot";
+
 const routes = [
   { path: "/", element: <LandingPage /> },
   { path: "/register", element: <Register /> },
@@ -33,6 +35,7 @@ const routes = [
 
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
+  { path: "/chatbot", element: <Chatbot /> },
 
   {
     path: "/",
@@ -74,9 +77,9 @@ function App() {
   return <RouterProvider router={router} />;
 }
 
-export default App;*/
+export default App;
 
-import React from "react";
+/*import React from "react";
 import Chatbot from "./pages/homepage/ChatBot";
 
 function App() {
@@ -87,4 +90,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;*/
