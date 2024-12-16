@@ -29,7 +29,11 @@ import AddEventPage from "./pages/event/crud event/AddEventPage";
 import { WrapperDashboard } from "./components/WrapperDashboard";
 import EditEventPage from "./pages/event/crud event/EditEventPage";
 import Chatbot from "./pages/homepage/ChatBot";
+import DetailEvent from "./pages/event/DetailEvent";
+import BuyTicket from "./pages/event/buyTicket";
+import Eticket from "./pages/event/BarcodeTicket";
 import TransactionDashboard from "./pages/admin/transactions/TransactionDashboard";
+
 
 const routes = [
   { path: "/", element: <LandingPage /> },
@@ -42,11 +46,14 @@ const routes = [
 
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
+
   {path:"/event-table", element: <EventTable />},
   {path:"/event-table/:id", element: <EditEventPage />},
   {path:"/add-event", element: <AddEventPage />},
   {path:"/wrapper", element:<WrapperDashboard/>}, 
   { path: "/chatbot", element: <Chatbot /> },
+
+  { path: "/events/buyticket/eticket", element: <Eticket /> },
 
   {
     path: "/",
@@ -56,8 +63,10 @@ const routes = [
       { path: "/article/:id", element: <ArticleDetail /> },
       { path: "/products", element: <ProductList /> },
       { path: "/events", element: <EventList /> },
+      { path: "/event/:id", element: <DetailEvent/> },
       { path: "/product/:id", element: <DetailProduct /> },
       { path: "/buy-now", element: <BuyNowProduct /> },
+      { path: "/events/buyticket", element: <BuyTicket />},
       {
         path: "/",
         element: <ProtectedRoute />,
