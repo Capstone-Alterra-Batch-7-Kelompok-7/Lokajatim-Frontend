@@ -7,7 +7,6 @@ import { WrapperDashboard } from "../../../components/WrapperDashboard";
 import EventDeleteErrorPopup from "./EventDeleteErrorPopup";
 import axios from "axios";
 
-
 const EventTable = () => {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
@@ -85,15 +84,16 @@ const EventTable = () => {
       
         if (response.data.data.message === "Event deleted") {
           setEvents((prevEvents) => prevEvents.filter((e) => e.id !== eventToDelete.id));
-          setErrorPopupOpen(false); // Tutup popup error jika penghapusan berhasil
+          setErrorPopupOpen(false); 
+          setIsSuccessPopupOpen(true);
           navigate("/event-table")
         } else {
           console.error("Gagal menghapus event.");
-          setErrorPopupOpen(true);  // Tampilkan popup error jika penghapusan gagal
+          setErrorPopupOpen(true);  
         }
       } catch (error) {
         console.error("Terjadi kesalahan:", error);
-        setErrorPopupOpen(true);  // Tampilkan popup error jika terjadi kesalahan
+        setErrorPopupOpen(true);  
       } finally {
         setDeletePopupOpen(false);
         setEventToDelete(null);
@@ -120,7 +120,7 @@ const EventTable = () => {
       </div>
   
       <div className="overflow-x-auto bg-[#F8F4EB] rounded-lg shadow-lg flex justify-center">
-        <table className="w-[1,074px] h-[942px] border-collapse rounded-lg bg-white">
+        <table className="w-[1,374px] h-[942px] border-collapse rounded-lg bg-white mb-[50px]">
           <thead className="bg-gray-100 text-left">
             <tr>
               <th className="px-4 py-3 border-b-2 border-gray-300">
@@ -199,6 +199,7 @@ const EventTable = () => {
       isOpen={isErrorPopupOpen}
       onClose={() => setErrorPopupOpen(false)}
     />
+
   </WrapperDashboard>
   
   );

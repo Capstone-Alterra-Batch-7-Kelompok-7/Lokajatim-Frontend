@@ -141,7 +141,7 @@ function AddEventPage() {
 
       return (
         <WrapperDashboard>
-          <div className="w-[1119px] h-[1694px] top-[162px] left-[20px] gap-[16px] absolute bg-[#F8F4EB] p-8 rounded-[var(--radixxl)]">
+          <div className="min-h-screen flex flex-col bg-[#F8F4EB]">
             <div className="bg-white shadow-md rounded-lg p-6">
               {/* Breadcrumb */}
               <h2 className="text-gray-600 mb-6 text-sm">
@@ -273,7 +273,7 @@ function AddEventPage() {
               </form>
     
               {/* Tabs */}
-              <div className="flex space-x-4 mt-6 border-b border-gray-200">
+              <div className="flex justify-around space-x-4 mt-6 border-b border-gray-200">
                 <button
                   className={`px-4 py-2 text-sm ${
                     activeTab === "description"
