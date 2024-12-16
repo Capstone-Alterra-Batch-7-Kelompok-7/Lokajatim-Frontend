@@ -10,11 +10,13 @@ import {
   faFileLines,
   faHouse,
   faMoneyBillTransfer,
+  faRightFromBracket,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Loading } from "./Loading";
+import profile from "../assets/dumy/profile.jpg";
 export const WrapperDashboard = ({
   children,
   tabActive = 'dashboard',
@@ -73,13 +75,13 @@ export const WrapperDashboard = ({
                 text={"Artikel"}
                 icon={faFileLines}
                 href={"/dashboard/article"}
-                active={tabActive == "project" ? true : false}
+                active={tabActive == "article" ? true : false}
               />
               <ListMenuDashboard
                 text={"Transaksi"}
                 icon={faMoneyBillTransfer}
                 href={"/dashboard/transaction"}
-                active={tabActive == "proyek" ? true : false}
+                active={tabActive == "transaction" ? true : false}
               />
               <ListMenuDashboard
                 text={"Laporan"}
@@ -88,20 +90,12 @@ export const WrapperDashboard = ({
                 active={tabActive == "report" ? true : false}
               />
               <ListMenuDashboard
-                text={"Chat"}
-                icon={faComment}
-                href={"/dashboard/chat"}
-                active={tabActive == "chat" ? true : false}
+                text={"Keluar"}
+                icon={faRightFromBracket}
+                href={"/homepage"}
+                active={tabActive == "out" ? true : false}
               />
             </>
-
-            {/* <div
-              // onClick={handleLogout}
-              className={`flex items-center justify-start py-4 pl-3 hover:bg-[#E9EFF6] cursor-pointer hover:text-blue-800 `}
-            >
-              <FontAwesomeIcon icon={faPowerOff} />
-              <p className="pl-3">Logout</p>
-            </div> */}
           </div>
         </div>
 
@@ -122,17 +116,8 @@ export const WrapperDashboard = ({
               </div>
               <div className="flex-1 navbar-end">
                 <div className="flex gap-2 items-center">
-                  <div className="relative mr-4">
-                    <FontAwesomeIcon
-                      icon={faBell}
-                      className="text-2xl text-gray-500"
-                    />
-                    <div className="absolute -top-2 -right-1 w-2 h-2 bg-primary rounded-full p-2 text-xs flex items-center justify-center text-white">
-                      9
-                    </div>
-                  </div>
                   <img
-                    src="https://placehold.co/400x400/png"
+                    src={profile}
                     alt=""
                     className="object-contain w-[3rem] h-[3rem] rounded-full"
                   />
@@ -217,13 +202,13 @@ export const WrapperDashboard = ({
                     text={"Artikel"}
                     icon={faFileLines}
                     href={"/dashboard/article"}
-                    active={tabActive == "project" ? true : false}
+                    active={tabActive == "article" ? true : false}
                   />
                   <ListMenuDashboard
                     text={"Transaksi"}
                     icon={faMoneyBillTransfer}
                     href={"/dashboard/transaction"}
-                    active={tabActive == "proyek" ? true : false}
+                    active={tabActive == "transaction" ? true : false}
                   />
                   <ListMenuDashboard
                     text={"Laporan"}
@@ -232,20 +217,12 @@ export const WrapperDashboard = ({
                     active={tabActive == "report" ? true : false}
                   />
                   <ListMenuDashboard
-                    text={"Chat"}
-                    icon={faComment}
-                    href={"/dashboard/chat"}
-                    active={tabActive == "chat" ? true : false}
+                    text={"Keluar"}
+                    icon={faRightFromBracket}
+                    href={"/homepage"}
+                    active={tabActive == "out" ? true : false}
                   />
                 </>
-
-                {/* <div
-              // onClick={handleLogout}
-              className={`flex items-center justify-start py-4 pl-3 hover:bg-[#E9EFF6] cursor-pointer hover:text-blue-800 `}
-            >
-              <FontAwesomeIcon icon={faPowerOff} />
-              <p className="pl-3">Logout</p>
-            </div> */}
               </div>
             </div>
           </div>

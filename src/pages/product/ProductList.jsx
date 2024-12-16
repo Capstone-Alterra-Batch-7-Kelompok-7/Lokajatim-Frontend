@@ -9,8 +9,10 @@ import { faArrowUp, faStar } from "@fortawesome/free-solid-svg-icons";
 import CheckBox from "../../components/CheckBox";
 import { useFetch } from "../../hooks/useFetch";
 import { Loading } from "../../components/Loading";
+import { useValidateLogin } from "../../hooks/useValidateLogin";
 const ProductList = () => {
-  const { data, isLoading, error } = useFetch("/products");
+  const { data, isLoading } = useFetch("/products");
+  const userId = useValidateLogin();
   return (
     <>
     {isLoading && <Loading />}
@@ -21,7 +23,7 @@ const ProductList = () => {
           <div className="breadcrumbs text-sm">
             <ul>
               <li>
-                <Link to={"/"}>Beranda</Link>
+                <Link to={"/homepage"}>Beranda</Link>
               </li>
               <li className="font-medium">Product Lokal</li>
             </ul>
@@ -30,7 +32,7 @@ const ProductList = () => {
         </div>
 
         {/* Prize  */}
-        <div className="px-4 py-2 shadow-md flex items-center justify-between rounded-2xl w-full my-4">
+        <div className={`px-4 py-2 shadow-md ${userId && "hidden"} flex items-center justify-between rounded-2xl w-full my-4`}>
           <div className="flex items-center gap-4 w-full">
             <img src={prize} alt="prize" width={54} />
             <div className="">
