@@ -68,7 +68,7 @@ export const WrapperDashboard = ({
               <ListMenuDashboard
                 text={"Event"}
                 icon={faCalendar}
-                href={"/dashboard/event"}
+                href={"/event-table"}
                 active={tabActive == "event" ? true : false}
               />
               <ListMenuDashboard

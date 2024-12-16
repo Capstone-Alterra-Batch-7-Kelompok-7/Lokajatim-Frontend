@@ -10,5 +10,14 @@ export default defineConfig({
        '@components': '/src/components',
       '@assets': '/src/assets'
     },
+    server: {
+      proxy: {
+        '/api': {
+          target: 'https://lokajatim.org',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+  },
   },
 })

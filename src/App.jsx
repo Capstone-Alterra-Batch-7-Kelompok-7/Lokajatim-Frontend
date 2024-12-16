@@ -24,7 +24,11 @@ import FormAddProduct from "./pages/admin/product/FormAddProduct";
 import FormEditProduct from "./pages/admin/product/FormEditProduct";
 import DashboardHome from "./components/AdminDashboard";
 import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
-
+import EventTable from "./pages/event/crud event/EventTable";
+import AddEventPage from "./pages/event/crud event/AddEventPage";
+import { WrapperDashboard } from "./components/WrapperDashboard";
+import EditEventPage from "./pages/event/crud event/EditEventPage";
+import Chatbot from "./pages/homepage/ChatBot";
 import DetailEvent from "./pages/event/DetailEvent";
 import BuyTicket from "./pages/event/buyTicket";
 import Eticket from "./pages/event/BarcodeTicket";
@@ -42,9 +46,14 @@ const routes = [
 
   { path: "/reset", element: <ResetPassword /> },
   { path: "/verify", element: <VerifyCode /> },
+
+  {path:"/event-table", element: <EventTable />},
+  {path:"/event-table/:id", element: <EditEventPage />},
+  {path:"/add-event", element: <AddEventPage />},
+  {path:"/wrapper", element:<WrapperDashboard/>}, 
+  { path: "/chatbot", element: <Chatbot /> },
+
   { path: "/events/buyticket/eticket", element: <Eticket /> },
-
-
 
   {
     path: "/",
@@ -91,3 +100,4 @@ function App() {
 }
 
 export default App;
+
