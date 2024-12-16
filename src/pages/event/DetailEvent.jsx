@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { useParams } from "react-router-dom"; // Pastikan ini diimpor
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
@@ -13,7 +13,6 @@ const DetailEvent = () => {
     const [eventData, setEventData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
     const { id: eventId } = useParams(); // Ambil ID dari URL params
 
 
@@ -86,6 +85,7 @@ const DetailEvent = () => {
         // Simpan ke localStorage
         localStorage.setItem("purchasedTickets", JSON.stringify(ticketData));
         alert("Tiket berhasil dibeli dan disimpan!");
+        window.location.href = "/events/buyticket";
 
     };
 
@@ -254,7 +254,7 @@ const DetailEvent = () => {
                                 <button
                                     className="w-full py-2 bg-[#5C2908] text-white font-semibold rounded-lg hover:bg-[#4A1F06] transition-colors"
                                     onClick={saveToLocalStorage}
-                                >
+                                >   
                                     Beli Tiket
                                 </button>
                             </>
