@@ -4,5 +4,5 @@ export const useResetStore = create((set) => ({
   email: null,
   otpFix: null,
   setEmail: (email) => set({ email }),
-  setOtpFix: (otp) => set({ otp }),
+  setOtpFix: (otpFix) => set({ otpFix }),
 }));

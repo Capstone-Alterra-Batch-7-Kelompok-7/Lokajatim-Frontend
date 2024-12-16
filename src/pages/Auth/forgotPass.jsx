@@ -1,4 +1,4 @@
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-crop.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -22,9 +22,10 @@ const ForgotPass = () => {
     e.preventDefault();
     setIsloading(true);
     try {
-       await instance.post("/forgot-password", {
+       const response =  await instance.post("/forgot-password", {
         email: email,
       });
+      localStorage.setItem('token_otp', response.data.data.token);
       navigate("/verify");
       setIsloading(false);
     } catch (error) {

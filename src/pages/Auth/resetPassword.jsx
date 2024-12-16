@@ -11,6 +11,7 @@ import imgsucces from "../../assets/auth/succes-login.png";
 import { useResetStore } from "../../store/resetPasswordStore";
 import { instance } from "../../config/config";
 import { Loading } from "../../components/Loading";
+import axios from "axios";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false); // Password visibility state
@@ -41,15 +42,31 @@ const ResetPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token_otp");
     setIsLoading(true);
-    if (password !== password2 && password !== "") return;
+    if (password !== password2 && password !== "") {
+      setIsLoading(false);
+      return;
+    }
     try {
-      await instance.put(`/reset-password/`, {
-        email: email,
-        password: password,
-        otp: otpFix,
-      });
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/reset-password`,
+        {
+          email: email,
+          new_password: password,
+          otp: otpFix,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       document.getElementById("success-login").showModal();
+      localStorage.removeItem("token_otp");
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 3000);
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -68,7 +85,11 @@ const ResetPassword = () => {
           Masukkan email Anda yang terdaftar untuk mendapatkan kode verifikasi
         </p>
         <br />
-        <form action="" className="text-primary py-4 flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form
+          action=""
+          className="text-primary py-4 flex flex-col gap-4"
+          onSubmit={handleSubmit}
+        >
           {/* Password Input */}
           <div className="relative w-full">
             <input

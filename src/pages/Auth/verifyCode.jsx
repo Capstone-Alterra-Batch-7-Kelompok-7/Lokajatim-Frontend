@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OTPVerification from "../../components/OTP/OTPInput";
 import logo from "../../assets/logo-crop.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,10 +9,45 @@ import slide3 from "../../assets/auth/aut-slide3.png";
 import { useEffect, useState } from "react";
 import { useResetStore } from "../../store/resetPasswordStore";
 import bg from "../../assets/auth/bg-auth.jpg";
+// import { instance } from "../../config/config";
+import { Loading } from "../../components/Loading";
+import axios from "axios";
 const VerifyCode = () => {
-  const { email } = useResetStore();
+  const { email, otpFix } = useResetStore();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const submitOTP = async (otp) => {
+      const dataOtp = otp.toString();
+      setLoading(true);
+      const token = localStorage.getItem("token_otp");
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/verify-otp`,
+          {
+            otp: dataOtp,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        navigate("/reset");
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+    if (otpFix) {
+      submitOTP(otpFix);
+    }
+  }, [otpFix]);
   return (
     <>
+      {loading && <Loading />}
       <div className="w-full min-h-screen md:flex">
         {/* VerifyCode Form Start */}
 
@@ -82,7 +117,6 @@ const Slide = () => {
 
     return () => clearInterval(interval); // Bersihkan interval saat komponen unmount
   }, [dataSileder.length]);
-  console.log(currentIndex);
   return (
     <>
       {
