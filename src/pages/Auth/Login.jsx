@@ -94,6 +94,7 @@ const Login = () => {
       if (response.status === 200) {
         // Set the token in localStorage
         localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("user_id", response.data.data.id);  // Save user id
 
         const modal = document.getElementById("success-login");
         modal.showModal();

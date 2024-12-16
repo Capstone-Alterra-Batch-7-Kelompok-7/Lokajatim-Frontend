@@ -9,6 +9,7 @@ import axios from 'axios';
 import DraggableFloatingIcon from '../../components/BotIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { Loading } from '../../components/Loading';
 
 // Import icon satu per satu
 
@@ -24,10 +25,11 @@ import kesenianIcon from '../../assets/icon/kesenian.png';
 import konserIcon from '../../assets/icon/konser.png';
 import festivalIcon from '../../assets/icon/festival.png';
 import umumIcon from '../../assets/icon/umum.png';
+import { useFetch } from '../../hooks/useFetch';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
-
+  const [loading, setLoading] = useState(false);
   const promoImages = [promoImage, promoImage2, promoImage3]; // Array gambar promo
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -72,61 +74,45 @@ const HomePage = () => {
   // Fetch likes
   const fetchLikes = async (articleId) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/likes/articles/${articleId}`);
-      setLikes(prevLikes => ({
+      // Ambil jumlah likes langsung dari API
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/likes/articles/${articleId}/count`);
+      const { count } = response.data.data; // Ambil jumlah likes langsung
+
+      // Perbarui state likes
+      setLikes((prevLikes) => ({
         ...prevLikes,
-        [articleId]: response.data.likes // Ganti 'likes' dengan nama kolom yang sesuai dengan data Anda
+        [articleId]: count, // Gunakan langsung nilai count dari API
       }));
     } catch (error) {
-      console.error("Error fetching likes:", error);
+      console.error(`Error fetching likes count for article ${articleId}:`, error);
     }
   };
+
+
+
 
   // UseEffect to fetch data
   useEffect(() => {
     fetchArticles();
   }, []);
 
+
+
   // Fetch likes for each article when articles are loaded
   useEffect(() => {
     articles.forEach(article => fetchLikes(article.id)); // Fetch likes untuk setiap artikel
   }, [articles]);
 
-  const cardsData = [
-    {
-      title: "Workshop Batik Tradisi",
-      price: "RP 285.000",
-      date: "14 Juli 2024",
-      image: "https://via.placeholder.com/300x200", // Ganti dengan URL gambar Anda
-    },
-    {
-      title: "Seminar Teknologi",
-      price: "RP 150.000",
-      date: "22 Juli 2024",
-      image: "https://via.placeholder.com/300x200",
-    },
-    {
-      title: "Pameran Seni Rupa",
-      price: "RP 200.000",
-      date: "30 Juli 2024",
-      image: "https://via.placeholder.com/300x200",
-    },
-    {
-      title: "Konser Musik Rock",
-      price: "RP 350.000",
-      date: "10 Agustus 2024",
-      image: "https://via.placeholder.com/300x200",
-    },
-    {
-      title: "Festival Kuliner Tradisional",
-      price: "RP 100.000",
-      date: "18 Agustus 2024",
-      image: "https://via.placeholder.com/300x200",
-    },
-  ];
   const [activeTab, setActiveTab] = useState("products");
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+
+  const [activeTabCard, setActiveTabCard] = useState('products');
+  const [dataProducts, setDataProducts] = useState([]);
+  const [dataEvents, setDataEvents] = useState([]);
+
+
+
+
 
   const fetchData = async (endpoint) => {
     setLoading(true);
@@ -155,7 +141,43 @@ const HomePage = () => {
       style: 'currency',
       currency: 'IDR',
     }).format(number);
+
   };
+  const fetchDataCards = async (endpoint) => {
+    try {
+      setLoading(true);
+      const response = await fetch(endpoint);
+      const result = await response.json();
+
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      if (result.status && result.data) {
+        if (activeTabCard === "products") {
+          setDataProducts(result.data);
+        } else if (activeTabCard === "events") {
+          setDataEvents(result.data);
+        }
+      } else {
+        console.error("No data found in the API response");
+      }
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+  useEffect(() => {
+    const endpoint =
+      activeTabCard === "products"
+        ? `${import.meta.env.VITE_BASE_URL}/products/best`
+        : `${import.meta.env.VITE_BASE_URL}/events/best`;
+
+    fetchDataCards(endpoint);
+  }, [activeTabCard]);
+
 
 
   return (
@@ -308,51 +330,96 @@ const HomePage = () => {
 
 
       {/* Recommendation Cards Section */}
+      {/* Recommendation Cards Section */}
       <section className="py-8">
         <div className="max-w-screen-xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-6">Harga Terbaik Ke Semuanya</h2>
-          {/* Tabs */}
+          <h2 className="text-2xl font-bold mb-6">Harga Terbaik Untuk Semua</h2>
+
+          {/* Tabs untuk memilih produk dan event */}
           <div className="flex gap-4 mb-8">
-            <button className="btn btn-sm btn-outline text-black border-black hover:text-[#ED7D31] hover:border-[#ED7D31] hover:bg-[#ED7D311A] rounded-full">
+            <button
+              onClick={() => setActiveTabCard('products')}
+              className={`btn btn-sm btn-outline rounded-md ${activeTabCard === 'products' ? 'text-[#ED7D31]' : 'text-black'}`}
+            >
               Produk
             </button>
-            <button className="btn btn-sm btn-outline text-black border-black hover:text-[#ED7D31] hover:border-[#ED7D31] hover:bg-[#ED7D311A] rounded-full">
+
+            <button
+              onClick={() => setActiveTabCard('events')}
+              className={`btn btn-sm btn-outline rounded-md ${activeTabCard === 'events' ? 'text-[#ED7D31]' : 'text-black'}`}
+            >
               Event
             </button>
           </div>
 
-
+          {/* Mengatur tampilan grid untuk produk dan event */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {cardsData.map((card, index) => (
-              <div key={index} className="card bg-white shadow-lg">
-                <figure>
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="h-36 object-cover w-full"
-                  />
-                </figure>
-                <div className="card-body p-4 text-black">
-                  <h3 className="card-title text-sm font-semibold">
-                    {card.title}
-                  </h3>
-                  <p className="font-bold text-black-500 mt-2">{card.price}</p>
-                  <p className="text-xs text-gray-600 mt-2 flex items-center gap-1">
-                    <span>📅</span> {card.date}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* Explore More Button */}
-          <div className="flex justify-center mt-8">
-            <button className="btn btn-sm btn-outline text-black border-black hover:text-[#ED7D31] hover:border-[#ED7D31] hover:bg-[#ED7D311A] rounded-md">
-              Jelajahi Semua
-            </button>
-          </div>
+            {loading ? (
+              <p className="text-center col-span-full">Loading...</p>
+            ) : (
+              <>
+                {/* Menampilkan Produk */}
+                {activeTabCard === "products" && dataProducts.length > 0 &&
+                  dataProducts.map((item) => (
+                    <div key={item.id} className="card bg-white shadow-lg">
+                      <figure>
+                        <img
+                          src={
+                            item.photos?.[0] ||
+                            "https://via.placeholder.com/300x200"
+                          }
+                          alt={item.name}
+                          className="h-36 object-cover w-full"
+                        />
+                      </figure>
+                      <div className="card-body p-4 text-black">
+                        <Link
+                          to={`/product/${item.id}`}
+                          className="card-title text-sm font-semibold"
+                        >
+                          {item.name || "Produk Tidak Tersedia"}
+                        </Link>
+                        <p className="font-bold mt-2">
+                          {item.price ? `Rp ${item.price}` : "Gratis"}
+                        </p>
+                        <p className="text-sm text-gray-600 mt-2">
+                          Stok: {item.stock || "Tidak Tersedia"}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
 
+                {/* Menampilkan Event */}
+                {activeTabCard === "events" && dataEvents.length > 0 &&
+                  dataEvents.map((event) => (
+                    <div key={event.id} className="card bg-white shadow-lg">
+                      <figure>
+                        <img
+                          src={event.url_photo || "https://via.placeholder.com/300x200"}
+                          alt={event.name}
+                          className="h-36 object-cover w-full"
+                        />
+                      </figure>
+                      <div className="card-body p-4 text-black">
+                        <p>{event.name}</p>
+                        <p>Lokasi: {event.location}</p>
+                        <p>Tanggal: {new Date(event.date_time)?.toLocaleDateString("id-ID")}</p>
+                        <p>Harga: {event.price ? `Rp ${event.price}` : "Gratis"}</p>
+                      </div>
+                    </div>
+                  ))}
+              </>
+            )}
+          </div>
+          <div className="flex justify-center mt-8">
+            <Link to={activeTabCard === "products" ? "/products" : "/events"} className="btn btn-sm btn-outline text-black border-black hover:text-[#ED7D31] hover:border-[#ED7D31] hover:bg-[#ED7D311A] rounded-md">
+              Jelajahi Semua
+            </Link>
+          </div>
         </div>
       </section>
+
+
       <br />
       <br />
       <br />
@@ -402,10 +469,7 @@ const HomePage = () => {
                       <span>{new Date(article.created_at).toLocaleDateString()}</span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <FontAwesomeIcon
-                        icon={faThumbsUpRegular}
-                        className="text-black text-sm"
-                      />
+                      <FontAwesomeIcon icon={faThumbsUpRegular} className="text-black text-sm" />
                       <span>{likes[article.id] || 0}</span>
                     </div>
                   </div>
