@@ -14,5 +14,5 @@ export const useCounter = () => {
     setCounter(counter - 1);
   };
 
-  return { counter, handleClickAdd, handleClickReduce };
+  return { counter, handleClickAdd, handleClickReduce, setCounter };
 }

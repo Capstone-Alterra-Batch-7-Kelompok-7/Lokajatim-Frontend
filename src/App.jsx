@@ -24,9 +24,12 @@ import FormAddProduct from "./pages/admin/product/FormAddProduct";
 import FormEditProduct from "./pages/admin/product/FormEditProduct";
 import DashboardHome from "./components/AdminDashboard";
 import ArticleDataDashboard from "./pages/admin/article/ArticleDataDashboard";
+
 import DetailEvent from "./pages/event/DetailEvent";
 import BuyTicket from "./pages/event/buyTicket";
 import Eticket from "./pages/event/BarcodeTicket";
+import TransactionDashboard from "./pages/admin/transactions/TransactionDashboard";
+
 
 const routes = [
   { path: "/", element: <LandingPage /> },
@@ -65,7 +68,7 @@ const routes = [
           { path: "/dashboard/product/add", element: <FormAddProduct /> },
           { path: "/dashboard/product/edit/:id", element: <FormEditProduct /> },
           { path: "/dashboard/article", element: <ArticleDataDashboard /> },
-
+          { path: "/dashboard/transaction", element: <TransactionDashboard /> },
         ],
       },
     ],

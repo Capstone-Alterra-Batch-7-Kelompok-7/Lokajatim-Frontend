@@ -13,19 +13,45 @@ import { Link, useParams } from "react-router-dom";
 import { useCounter } from "../../hooks/useCounter";
 import { useFetch } from "../../hooks/useFetch";
 import { useValidateLogin } from "../../hooks/useValidateLogin";
+import { instance } from "../../config/config";
+import { Loading } from "../../components/Loading";
+import { formatRupiah } from "../../utils/rupiahFormater";
 
 const DetailProduct = () => {
   const { counter, handleClickAdd, handleClickReduce } = useCounter();
   const { id } = useParams();
-  const { data } = useFetch(`/products/${id}`);
+  const { data, isLoading, setIsLoading } = useFetch(`/products/${id}`);
   const userId = useValidateLogin();
+
+  const handleCart = async (e) => {
+    setIsLoading(true);
+    try{
+      const response = await instance.post(`/carts`, {
+        cart_items: [
+          {
+            product_id: parseInt(id),
+            quantity: parseInt(counter), 
+          }
+        ],
+        user_id: parseInt(userId),
+      })
+      console.log(response);
+      alert("Produk berhasil ditambahkan ke keranjang");
+      setIsLoading(false);
+    }catch(e){
+      console.error(e);
+      setIsLoading(false);
+    }
+  };
 
   const handleBuyNow = () => {
     localStorage.setItem("product_id", id);
     window.location.href = "/buy-now";
   };
+  
   return (
     <>
+      {isLoading && <Loading />}
       <AlertLogin />
       {data && (
         <NavbarSearchBrown>
@@ -82,7 +108,7 @@ const DetailProduct = () => {
                         </div>
                       </div>
                       <h2 className="text-3xl font-bold pt-4 pb-2">
-                        Rp.{data.price}
+                        {formatRupiah(data.price)}
                       </h2>
 
                       <div className="flex w-full border-b gap-2 mt-4">
@@ -144,13 +170,15 @@ const DetailProduct = () => {
                         <div className="border border-[#ED7D31] rounded-lg hover:border-none">
                           <button
                             className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full"
-                            onClick={() => {
-                              userId
-                                ? (window.location.href = "/cart")
-                                : document
-                                    .getElementById("alert-login")
-                                    .showModal();
-                            }}
+                            type="button"
+                            // onClick={() => {
+                            //   userId
+                            //     ? (window.location.href = "/cart")
+                            //     : document
+                            //         .getElementById("alert-login")
+                            //         .showModal();
+                            // }}
+                            onClick={handleCart}
                           >
                             Keranjang
                           </button>
@@ -619,11 +647,13 @@ const DetailProduct = () => {
                   <div className="border border-[#ED7D31] rounded-lg hover:border-none">
                     <button
                       className="btn min-h-9 h-9 bg-white border-2  border-none hover:bg-gray-200 text-[#ED7D31] hover:text-black w-full"
-                      onClick={() => {
-                        userId
-                          ? (window.location.href = "/cart")
-                          : document.getElementById("alert-login").showModal();
-                      }}
+                      onClick={handleCart}
+                      type="button"
+                      // onClick={() => {
+                      //   userId
+                      //     ? (window.location.href = "/cart")
+                      //     : document.getElementById("alert-login").showModal();
+                      // }}
                     >
                       Keranjang
                     </button>
@@ -648,71 +678,7 @@ const DetailProduct = () => {
             </div>
 
             {/* Other Product */}
-            <div className="w-full py-4">
-              <h2 className="text-lg font-bold pb-2">Lainya di Toko ini</h2>
-              <div className="flex flex-wrap gap-4 justify-around">
-                <CardProduct
-                  price={"Rp.34.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food1}
-                />
-                <CardProduct
-                  price={"Rp.21.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food2}
-                />
-                <CardProduct
-                  price={"Rp.34.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food1}
-                />
-                <CardProduct
-                  price={"Rp.21.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food2}
-                />
-                <CardProduct
-                  price={"Rp.34.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food1}
-                />
-                <CardProduct
-                  price={"Rp.21.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food2}
-                />
-                <CardProduct
-                  price={"Rp.34.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food1}
-                />
-                <CardProduct
-                  price={"Rp.21.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food2}
-                />
-                <CardProduct
-                  price={"Rp.34.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food1}
-                />
-                <CardProduct
-                  price={"Rp.21.000"}
-                  id={1}
-                  title={"Kopi"}
-                  img={food2}
-                />
-              </div>
-            </div>
+         <OtherProducts />
             <Footer />
           </div>
         </NavbarSearchBrown>
@@ -747,5 +713,28 @@ const AlertLogin = () => {
     </>
   );
 };
+
+const OtherProducts = () => {
+  const {data} = useFetch("/products");
+  return (
+    <div className="w-full py-4">
+      <h2 className="text-lg font-bold pb-2">Lainya di Toko ini</h2>
+      <div className="flex flex-wrap gap-4 justify-around">
+        {data &&
+          data
+            .slice(0, 10)
+            .map((item) => (
+              <CardProduct
+                key={item.id}
+                id={item.id}
+                img={item.photos[0].url_photo}
+                title={item.name}
+                price={item.price}
+              />
+            ))}
+      </div>
+    </div>
+  );
+}
 
 export default DetailProduct;
